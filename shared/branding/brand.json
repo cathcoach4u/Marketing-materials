@@ -1,0 +1,52 @@
+{
+  "name": "Coach4U",
+  "entity": "SARUBA Pty Ltd",
+  "website": "www.coach4u.com.au",
+  "email": "cath@coach4u.com.au",
+  "phone": "0402 313 337",
+  "footer": "Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337",
+
+  "colours": {
+    "dark_blue": "#1B3664",
+    "light_blue": "#5684C4",
+    "dark_grey": "#2D2D2D",
+    "light_grey": "#DDDDDD",
+    "background": "#FFFFFF"
+  },
+
+  "fonts": {
+    "heading": "Inter Bold",
+    "body": "Montserrat Regular",
+    "fallback": "sans-serif"
+  },
+
+  "font_sizes": {
+    "title_pt": 16,
+    "section_heading_pt": 12,
+    "body_pt": 11,
+    "footer_pt": 9,
+    "title_rem": 2,
+    "body_rem": 1.1
+  },
+
+  "logo": {
+    "path": "shared/branding/logos/coach4u-logo.png",
+    "width_cm": 4.71,
+    "height_cm": 2.41,
+    "scale_pct": 39,
+    "position": "top-left"
+  },
+
+  "tone": {
+    "language": "Australian English",
+    "style": "Warm, professional, clear. Strengths-based, not clinical.",
+    "avoid": ["exclamation marks", "em dashes", "psychology practice label"]
+  },
+
+  "slide_layout": {
+    "border_radius_small_px": 8,
+    "border_radius_medium_px": 12,
+    "border_radius_large_px": 16,
+    "transition_seconds": 0.2
+  }
+}
