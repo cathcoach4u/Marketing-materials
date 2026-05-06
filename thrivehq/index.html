@@ -431,6 +431,24 @@
       margin-bottom: 1.25rem;
     }
 
+    .pricing-card .price-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pricing-card .price-total {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      color: var(--dark-blue);
+    }
+
+    .pricing-card .price-gst {
+      font-size: 0.82rem;
+      color: #888;
+    }
+
     .pricing-card ul {
       list-style: none;
       padding: 0;
@@ -736,17 +754,20 @@
 
         <!-- FocusHQ -->
         <div class="pricing-card pricing-card--focushq">
-          <span class="pricing-label pricing-label--focushq">Entry level</span>
+          <span class="pricing-label pricing-label--focushq">Body doubling</span>
           <h3>FocusHQ</h3>
           <div class="price">$29<span style="font-size: 1.1rem;">/week</span></div>
-          <div class="price-note">$250 per 10-week term &nbsp;|&nbsp; GST included</div>
+          <div class="price-meta">
+            <span class="price-total">$754 over 6 months</span>
+            <span class="price-gst">GST included &nbsp;|&nbsp; Paid weekly</span>
+          </div>
           <ul>
             <li><span class="tick">&#10003;</span> Peer-hosted body doubling sessions</li>
             <li><span class="tick">&#10003;</span> Flexible scheduling across the week</li>
             <li><span class="tick">&#10003;</span> Shared community access</li>
             <li><span class="cross">✕</span> Coaching sessions</li>
             <li><span class="cross">✕</span> Resource hub</li>
-            <li><span class="cross">✕</span> 1:1 discount</li>
+            <li><span class="cross">✕</span> 20% off 1:1 sessions</li>
           </ul>
         </div>
 
@@ -756,7 +777,10 @@
           <span class="pricing-label pricing-label--thrivehq">Full membership</span>
           <h3>ThriveHQ</h3>
           <div class="price">$68<span style="font-size: 1.1rem;">/week</span></div>
-          <div class="price-note">Over 26 weeks &nbsp;|&nbsp; GST included</div>
+          <div class="price-meta">
+            <span class="price-total">$1,768 over 6 months</span>
+            <span class="price-gst">GST included &nbsp;|&nbsp; Paid weekly</span>
+          </div>
           <ul>
             <li><span class="tick">&#10003;</span> Up to 20 live sessions over 6 months</li>
             <li><span class="tick">&#10003;</span> Tuesday coaching session</li>
