@@ -350,16 +350,50 @@
 
     .pricing-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 1.25rem;
       margin-top: 2rem;
       align-items: start;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 600px) {
       .pricing-grid {
         grid-template-columns: 1fr;
       }
+    }
+
+    .pricing-compare-bar {
+      margin-top: 1.5rem;
+      border: 1px solid var(--light-grey);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: #fafafa;
+      flex-wrap: wrap;
+    }
+
+    .pricing-compare-bar .compare-label {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #999;
+      white-space: nowrap;
+    }
+
+    .pricing-compare-bar .compare-price {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--dark-grey);
+      white-space: nowrap;
+    }
+
+    .pricing-compare-bar .compare-desc {
+      font-size: 0.9rem;
+      color: #888;
+      flex: 1;
     }
 
     .pricing-card {
@@ -700,20 +734,6 @@
 
       <div class="pricing-grid">
 
-        <!-- Compare: solo coaching -->
-        <div class="pricing-card">
-          <span class="pricing-label pricing-label--compare">Traditional 1:1</span>
-          <h3>Solo Coaching</h3>
-          <div class="price">$150–$250</div>
-          <div class="price-note">per hour</div>
-          <ul>
-            <li><span class="cross">✕</span> 6–10 sessions over 6 months</li>
-            <li><span class="cross">✕</span> No community support</li>
-            <li><span class="cross">✕</span> No body doubling</li>
-            <li><span class="cross">✕</span> Sessions end when you stop paying</li>
-          </ul>
-        </div>
-
         <!-- FocusHQ -->
         <div class="pricing-card pricing-card--focushq">
           <span class="pricing-label pricing-label--focushq">Entry level</span>
@@ -747,6 +767,13 @@
           </ul>
         </div>
 
+      </div>
+
+      <!-- Comparison context -->
+      <div class="pricing-compare-bar">
+        <span class="compare-label">For comparison</span>
+        <span class="compare-price">Traditional 1:1 coaching: $150–$250/hour</span>
+        <span class="compare-desc">6–10 sessions over 6 months, no community support, no body doubling.</span>
       </div>
 
       <p class="upgrade-note">Already in FocusHQ and want more? <strong>Upgrade to ThriveHQ at any time</strong> and your term credit will be applied.</p>
