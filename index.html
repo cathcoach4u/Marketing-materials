@@ -14,230 +14,188 @@
       --dark-grey: #2D2D2D;
       --light-grey: #DDDDDD;
       --bg: #ffffff;
+      --card: #f7f9fc;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.6; }
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      color: var(--dark-grey);
-      background: var(--bg);
-      font-size: 1.05rem;
-      line-height: 1.65;
-    }
+    header { background: var(--dark-blue); padding: 1.4rem 1.25rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: #fff; }
+    header span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
 
-    header {
-      background: var(--dark-blue);
-      padding: 2rem 1.5rem 1.75rem;
-    }
+    nav { background: #edf1f8; border-bottom: 1px solid var(--light-grey); display: flex; overflow-x: auto; }
+    nav a { padding: 0.75rem 1.1rem; font-size: 0.88rem; font-weight: 500; color: #555; text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; }
+    nav a:hover { color: var(--dark-blue); }
+    nav a.active { color: var(--dark-blue); border-bottom-color: var(--light-blue); font-family: 'Inter', sans-serif; font-weight: 700; }
 
-    header h1 {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 1.75rem;
-      color: #ffffff;
-    }
-
-    header p {
-      color: rgba(255,255,255,0.72);
-      margin-top: 0.4rem;
-      font-size: 0.95rem;
-    }
-
-    main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 3rem;
-    }
-
+    main { max-width: 820px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
     section { margin-bottom: 2.5rem; }
+    h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 1.05rem; margin-bottom: 1rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--light-grey); }
+    p { font-size: 0.92rem; margin-bottom: 0.6rem; }
 
-    h2 {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      color: var(--dark-blue);
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--light-grey);
-    }
+    /* Priority card */
+    .priority { background: var(--dark-blue); border-radius: 12px; padding: 1.4rem; margin-bottom: 2.5rem; }
+    .priority-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem; }
+    .priority h2 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fff; border: none; padding: 0; margin-bottom: 0.75rem; }
+    .priority p { color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-bottom: 1rem; }
+    .priority-action { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+    .priority-action span { color: rgba(255,255,255,0.55); font-size: 0.85rem; }
 
-    .card-list { display: grid; gap: 0.65rem; }
+    /* Tags */
+    .tag { font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--light-blue); background: #eef3fb; border: 1px solid #c5d6ef; border-radius: 6px; padding: 0.2rem 0.55rem; font-size: 0.82rem; white-space: nowrap; }
+    .tag-white { font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--dark-blue); background: rgba(255,255,255,0.9); border-radius: 6px; padding: 0.2rem 0.55rem; font-size: 0.82rem; white-space: nowrap; }
 
-    .card {
-      border: 1px solid var(--light-grey);
-      border-radius: 10px;
-      padding: 0.9rem 1.1rem;
-      display: flex;
-      gap: 0.9rem;
-      align-items: flex-start;
-      text-decoration: none;
-      color: var(--dark-grey);
-      transition: border-color 0.15s;
-    }
+    /* Action grid */
+    .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+    @media (max-width: 480px) { .action-grid { grid-template-columns: 1fr; } }
+    .action-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.9rem 1rem; }
+    .action-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.9rem; margin-bottom: 0.3rem; }
+    .action-card p { font-size: 0.84rem; color: #666; margin-bottom: 0.6rem; }
 
-    a.card:hover { border-color: var(--light-blue); }
+    /* Revenue */
+    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 1rem; }
+    @media (max-width: 480px) { .rev-grid { grid-template-columns: 1fr; } }
+    .rev-card { background: var(--dark-blue); border-radius: 10px; padding: 1rem; text-align: center; }
+    .rev-card .lbl { color: rgba(255,255,255,0.55); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .rev-card .amt { color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; }
 
-    .tag {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      color: var(--light-blue);
-      background: #eef3fb;
-      border: 1px solid #c5d6ef;
-      border-radius: 6px;
-      padding: 0.2rem 0.55rem;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      flex-shrink: 0;
-      align-self: center;
-    }
+    .stream-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .stream-table th { text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.45rem 0.6rem; border-bottom: 2px solid var(--light-grey); }
+    .stream-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #f0f0f0; }
+    .stream-table td:last-child { color: var(--light-blue); font-weight: 500; text-align: right; }
+    .stream-table tr:last-child td { border-bottom: none; }
 
-    .card-desc {
-      font-size: 0.92rem;
-      color: var(--dark-grey);
-      line-height: 1.5;
-    }
+    /* Insights cards */
+    .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+    @media (max-width: 480px) { .insights-grid { grid-template-columns: 1fr; } }
+    .insight-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 1rem; text-decoration: none; color: var(--dark-grey); display: block; transition: border-color 0.15s; }
+    .insight-card:hover { border-color: var(--light-blue); }
+    .insight-card .date { font-size: 0.78rem; color: var(--light-blue); font-weight: 500; margin-bottom: 0.3rem; }
+    .insight-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .insight-card .angles { font-size: 0.82rem; color: #666; }
+    .insight-card .angles li { margin-bottom: 0.2rem; }
+    .insight-card .arrow { color: var(--light-blue); font-size: 1.1rem; float: right; margin-top: -1.5rem; }
 
-    .card-title {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      color: var(--dark-blue);
-      font-size: 0.97rem;
-    }
-
-    .card-sub {
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 0.15rem;
-    }
-
-    .card-arrow {
-      color: var(--light-blue);
-      font-size: 1.3rem;
-      margin-left: auto;
-      flex-shrink: 0;
-      align-self: center;
-    }
-
-    .card-body {
-      flex: 1;
-    }
-
-    footer {
-      border-top: 1px solid var(--light-grey);
-      padding: 1.5rem 1.25rem;
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--dark-grey);
-    }
+    footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Coach4U Marketing Hub</h1>
-  <p>Your private reference for marketing tools, slash commands, and session insights.</p>
+  <span>Session-driven. Agent-assisted.</span>
 </header>
+
+<nav>
+  <a href="index.html" class="active">Dashboard</a>
+  <a href="content.html">Content Pipeline</a>
+  <a href="plan.html">Marketing Plan</a>
+</nav>
 
 <main>
 
+  <!-- THIS WEEK -->
+  <div class="priority">
+    <div class="priority-label">This week's priority — 26 May 2026 session</div>
+    <h2>"Don't put the phone away. Replace what it gives you."</h2>
+    <p>Write a LinkedIn post opening with the moment of picking up the phone instead of working. Reframe it: the ADHD brain isn't being lazy, it's looking for dopamine. End with the insight: the goal is not to remove the distraction, but to find something more engaging. Connect to what ThriveHQ offers.</p>
+    <div class="priority-action">
+      <span>Use</span>
+      <span class="tag-white">/social</span>
+      <span>to write this post</span>
+    </div>
+  </div>
+
+  <!-- QUICK ACTIONS -->
   <section>
-    <h2>Slash Commands</h2>
-    <div class="card-list">
-      <div class="card">
-        <span class="tag">/thrivehq-insights</span>
-        <span class="card-desc">Turn a ThriveHQ session transcript into a full marketing insights report</span>
-      </div>
-      <div class="card">
+    <h2>Quick Actions</h2>
+    <div class="action-grid">
+      <div class="action-card">
+        <h3>Write marketing copy</h3>
+        <p>Website pages, service descriptions, landing pages, CTAs.</p>
         <span class="tag">/copywriting</span>
-        <span class="card-desc">Write or improve marketing copy for a page, service description, or offer</span>
       </div>
-      <div class="card">
-        <span class="tag">/emails</span>
-        <span class="card-desc">Build an email sequence — welcome series, nurture flow, re-engagement</span>
-      </div>
-      <div class="card">
+      <div class="action-card">
+        <h3>Create social content</h3>
+        <p>LinkedIn posts, Reels scripts, content calendar, repurpose insights.</p>
         <span class="tag">/social</span>
-        <span class="card-desc">Write LinkedIn posts, Reels scripts, or plan a content calendar</span>
       </div>
-      <div class="card">
+      <div class="action-card">
+        <h3>Build an email sequence</h3>
+        <p>Welcome series, nurture flow, re-engagement campaign.</p>
+        <span class="tag">/emails</span>
+      </div>
+      <div class="action-card">
+        <h3>Plan content strategy</h3>
+        <p>Content pillars, topics, editorial direction for Coach4U.</p>
         <span class="tag">/content-strategy</span>
-        <span class="card-desc">Plan what to write about and build content pillars for Coach4U</span>
       </div>
-      <div class="card">
+      <div class="action-card">
+        <h3>Brainstorm marketing ideas</h3>
+        <p>Tactics and approaches when you're stuck or want to grow faster.</p>
         <span class="tag">/marketing-ideas</span>
-        <span class="card-desc">Brainstorm marketing tactics when you're stuck or want fresh ideas</span>
       </div>
-      <div class="card">
-        <span class="tag">/customer-research</span>
-        <span class="card-desc">Analyse what clients say, build personas, extract voice-of-customer language</span>
-      </div>
-      <div class="card">
+      <div class="action-card">
+        <h3>Plan a lead magnet</h3>
+        <p>Downloadable resources, opt-in offers, email capture tools.</p>
         <span class="tag">/lead-magnets</span>
-        <span class="card-desc">Plan a downloadable resource or lead magnet to grow your email list</span>
       </div>
     </div>
   </section>
 
+  <!-- REVENUE GOALS -->
   <section>
-    <h2>ThriveHQ Insights Reports</h2>
-    <div class="card-list">
-      <a class="card" href="Coach4U_Insights_ThriveHQ_2026-05-26.md">
-        <div class="card-body">
-          <div class="card-title">ThriveHQ Session Insights</div>
-          <div class="card-sub">26 May 2026</div>
-        </div>
-        <span class="card-arrow">&#8250;</span>
-      </a>
-      <a class="card" href="Coach4U_Insights_ThriveHQ_2026-03-31.md">
-        <div class="card-body">
-          <div class="card-title">ThriveHQ Session Insights</div>
-          <div class="card-sub">31 March 2026</div>
-        </div>
-        <span class="card-arrow">&#8250;</span>
-      </a>
+    <h2>Revenue Goals</h2>
+    <div class="rev-grid">
+      <div class="rev-card"><div class="lbl">Year 1</div><div class="amt">$120k–$220k</div></div>
+      <div class="rev-card"><div class="lbl">Year 2</div><div class="amt">$250k–$450k</div></div>
+      <div class="rev-card"><div class="lbl">Year 3</div><div class="amt">$500k+</div></div>
     </div>
+    <table class="stream-table">
+      <thead><tr><th>Revenue Stream</th><th>Target Range</th></tr></thead>
+      <tbody>
+        <tr><td>Team Workshops</td><td>$80k–$250k</td></tr>
+        <tr><td>Executive Coaching</td><td>$60k–$180k</td></tr>
+        <tr><td>Counselling and Life Coaching</td><td>$40k–$120k</td></tr>
+        <tr><td>Corporate Programs</td><td>$50k–$300k</td></tr>
+        <tr><td>Online Courses and Digital Products</td><td>$10k–$100k</td></tr>
+        <tr><td>Speaking</td><td>$5k–$50k</td></tr>
+      </tbody>
+    </table>
   </section>
 
+  <!-- SESSION INSIGHTS -->
   <section>
-    <h2>Plans</h2>
-    <div class="card-list">
-      <a class="card" href="plans.html">
-        <div class="card-body">
-          <div class="card-title">Marketing Planner</div>
-          <div class="card-sub">Positioning, services, revenue targets, action plan, key messages, brand voice</div>
-        </div>
-        <span class="card-arrow">&#8250;</span>
+    <h2>Session Insights Reports</h2>
+    <div class="insights-grid">
+      <a class="insight-card" href="https://github.com/cathcoach4u/Marketing-materials/blob/main/Coach4U_Insights_ThriveHQ_2026-05-26.md" target="_blank">
+        <div class="date">26 May 2026</div>
+        <h3>ThriveHQ Session Insights</h3>
+        <ul class="angles">
+          <li>AI as personalised ADHD support</li>
+          <li>Replacing dopamine, not removing it</li>
+          <li>Good day plan and bad day plan</li>
+          <li>The ideation loop</li>
+          <li>What sustained progress looks like</li>
+        </ul>
       </a>
-      <a class="card" href="Plans/coach4u_comprehensive_marketing_overview_20260528_024533.pdf" target="_blank">
-        <div class="card-body">
-          <div class="card-title">Comprehensive Marketing Overview</div>
-          <div class="card-sub">28 May 2026 — Full PDF reference document</div>
-        </div>
-        <span class="card-arrow">&#8250;</span>
-      </a>
-    </div>
-  </section>
-
-  <section>
-    <h2>Resources</h2>
-    <div class="card-list">
-      <a class="card" href="adhd-materials-sales-plan.md">
-        <div class="card-body">
-          <div class="card-title">ADHD Materials Sales Plan</div>
-          <div class="card-sub">Digital product strategy for ThriveHQ</div>
-        </div>
-        <span class="card-arrow">&#8250;</span>
+      <a class="insight-card" href="https://github.com/cathcoach4u/Marketing-materials/blob/main/Coach4U_Insights_ThriveHQ_2026-03-31.md" target="_blank">
+        <div class="date">31 March 2026</div>
+        <h3>ThriveHQ Session Insights</h3>
+        <ul class="angles">
+          <li>AI removes friction — community removes shame</li>
+          <li>Body doubling in families</li>
+          <li>Procrastination to completion gap</li>
+          <li>Scaffolding for your strength profile</li>
+          <li>What the Brain Pulse actually does</li>
+        </ul>
       </a>
     </div>
   </section>
 
 </main>
 
-<footer>
-  Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337
-</footer>
+<footer>Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337</footer>
 
 </body>
 </html>
