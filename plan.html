@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Plan — Coach4U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #1B3664;
+      --light-blue: #5684C4;
+      --dark-grey: #2D2D2D;
+      --light-grey: #DDDDDD;
+      --bg: #ffffff;
+      --card: #f7f9fc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.6; }
+
+    header { background: var(--dark-blue); padding: 1.4rem 1.25rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: #fff; }
+    header span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+    nav { background: #edf1f8; border-bottom: 1px solid var(--light-grey); display: flex; overflow-x: auto; }
+    nav a { padding: 0.75rem 1.1rem; font-size: 0.88rem; font-weight: 500; color: #555; text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; }
+    nav a:hover { color: var(--dark-blue); }
+    nav a.active { color: var(--dark-blue); border-bottom-color: var(--light-blue); font-family: 'Inter', sans-serif; font-weight: 700; }
+
+    main { max-width: 820px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
+    section { margin-bottom: 2.5rem; }
+    h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 1.05rem; margin-bottom: 1rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--light-grey); }
+    h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    p { font-size: 0.92rem; margin-bottom: 0.6rem; }
+
+    .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+    @media (max-width: 520px) { .service-grid { grid-template-columns: 1fr; } }
+    .service-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.9rem 1rem; }
+    .service-card h3 { margin-bottom: 0.3rem; }
+    .service-card .audience { font-size: 0.8rem; color: #666; margin-bottom: 0.5rem; }
+    .service-card .price { font-size: 0.85rem; color: var(--dark-blue); font-weight: 500; margin-bottom: 0.45rem; }
+    .service-card .msg { font-size: 0.83rem; color: #444; border-left: 2px solid var(--light-blue); padding-left: 0.6rem; margin-bottom: 0.5rem; font-style: italic; }
+    .tag { font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--light-blue); background: #eef3fb; border: 1px solid #c5d6ef; border-radius: 6px; padding: 0.2rem 0.55rem; font-size: 0.79rem; white-space: nowrap; }
+
+    .progress-wrap { margin-bottom: 1.25rem; }
+    .progress-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 0.4rem; }
+    .progress-track { background: var(--light-grey); border-radius: 99px; height: 6px; }
+    .progress-bar { background: var(--light-blue); border-radius: 99px; height: 6px; transition: width 0.3s; }
+
+    .phase { margin-bottom: 1.5rem; }
+    .phase-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--light-blue); font-weight: 500; margin-bottom: 0.6rem; }
+    .check-list { display: flex; flex-direction: column; gap: 0.4rem; }
+    .check-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.7rem 0.9rem; background: var(--card); border: 1px solid var(--light-grey); border-radius: 8px; cursor: pointer; transition: border-color 0.15s; }
+    .check-item:hover { border-color: var(--light-blue); }
+    .check-item.done { background: #f0f4f0; border-color: #c8d8c8; }
+    .check-item.done .check-text { color: #888; text-decoration: line-through; }
+    .check-box { width: 18px; height: 18px; border: 2px solid var(--light-grey); border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .check-item.done .check-box { background: #5a9e5a; border-color: #5a9e5a; }
+    .check-box svg { display: none; }
+    .check-item.done .check-box svg { display: block; }
+    .check-text { font-size: 0.87rem; color: var(--dark-grey); }
+    .check-text em { font-style: normal; font-size: 0.78rem; color: #888; display: block; margin-top: 0.1rem; }
+
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+    @media (max-width: 520px) { .voice-grid { grid-template-columns: 1fr; } }
+    .voice-do { background: #f0f7f0; border: 1px solid #c8d8c8; border-radius: 10px; padding: 0.9rem 1rem; }
+    .voice-dont { background: #fdf3f3; border: 1px solid #e8c8c8; border-radius: 10px; padding: 0.9rem 1rem; }
+    .voice-do h3 { color: #2a5a2a; margin-bottom: 0.5rem; }
+    .voice-dont h3 { color: #7a2a2a; margin-bottom: 0.5rem; }
+    .voice-do ul, .voice-dont ul { padding-left: 1.1rem; font-size: 0.85rem; }
+    .voice-do li, .voice-dont li { margin-bottom: 0.3rem; }
+
+    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 1rem; }
+    @media (max-width: 480px) { .rev-grid { grid-template-columns: 1fr; } }
+    .rev-card { background: var(--dark-blue); border-radius: 10px; padding: 1rem; text-align: center; }
+    .rev-card .lbl { color: rgba(255,255,255,0.55); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .rev-card .amt { color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; }
+    .stream-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .stream-table th { text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.45rem 0.6rem; border-bottom: 2px solid var(--light-grey); }
+    .stream-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #f0f0f0; }
+    .stream-table td:last-child { color: var(--light-blue); font-weight: 500; text-align: right; }
+    .stream-table tr:last-child td { border-bottom: none; }
+
+    footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Coach4U Marketing Hub</h1>
+  <span>Session-driven. Agent-assisted.</span>
+</header>
+
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="content.html">Content Pipeline</a>
+  <a href="plan.html" class="active">Marketing Plan</a>
+</nav>
+
+<main>
+
+  <section>
+    <h2>Services Reference</h2>
+    <p>Quick guide for positioning each service in copy, posts, and pitches.</p>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <h3>Individual Coaching and Counselling</h3>
+        <div class="audience">Adults seeking clarity, life transitions, confidence</div>
+        <div class="price">$250 + GST per session (1.5 hrs) — 2-hr intake session first</div>
+        <div class="msg">"Find what actually works for your brain and your life."</div>
+        <span class="tag">/copywriting</span>
+      </div>
+
+      <div class="service-card">
+        <h3>Couples Coaching and Counselling</h3>
+        <div class="audience">Couples with communication issues, conflict, or disconnection</div>
+        <div class="price">$250 + GST per session (1.5 hrs)</div>
+        <div class="msg">"Clearer communication. Stronger connection. A safer relationship."</div>
+        <span class="tag">/copywriting</span>
+      </div>
+
+      <div class="service-card">
+        <h3>ThriveHQ ADHD Group Coaching</h3>
+        <div class="audience">Adults with ADHD wanting structure, community, and momentum</div>
+        <div class="price">6-month membership — see current pricing</div>
+        <div class="msg">"From chaos toward calm, focus, and self-compassion."</div>
+        <span class="tag">/social</span> <span class="tag">/emails</span>
+      </div>
+
+      <div class="service-card">
+        <h3>Executive and Leadership Coaching</h3>
+        <div class="audience">Leaders, managers, professionals in career transitions</div>
+        <div class="price">Package pricing — confirm current rates</div>
+        <div class="msg">"Lead from your strengths, not against your nature."</div>
+        <span class="tag">/copywriting</span>
+      </div>
+
+      <div class="service-card">
+        <h3>Team Workshops</h3>
+        <div class="audience">Corporate teams, HR leads, L&amp;D managers</div>
+        <div class="price">Custom — contact for quote</div>
+        <div class="msg">"Strengths-based teams perform better and stay longer."</div>
+        <span class="tag">/marketing-ideas</span>
+      </div>
+
+      <div class="service-card">
+        <h3>Digital Products (coming)</h3>
+        <div class="audience">ADHD adults, ThriveHQ prospects, self-starters</div>
+        <div class="price">$15–$49 per item on Gumroad</div>
+        <div class="msg">"Tools built around your brain, not a generic system."</div>
+        <span class="tag">/lead-magnets</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>12-Month Marketing Checklist</h2>
+    <p>Tap to mark actions complete. Saved in your browser.</p>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="prog-label">0 of 20 done</span>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" id="prog-bar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Foundation — Months 1–2</div>
+      <div class="check-list">
+        <div class="check-item" data-id="plan-1" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Set up Gumroad account and connect to coach4u.com.au<em>Digital products channel live</em></div>
+        </div>
+        <div class="check-item" data-id="plan-2" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Build Brain Pulse self-assessment PDF and list on Gumroad<em>First digital product — most distinctive framework</em></div>
+        </div>
+        <div class="check-item" data-id="plan-3" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Add Resources page to coach4u.com.au with product listings<em>WordPress Gutenberg page</em></div>
+        </div>
+        <div class="check-item" data-id="plan-4" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Publish weekly LinkedIn post from this session's ideas<em>Use /social — start with "Don't put the phone away"</em></div>
+        </div>
+        <div class="check-item" data-id="plan-5" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Email existing clients about Brain Pulse PDF availability<em>Warm audience first — builds loyalty and tests the product</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Content and Email — Months 2–4</div>
+      <div class="check-list">
+        <div class="check-item" data-id="plan-6" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Write welcome email sequence for new ThriveHQ enquiries<em>Use /emails — 3–5 email series introducing the framework</em></div>
+        </div>
+        <div class="check-item" data-id="plan-7" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Create lead magnet — one free worksheet to grow email list<em>Use /lead-magnets — SAFEty Pulse or Brain Pulse lite version</em></div>
+        </div>
+        <div class="check-item" data-id="plan-8" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Publish all 10 content ideas from session pipeline<em>See Content Pipeline tab — track progress there</em></div>
+        </div>
+        <div class="check-item" data-id="plan-9" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Build remaining digital products (SAFEty Pulse, Strengths workbook, Weekly Reset)<em>Use /copywriting for each product description</em></div>
+        </div>
+        <div class="check-item" data-id="plan-10" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Write one LinkedIn post per digital product<em>Focus on the problem it solves, not the product itself</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Growth and Corporate — Months 4–8</div>
+      <div class="check-list">
+        <div class="check-item" data-id="plan-11" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Develop team workshop offering and proposal template<em>Use /marketing-ideas — target HR and L&D contacts</em></div>
+        </div>
+        <div class="check-item" data-id="plan-12" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Establish speaking presence — pitch for at least 2 events or panels<em>MHPN, professional development conferences, corporate events</em></div>
+        </div>
+        <div class="check-item" data-id="plan-13" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Collect and publish client proof points on coach4u.com.au<em>Use language from session insights — paraphrased, de-identified</em></div>
+        </div>
+        <div class="check-item" data-id="plan-14" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">SEO-optimise product and service pages on coach4u.com.au<em>Use /copywriting — target ADHD coaching and couples counselling search terms</em></div>
+        </div>
+        <div class="check-item" data-id="plan-15" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Launch ThriveHQ Starter Kit bundle on Gumroad<em>Brain Pulse + Weekly Reset + Purpose doc at $49</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Scale and Systemise — Months 8–12</div>
+      <div class="check-list">
+        <div class="check-item" data-id="plan-16" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Run corporate program with at least one organisation<em>Target $50k–$100k first engagement</em></div>
+        </div>
+        <div class="check-item" data-id="plan-17" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Build referral system — formal process for GP and specialist referrals<em>Particularly for ADHD diagnosis pathways</em></div>
+        </div>
+        <div class="check-item" data-id="plan-18" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Review and refresh content strategy — update content pillars<em>Use /content-strategy with updated session insights</em></div>
+        </div>
+        <div class="check-item" data-id="plan-19" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Conduct customer research — extract persona and VOC data<em>Use /customer-research — build from coaching session patterns</em></div>
+        </div>
+        <div class="check-item" data-id="plan-20" onclick="toggleCheck(this)">
+          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-text">Year 1 review — assess revenue by stream against targets<em>Use revenue table below to track actuals vs goals</em></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>Revenue Goals</h2>
+    <div class="rev-grid">
+      <div class="rev-card"><div class="lbl">Year 1</div><div class="amt">$120k–$220k</div></div>
+      <div class="rev-card"><div class="lbl">Year 2</div><div class="amt">$250k–$450k</div></div>
+      <div class="rev-card"><div class="lbl">Year 3</div><div class="amt">$500k+</div></div>
+    </div>
+    <table class="stream-table">
+      <thead><tr><th>Revenue Stream</th><th>Target Range</th></tr></thead>
+      <tbody>
+        <tr><td>Team Workshops</td><td>$80k–$250k</td></tr>
+        <tr><td>Executive Coaching</td><td>$60k–$180k</td></tr>
+        <tr><td>Counselling and Life Coaching</td><td>$40k–$120k</td></tr>
+        <tr><td>Corporate Programs</td><td>$50k–$300k</td></tr>
+        <tr><td>Online Courses and Digital Products</td><td>$10k–$100k</td></tr>
+        <tr><td>Speaking</td><td>$5k–$50k</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Brand Voice Rules</h2>
+    <div class="voice-grid">
+      <div class="voice-do">
+        <h3>Do</h3>
+        <ul>
+          <li>Warm, professional, clear</li>
+          <li>Strengths-based, not clinical</li>
+          <li>Australian English</li>
+          <li>Short paragraphs, easy to scan</li>
+          <li>Practical over theoretical</li>
+          <li>Close emails with "Thanks"</li>
+          <li>One improvement at a time</li>
+          <li>Name the problem in plain language</li>
+        </ul>
+      </div>
+      <div class="voice-dont">
+        <h3>Don't</h3>
+        <ul>
+          <li>No exclamation marks</li>
+          <li>No em dashes in prose</li>
+          <li>No clinical or therapy jargon</li>
+          <li>Never call Coach4U a psychology practice</li>
+          <li>No "Best regards" or "Cheers" sign-offs</li>
+          <li>No generic productivity advice</li>
+          <li>No American English</li>
+          <li>No purple gradients or emoji-heavy design</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337</footer>
+
+<script>
+  const STORAGE_KEY = 'coach4u_plan_done';
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    const state = loadState();
+    state[el.dataset.id] = el.classList.contains('done');
+    saveState(state);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const items = document.querySelectorAll('.check-item');
+    const done = document.querySelectorAll('.check-item.done').length;
+    const total = items.length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById('prog-label').textContent = done + ' of ' + total + ' done';
+    document.getElementById('prog-pct').textContent = pct + '%';
+    document.getElementById('prog-bar').style.width = pct + '%';
+  }
+
+  function init() {
+    const state = loadState();
+    document.querySelectorAll('.check-item').forEach(el => {
+      if (state[el.dataset.id]) el.classList.add('done');
+    });
+    updateProgress();
+  }
+
+  init();
+</script>
+
+</body>
+</html>
