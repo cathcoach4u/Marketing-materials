@@ -17,7 +17,7 @@
       --card: #f7f9fc;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.6; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.7; }
 
     header { background: var(--dark-blue); padding: 1.4rem 1.25rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
     header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: #fff; }
@@ -29,63 +29,96 @@
     nav a.active { color: var(--dark-blue); border-bottom-color: var(--light-blue); font-family: 'Inter', sans-serif; font-weight: 700; }
 
     main { max-width: 820px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
-    section { margin-bottom: 2.5rem; }
-    h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 1.05rem; margin-bottom: 1rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--light-grey); }
-    h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.9rem; margin-bottom: 0.5rem; }
-    p { font-size: 0.92rem; margin-bottom: 0.6rem; }
 
-    /* Services */
-    .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
-    @media (max-width: 520px) { .service-grid { grid-template-columns: 1fr; } }
-    .service-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.9rem 1rem; }
-    .service-card h3 { margin-bottom: 0.3rem; }
-    .service-card .audience { font-size: 0.8rem; color: #666; margin-bottom: 0.5rem; }
-    .service-card .price { font-size: 0.85rem; color: var(--dark-blue); font-weight: 500; margin-bottom: 0.45rem; }
-    .service-card .msg { font-size: 0.83rem; color: #444; border-left: 2px solid var(--light-blue); padding-left: 0.6rem; margin-bottom: 0.5rem; font-style: italic; }
-    .tag { font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--light-blue); background: #eef3fb; border: 1px solid #c5d6ef; border-radius: 6px; padding: 0.2rem 0.55rem; font-size: 0.79rem; white-space: nowrap; }
+    /* Section structure */
+    .plan-section { margin-bottom: 3rem; }
+    .section-number { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--light-blue); font-weight: 500; margin-bottom: 0.3rem; }
+    h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 1.1rem; margin-bottom: 0.5rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--light-grey); }
+    h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.92rem; margin-bottom: 0.35rem; margin-top: 1rem; }
+    p { font-size: 0.91rem; margin-bottom: 0.7rem; color: var(--dark-grey); }
 
-    /* Progress */
-    .progress-wrap { margin-bottom: 1.25rem; }
-    .progress-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 0.4rem; }
-    .progress-track { background: var(--light-grey); border-radius: 99px; height: 6px; }
-    .progress-bar { background: var(--light-blue); border-radius: 99px; height: 6px; transition: width 0.3s; }
+    /* Positioning card */
+    .position-card { background: var(--dark-blue); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .position-card p { color: rgba(255,255,255,0.85); font-size: 0.93rem; margin-bottom: 0; line-height: 1.75; }
+    .position-card strong { color: #fff; }
 
-    /* Checklist */
-    .phase { margin-bottom: 1.5rem; }
-    .phase-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--light-blue); font-weight: 500; margin-bottom: 0.6rem; }
-    .check-list { display: flex; flex-direction: column; gap: 0.4rem; }
-    .check-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.7rem 0.9rem; background: var(--card); border: 1px solid var(--light-grey); border-radius: 8px; cursor: pointer; transition: border-color 0.15s; }
-    .check-item:hover { border-color: var(--light-blue); }
-    .check-item.done { background: #f0f4f0; border-color: #c8d8c8; }
-    .check-item.done .check-text { color: #888; text-decoration: line-through; }
-    .check-box { width: 18px; height: 18px; border: 2px solid var(--light-grey); border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-    .check-item.done .check-box { background: #5a9e5a; border-color: #5a9e5a; }
-    .check-box svg { display: none; }
-    .check-item.done .check-box svg { display: block; }
-    .check-text { font-size: 0.87rem; color: var(--dark-grey); }
-    .check-text em { font-style: normal; font-size: 0.78rem; color: #888; display: block; margin-top: 0.1rem; }
+    /* Pull quote */
+    .pull-quote { border-left: 3px solid var(--light-blue); padding: 0.6rem 1rem; margin: 1rem 0; background: var(--card); border-radius: 0 8px 8px 0; }
+    .pull-quote p { font-size: 0.9rem; font-style: italic; color: #444; margin: 0; }
+
+    /* Differentiator list */
+    .diff-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .diff-list { grid-template-columns: 1fr; } }
+    .diff-item { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.9rem 1rem; }
+    .diff-item h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .diff-item p { font-size: 0.83rem; color: #555; margin: 0; line-height: 1.55; }
+
+    /* Audience cards */
+    .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .audience-grid { grid-template-columns: 1fr; } }
+    .audience-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.9rem 1rem; }
+    .audience-card h3 { margin-top: 0; color: var(--dark-blue); }
+    .audience-card .aud-problem { font-size: 0.82rem; color: #666; margin-bottom: 0.5rem; font-style: italic; }
+    .audience-card .aud-offer { font-size: 0.83rem; color: var(--dark-grey); border-top: 1px solid var(--light-grey); padding-top: 0.5rem; margin-top: 0.5rem; }
+    .aud-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--light-blue); font-weight: 500; margin-bottom: 0.2rem; }
+
+    /* Services table */
+    .service-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; margin-top: 0.75rem; }
+    .service-table th { text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.5rem 0.7rem; border-bottom: 2px solid var(--light-grey); }
+    .service-table td { padding: 0.65rem 0.7rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    .service-table tr:last-child td { border-bottom: none; }
+    .service-table td:first-child { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); width: 28%; }
+    .service-table td:nth-child(2) { color: #555; width: 32%; }
+    .service-table td:last-child { font-style: italic; color: #444; }
+
+    /* Channel strategy */
+    .channel-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+    .channel-item { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.85rem 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .channel-label { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.87rem; min-width: 130px; flex-shrink: 0; padding-top: 0.1rem; }
+    .channel-detail { font-size: 0.85rem; color: #555; line-height: 1.55; }
+    .channel-detail strong { color: var(--dark-grey); font-weight: 500; }
+
+    /* Content pillars */
+    .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .pillar-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--dark-blue); border-radius: 10px; padding: 1rem; text-align: center; }
+    .pillar-card .pillar-title { font-family: 'Inter', sans-serif; font-weight: 700; color: #fff; font-size: 0.88rem; margin-bottom: 0.4rem; }
+    .pillar-card .pillar-desc { font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+    /* 12-month plan */
+    .phase-block { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 1rem 1.1rem; margin-bottom: 0.75rem; }
+    .phase-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem; }
+    .phase-badge { background: var(--dark-blue); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0.6rem; border-radius: 20px; white-space: nowrap; }
+    .phase-goal { font-size: 0.82rem; color: #666; }
+    .phase-actions { list-style: none; padding: 0; }
+    .phase-actions li { font-size: 0.86rem; color: var(--dark-grey); padding: 0.3rem 0; border-bottom: 1px solid #eee; display: flex; gap: 0.6rem; align-items: flex-start; }
+    .phase-actions li:last-child { border-bottom: none; }
+    .phase-actions li::before { content: "→"; color: var(--light-blue); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+    .phase-actions li em { display: block; font-size: 0.77rem; font-style: normal; color: #999; margin-top: 0.1rem; }
+
+    /* Revenue */
+    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 1rem; }
+    @media (max-width: 480px) { .rev-grid { grid-template-columns: 1fr; } }
+    .rev-card { background: var(--dark-blue); border-radius: 10px; padding: 1rem; text-align: center; }
+    .rev-card .lbl { color: rgba(255,255,255,0.55); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .rev-card .amt { color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; }
+    .stream-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+    .stream-table th { text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.45rem 0.6rem; border-bottom: 2px solid var(--light-grey); }
+    .stream-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #f0f0f0; }
+    .stream-table td:last-child { color: var(--light-blue); font-weight: 500; text-align: right; }
+    .stream-table tr:last-child td { border-bottom: none; }
+    .stream-table td:first-child { font-weight: 500; }
+    .stream-table td:nth-child(2) { font-size: 0.83rem; color: #666; }
 
     /* Brand voice */
     .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
     @media (max-width: 520px) { .voice-grid { grid-template-columns: 1fr; } }
     .voice-do { background: #f0f7f0; border: 1px solid #c8d8c8; border-radius: 10px; padding: 0.9rem 1rem; }
     .voice-dont { background: #fdf3f3; border: 1px solid #e8c8c8; border-radius: 10px; padding: 0.9rem 1rem; }
-    .voice-do h3 { color: #2a5a2a; margin-bottom: 0.5rem; }
-    .voice-dont h3 { color: #7a2a2a; margin-bottom: 0.5rem; }
-    .voice-do ul, .voice-dont ul { padding-left: 1.1rem; font-size: 0.85rem; }
-    .voice-do li, .voice-dont li { margin-bottom: 0.3rem; }
-
-    /* Revenue table */
-    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 1rem; }
-    @media (max-width: 480px) { .rev-grid { grid-template-columns: 1fr; } }
-    .rev-card { background: var(--dark-blue); border-radius: 10px; padding: 1rem; text-align: center; }
-    .rev-card .lbl { color: rgba(255,255,255,0.55); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-    .rev-card .amt { color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; }
-    .stream-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    .stream-table th { text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.45rem 0.6rem; border-bottom: 2px solid var(--light-grey); }
-    .stream-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #f0f0f0; }
-    .stream-table td:last-child { color: var(--light-blue); font-weight: 500; text-align: right; }
-    .stream-table tr:last-child td { border-bottom: none; }
+    .voice-do h3 { color: #2a5a2a; margin-top: 0; border-bottom: 1px solid #c8d8c8; padding-bottom: 0.3rem; }
+    .voice-dont h3 { color: #7a2a2a; margin-top: 0; border-bottom: 1px solid #e8c8c8; padding-bottom: 0.3rem; }
+    .voice-do ul, .voice-dont ul { padding-left: 1.1rem; font-size: 0.84rem; margin-top: 0.5rem; }
+    .voice-do li, .voice-dont li { margin-bottom: 0.35rem; }
 
     footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
   </style>
@@ -105,281 +138,354 @@
 
 <main>
 
-  <!-- SERVICES REFERENCE -->
-  <section>
-    <h2>Services Reference</h2>
-    <p>Quick guide for positioning each service in copy, posts, and pitches.</p>
-    <div class="service-grid">
+  <!-- 1. POSITIONING -->
+  <div class="plan-section">
+    <div class="section-number">Section 1</div>
+    <h2>Positioning and Mission</h2>
 
-      <div class="service-card">
-        <h3>Individual Coaching and Counselling</h3>
-        <div class="audience">Adults seeking clarity, life transitions, confidence</div>
-        <div class="price">$250 + GST per session (1.5 hrs) — 2-hr intake session first</div>
-        <div class="msg">"Find what actually works for your brain and your life."</div>
-        <span class="tag">/copywriting</span>
-      </div>
-
-      <div class="service-card">
-        <h3>Couples Coaching and Counselling</h3>
-        <div class="audience">Couples with communication issues, conflict, or disconnection</div>
-        <div class="price">$250 + GST per session (1.5 hrs)</div>
-        <div class="msg">"Clearer communication. Stronger connection. A safer relationship."</div>
-        <span class="tag">/copywriting</span>
-      </div>
-
-      <div class="service-card">
-        <h3>ThriveHQ ADHD Group Coaching</h3>
-        <div class="audience">Adults with ADHD wanting structure, community, and momentum</div>
-        <div class="price">6-month membership — see current pricing</div>
-        <div class="msg">"From chaos toward calm, focus, and self-compassion."</div>
-        <span class="tag">/social</span> <span class="tag">/emails</span>
-      </div>
-
-      <div class="service-card">
-        <h3>Executive and Leadership Coaching</h3>
-        <div class="audience">Leaders, managers, professionals in career transitions</div>
-        <div class="price">Package pricing — confirm current rates</div>
-        <div class="msg">"Lead from your strengths, not against your nature."</div>
-        <span class="tag">/copywriting</span>
-      </div>
-
-      <div class="service-card">
-        <h3>Team Workshops</h3>
-        <div class="audience">Corporate teams, HR leads, L&amp;D managers</div>
-        <div class="price">Custom — contact for quote</div>
-        <div class="msg">"Strengths-based teams perform better and stay longer."</div>
-        <span class="tag">/marketing-ideas</span>
-      </div>
-
-      <div class="service-card">
-        <h3>Digital Products (coming)</h3>
-        <div class="audience">ADHD adults, ThriveHQ prospects, self-starters</div>
-        <div class="price">$15–$49 per item on Gumroad</div>
-        <div class="msg">"Tools built around your brain, not a generic system."</div>
-        <span class="tag">/lead-magnets</span>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 12-MONTH ACTION CHECKLIST -->
-  <section>
-    <h2>12-Month Marketing Checklist</h2>
-    <p>Tap to mark actions complete. Saved in your browser.</p>
-
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span id="prog-label">0 of 20 done</span>
-        <span id="prog-pct">0%</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-bar" id="prog-bar" style="width: 0%"></div>
-      </div>
+    <div class="position-card">
+      <p><strong>Coach4U</strong> is a fully online, strengths-based coaching and counselling practice based in Sydney, Australia. The practice serves individuals, couples, adults with ADHD, and organisations — helping them move toward clarity, stronger connection, and sustainable growth.</p>
+      <p style="margin-top:0.75rem;">Coach4U is not a psychology practice. It bridges the gap between traditional therapy and generic life coaching: more structure and practical tools than conventional counselling, and more psychological depth and evidence-based rigour than most coaching services.</p>
     </div>
 
-    <div class="phase">
-      <div class="phase-label">Foundation — Months 1–2</div>
-      <div class="check-list">
-        <div class="check-item" data-id="plan-1" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Set up Gumroad account and connect to coach4u.com.au<em>Digital products channel live</em></div>
+    <h3>What makes Coach4U different</h3>
+    <div class="diff-list">
+      <div class="diff-item">
+        <h4>Coaching plus counselling, not one or the other</h4>
+        <p>Evidence-based frameworks (EFT, Gottman, Imago, Narrative Therapy, TA) delivered in a forward-looking coaching style that focuses on action, goals, and practical tools — not diagnosis or clinical language.</p>
+      </div>
+      <div class="diff-item">
+        <h4>Strengths first, problems second</h4>
+        <p>Every service builds on what clients already do well. Challenges are reframed as opportunities to use strengths in a new way. This is fundamentally different from problem-focused therapy.</p>
+      </div>
+      <div class="diff-item">
+        <h4>Proprietary frameworks that create structure</h4>
+        <p>ThriveHQ (ADHD coaching), Relationship Compass (couples), SAFEty Pulse, Brain Pulse, and Strengths Development Pathway are all built in-house and cannot be found elsewhere.</p>
+      </div>
+      <div class="diff-item">
+        <h4>ADHD and neurodiversity expertise</h4>
+        <p>Deep specialisation informed by lived experience. ThriveHQ is built specifically for ADHD adults — addressing executive function, isolation, and start-stop cycles in ways generic programs cannot.</p>
+      </div>
+      <div class="diff-item">
+        <h4>Continuous support between sessions</h4>
+        <p>Daily check-ins, community, and digital tools mean clients aren't left alone between sessions. This level of between-session support is rare in both coaching and counselling practices.</p>
+      </div>
+      <div class="diff-item">
+        <h4>Fully online, all of Australia</h4>
+        <p>Delivered via Microsoft Teams. Accessible regardless of location, easy to fit around busy schedules, and practical for the ADHD clients who struggle with commuting and waiting rooms.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. AUDIENCES -->
+  <div class="plan-section">
+    <div class="section-number">Section 2</div>
+    <h2>Target Audiences</h2>
+    <p>Four primary audiences, each with distinct problems and entry points into Coach4U's services.</p>
+
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h3>Adults with ADHD</h3>
+        <div class="aud-label">Primary audience for ThriveHQ</div>
+        <div class="aud-problem">"I've tried every system and nothing sticks. I know what I should be doing but I can't make myself do it."</div>
+        <div class="aud-offer">
+          <strong>What we offer:</strong> ThriveHQ ADHD group coaching membership — a structured community that works with the ADHD brain, not against it. Brain Pulse weekly tracking, peer support, and strengths-based scaffolding. Outcome: from chaos toward calm, focus, and self-compassion.
         </div>
-        <div class="check-item" data-id="plan-2" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Build Brain Pulse self-assessment PDF and list on Gumroad<em>First digital product — most distinctive framework</em></div>
+      </div>
+
+      <div class="audience-card">
+        <h3>Couples</h3>
+        <div class="aud-label">Individual and joint sessions</div>
+        <div class="aud-problem">"We keep having the same argument. We love each other but we can't communicate. One or both of us has ADHD and it's affecting everything."</div>
+        <div class="aud-offer">
+          <strong>What we offer:</strong> Couples coaching and counselling using EFT, Gottman, and Imago methods. Structured 4-phase process: Stabilise, Understand, Integrate, Sustain. Outcome: clearer communication, stronger emotional connection, conflict resolved not avoided.
         </div>
-        <div class="check-item" data-id="plan-3" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Add Resources page to coach4u.com.au with product listings<em>WordPress Gutenberg page</em></div>
+      </div>
+
+      <div class="audience-card">
+        <h3>Individuals in transition</h3>
+        <div class="aud-label">1:1 coaching and counselling</div>
+        <div class="aud-problem">"I feel stuck. I know I'm capable of more but I don't know where to start or what direction to go. I've lost confidence."</div>
+        <div class="aud-offer">
+          <strong>What we offer:</strong> Individual coaching and counselling using Narrative Therapy, ACT, Solution-Focused, and CliftonStrengths. Personal goals, life transitions, self-management, confidence. Outcome: clarity, momentum, and a renewed sense of direction.
         </div>
-        <div class="check-item" data-id="plan-4" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Publish weekly LinkedIn post from this session's ideas<em>Use /social — start with "Don't put the phone away"</em></div>
-        </div>
-        <div class="check-item" data-id="plan-5" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Email existing clients about Brain Pulse PDF availability<em>Warm audience first — builds loyalty and tests the product</em></div>
+      </div>
+
+      <div class="audience-card">
+        <h3>Leaders and organisations</h3>
+        <div class="aud-label">Executive coaching and team workshops</div>
+        <div class="aud-problem">"My team is disengaged and we're not communicating well. I need to lead better but don't know where my blind spots are."</div>
+        <div class="aud-offer">
+          <strong>What we offer:</strong> Business and leadership coaching, CliftonStrengths-based team workshops, corporate programs for neurodiverse workplaces. Outcome: stronger leaders, aligned teams, measurable performance improvement.
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="phase">
-      <div class="phase-label">Content and Email — Months 2–4</div>
-      <div class="check-list">
-        <div class="check-item" data-id="plan-6" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Write welcome email sequence for new ThriveHQ enquiries<em>Use /emails — 3–5 email series introducing the framework</em></div>
+  <!-- 3. SERVICES -->
+  <div class="plan-section">
+    <div class="section-number">Section 3</div>
+    <h2>Services Overview</h2>
+    <p>Full suite of services under SARUBA Pty Ltd. Pricing quoted to clients excludes GST unless otherwise stated. All sessions delivered online via Microsoft Teams.</p>
+
+    <table class="service-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Format and pricing</th>
+          <th>Key marketing message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Individual Coaching and Counselling</td>
+          <td>1:1 sessions online. 2-hr intake, then 1.5-hr ongoing sessions at $250 + GST/hr.</td>
+          <td>"Find what actually works for your brain and your life."</td>
+        </tr>
+        <tr>
+          <td>Couples Coaching and Counselling</td>
+          <td>Joint sessions online. 2-hr intake, then 1.5-hr ongoing at $250 + GST/hr.</td>
+          <td>"Clearer communication. Stronger connection. A safer relationship."</td>
+        </tr>
+        <tr>
+          <td>ThriveHQ ADHD Group Coaching</td>
+          <td>6-month membership. Live group sessions, daily check-ins, private community. Confirm current pricing.</td>
+          <td>"From chaos toward calm, focus, and self-compassion."</td>
+        </tr>
+        <tr>
+          <td>Executive and Leadership Coaching</td>
+          <td>1:1 coaching. Package pricing — confirm current rates.</td>
+          <td>"Lead from your strengths, not against your nature."</td>
+        </tr>
+        <tr>
+          <td>Team Workshops</td>
+          <td>Half-day or full-day. Custom quote. CliftonStrengths-based.</td>
+          <td>"Strengths-based teams perform better and stay longer."</td>
+        </tr>
+        <tr>
+          <td>Career Coaching</td>
+          <td>1:1 sessions online. Same rate as individual coaching.</td>
+          <td>"Align your career with how you actually think and work."</td>
+        </tr>
+        <tr>
+          <td>Corporate Programs</td>
+          <td>Multi-session programs for organisations. Custom scope and pricing.</td>
+          <td>"Practical, evidenced-based programs that improve performance and wellbeing."</td>
+        </tr>
+        <tr>
+          <td>Digital Products (coming)</td>
+          <td>Downloadable PDFs via Gumroad. $15–$49 per item. Included free for ThriveHQ members.</td>
+          <td>"Tools built around your brain, not a generic system."</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. CHANNEL STRATEGY -->
+  <div class="plan-section">
+    <div class="section-number">Section 4</div>
+    <h2>Channel Strategy</h2>
+    <p>Where to focus marketing effort and what each channel does. Prioritised for a solo practitioner with limited time.</p>
+
+    <div class="channel-list">
+      <div class="channel-item">
+        <div class="channel-label">LinkedIn</div>
+        <div class="channel-detail">
+          <strong>Primary channel.</strong> Reaches ADHD adults, professionals, leaders, HR and L&D contacts in one place. Post 1–2 times per week using session-driven content angles (see Content Pipeline). Focus on relatable ADHD reframes, strengths insights, and proof points. Build the ThriveHQ audience and the corporate referral network from the same channel. Use <strong>/social</strong> to write posts.
         </div>
-        <div class="check-item" data-id="plan-7" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Create lead magnet — one free worksheet to grow email list<em>Use /lead-magnets — SAFEty Pulse or Brain Pulse lite version</em></div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-label">Email list</div>
+        <div class="channel-detail">
+          <strong>Nurture and convert.</strong> Warm list of past clients, enquiries, and ThriveHQ prospects. Send one newsletter per month with a session insight or practical tip. Use a lead magnet (free Brain Pulse worksheet or SAFEty Pulse PDF) to grow the list. Welcome sequence for new subscribers should introduce the ThriveHQ framework. Use <strong>/emails</strong> to build sequences.
         </div>
-        <div class="check-item" data-id="plan-8" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Publish all 10 content ideas from session pipeline<em>See Content Pipeline tab — track progress there</em></div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-label">Website (SEO)</div>
+        <div class="channel-detail">
+          <strong>Long-term discovery.</strong> coach4u.com.au should have optimised service pages for: ADHD coaching Australia, strengths-based counselling, couples counselling online, executive coaching. Each page needs a clear CTA and social proof. Resources page for digital products. Blog posts from session content angles will build organic traffic over time. Use <strong>/copywriting</strong> for page copy.
         </div>
-        <div class="check-item" data-id="plan-9" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Build remaining digital products (SAFEty Pulse, Strengths workbook, Weekly Reset)<em>Use /copywriting for each product description</em></div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-label">Referrals</div>
+        <div class="channel-detail">
+          <strong>Highest quality leads.</strong> GP and specialist referrals for ADHD clients. Professional network — other coaches, therapists, psychologists. MHPN neurodiversity facilitation contacts. Build a one-page referral overview for each audience (GPs, therapists, HR managers). Past clients referring friends and family. This channel needs a formal process, not just word of mouth.
         </div>
-        <div class="check-item" data-id="plan-10" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Write one LinkedIn post per digital product<em>Focus on the problem it solves, not the product itself</em></div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-label">Speaking</div>
+        <div class="channel-detail">
+          <strong>Authority and reach.</strong> MHPN events, neurodiversity conferences, professional development panels, corporate lunch-and-learns. Each speaking engagement should be treated as a content event — record a short clip or write a follow-up post. Target 2–4 engagements per year in Year 1. Use <strong>/marketing-ideas</strong> to identify relevant venues.
+        </div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-label">Gumroad (digital products)</div>
+        <div class="channel-detail">
+          <strong>Passive discovery and conversion.</strong> Products embedded on coach4u.com.au. Buyers who download a Brain Pulse PDF are warm leads for ThriveHQ. Promote each product with a LinkedIn post focused on the problem it solves — not the product. Phase 1: Brain Pulse self-assessment. Phase 2: remaining PDFs and Starter Kit bundle.
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="phase">
-      <div class="phase-label">Growth and Corporate — Months 4–8</div>
-      <div class="check-list">
-        <div class="check-item" data-id="plan-11" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Develop team workshop offering and proposal template<em>Use /marketing-ideas — target HR and L&D contacts</em></div>
-        </div>
-        <div class="check-item" data-id="plan-12" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Establish speaking presence — pitch for at least 2 events or panels<em>MHPN, professional development conferences, corporate events</em></div>
-        </div>
-        <div class="check-item" data-id="plan-13" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Collect and publish client proof points on coach4u.com.au<em>Use language from session insights — paraphrased, de-identified</em></div>
-        </div>
-        <div class="check-item" data-id="plan-14" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">SEO-optimise product and service pages on coach4u.com.au<em>Use /copywriting — target ADHD coaching and couples counselling search terms</em></div>
-        </div>
-        <div class="check-item" data-id="plan-15" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Launch ThriveHQ Starter Kit bundle on Gumroad<em>Brain Pulse + Weekly Reset + Purpose doc at $49</em></div>
-        </div>
+  <!-- 5. CONTENT STRATEGY -->
+  <div class="plan-section">
+    <div class="section-number">Section 5</div>
+    <h2>Content Strategy</h2>
+    <p>Content is driven by what happens in ThriveHQ sessions. Each session generates content angles in client language — these become posts, emails, and blog articles. Use <strong>/content-strategy</strong> to plan further.</p>
+
+    <h3>Three content pillars</h3>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="pillar-title">ADHD and the brain</div>
+        <div class="pillar-desc">Counterintuitive reframes, practical strategies, dopamine, executive function. What no-one tells you. Speaks to ThriveHQ prospects.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-title">Strengths in action</div>
+        <div class="pillar-desc">How knowing your strengths changes what's possible. Real examples from individuals, couples, and teams. Positions the CliftonStrengths work.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-title">Progress and proof</div>
+        <div class="pillar-desc">What sustained coaching actually looks like. Quiet wins, shifts in self-awareness, before-and-after moments. De-identified, paraphrased from sessions.</div>
       </div>
     </div>
 
-    <div class="phase">
-      <div class="phase-label">Scale and Systemise — Months 8–12</div>
-      <div class="check-list">
-        <div class="check-item" data-id="plan-16" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Run corporate program with at least one organisation<em>Target $50k–$100k first engagement</em></div>
-        </div>
-        <div class="check-item" data-id="plan-17" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Build referral system — formal process for GP and specialist referrals<em>Particularly for ADHD diagnosis pathways</em></div>
-        </div>
-        <div class="check-item" data-id="plan-18" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Review and refresh content strategy — update content pillars<em>Use /content-strategy with updated session insights</em></div>
-        </div>
-        <div class="check-item" data-id="plan-19" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Conduct customer research — extract persona and VOC data<em>Use /customer-research — build from coaching session patterns</em></div>
-        </div>
-        <div class="check-item" data-id="plan-20" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="check-text">Year 1 review — assess revenue by stream against targets<em>Use revenue table below to track actuals vs goals</em></div>
-        </div>
-      </div>
+    <div class="pull-quote">
+      <p>Every ThriveHQ session generates 5 content angles. After each session, run <strong>/thrivehq-insights</strong> on the transcript to produce a full marketing insights report with content ideas, client language, and proof points ready to use.</p>
     </div>
 
-  </section>
+    <h3>Content rules</h3>
+    <p>Content should reflect how clients actually talk about their experience — use the Language Bank in the Content Pipeline tab as the source of real language. Never use clinical terms. Never say "therapy." Focus on the problem the reader is experiencing right now, not the service being sold. One practical insight per piece is enough.</p>
+  </div>
 
-  <!-- REVENUE GOALS -->
-  <section>
+  <!-- 6. 12-MONTH PLAN -->
+  <div class="plan-section">
+    <div class="section-number">Section 6</div>
+    <h2>12-Month Marketing Plan</h2>
+    <p>Four phases, building in sequence. Each phase has a clear goal and a set of concrete actions. Revenue and content build on each other.</p>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-badge">Months 1–2 — Foundation</div>
+        <div class="phase-goal">Get the basics live and start publishing.</div>
+      </div>
+      <ul class="phase-actions">
+        <li><span>Set up Gumroad and connect to coach4u.com.au. List the Brain Pulse self-assessment PDF first — it is the most distinctive product and the easiest to describe.</span></li>
+        <li><span>Publish the first LinkedIn post using the "Don't put the phone away" angle from the May 2026 session. Use <strong>/social</strong> to write it. Then publish one post per week from the Content Pipeline.</span></li>
+        <li><span>Add a Resources page to WordPress (coach4u.com.au) with the Brain Pulse product and a brief explainer of what ThriveHQ members receive as part of membership.</span></li>
+        <li><span>Email existing clients and ThriveHQ enquiries to announce the Brain Pulse PDF. Keep it short — one paragraph, one link, "Thanks" sign-off.</span></li>
+        <li><span>Run <strong>/thrivehq-insights</strong> after every session to keep the content pipeline full.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-badge">Months 2–4 — Content and Email</div>
+        <div class="phase-goal">Build the email list and publish consistently.</div>
+      </div>
+      <ul class="phase-actions">
+        <li><span>Create a free lead magnet — a lite version of the Brain Pulse or SAFEty Pulse worksheet. Use <strong>/lead-magnets</strong> to plan format and landing page. This grows the email list with warm ADHD prospects.</span></li>
+        <li><span>Write a 3–5 email welcome sequence for new list subscribers. Should introduce ThriveHQ framework, share one practical ADHD insight per email, and end with a clear call to enquire. Use <strong>/emails</strong>.</span></li>
+        <li><span>Build and list remaining digital products: SAFEty Pulse worksheet ($18), Strengths for ADHD workbook ($35), Weekly Reset planner ($15). Use <strong>/copywriting</strong> for product descriptions.</span></li>
+        <li><span>Write one LinkedIn post per digital product — focused on the problem it solves, not the product itself.</span></li>
+        <li><span>Publish the 10 content ideas from the May and March 2026 session insights. Track progress in the Content Pipeline tab.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-badge">Months 4–8 — Growth and Corporate</div>
+        <div class="phase-goal">Add corporate revenue and build referral systems.</div>
+      </div>
+      <ul class="phase-actions">
+        <li><span>Develop a team workshop offering with a one-page proposal template. Use <strong>/marketing-ideas</strong> to identify HR and L&D contacts. Target IAS and professional network first.</span></li>
+        <li><span>Build a one-page referral brief for GPs and specialists — plain language, what to expect, how to refer, what makes Coach4U different from a psychology practice.</span></li>
+        <li><span>Pitch for 2 speaking engagements — MHPN events, neurodiversity panels, or corporate lunch-and-learns. Prepare a short speaker bio and topic list.</span></li>
+        <li><span>SEO-optimise service pages on coach4u.com.au. Target: "ADHD coaching Australia," "strengths-based counselling Sydney," "couples counselling online Australia." Use <strong>/copywriting</strong>.</span></li>
+        <li><span>Launch ThriveHQ Starter Kit bundle on Gumroad at $49 (Brain Pulse + Weekly Reset + Purpose doc). Write a launch email to the list.</span></li>
+        <li><span>Add de-identified client proof points and success stories to coach4u.com.au — drawn from session insights reports, always paraphrased and anonymised.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-badge">Months 8–12 — Scale and Systemise</div>
+        <div class="phase-goal">Consolidate revenue streams and plan Year 2.</div>
+      </div>
+      <ul class="phase-actions">
+        <li><span>Run the first corporate program with at least one organisation. Document the process so it can be repeated. Target $50k–$100k first engagement.</span></li>
+        <li><span>Review content performance — which LinkedIn posts generated enquiries, which emails were opened. Use <strong>/content-strategy</strong> to refresh pillars based on data.</span></li>
+        <li><span>Conduct customer research — use session insights to build a proper persona document and voice-of-customer quote bank. Use <strong>/customer-research</strong>.</span></li>
+        <li><span>Year 1 revenue review against targets by stream. Identify which channels produced leads and which need adjustment. Plan Year 2 with revised priorities.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7. REVENUE GOALS -->
+  <div class="plan-section">
+    <div class="section-number">Section 7</div>
     <h2>Revenue Goals</h2>
+    <p>Three-year trajectory. Year 1 establishes the foundation across individual services, ThriveHQ, and digital products. Corporate and team revenue grows significantly in Years 2–3.</p>
+
     <div class="rev-grid">
       <div class="rev-card"><div class="lbl">Year 1</div><div class="amt">$120k–$220k</div></div>
       <div class="rev-card"><div class="lbl">Year 2</div><div class="amt">$250k–$450k</div></div>
       <div class="rev-card"><div class="lbl">Year 3</div><div class="amt">$500k+</div></div>
     </div>
+
     <table class="stream-table">
-      <thead><tr><th>Revenue Stream</th><th>Target Range</th></tr></thead>
+      <thead><tr><th>Revenue Stream</th><th>How to grow it</th><th>Target Range</th></tr></thead>
       <tbody>
-        <tr><td>Team Workshops</td><td>$80k–$250k</td></tr>
-        <tr><td>Executive Coaching</td><td>$60k–$180k</td></tr>
-        <tr><td>Counselling and Life Coaching</td><td>$40k–$120k</td></tr>
-        <tr><td>Corporate Programs</td><td>$50k–$300k</td></tr>
-        <tr><td>Online Courses and Digital Products</td><td>$10k–$100k</td></tr>
-        <tr><td>Speaking</td><td>$5k–$50k</td></tr>
+        <tr><td>Team Workshops</td><td>Corporate network, LinkedIn, referrals from IAS engagement</td><td>$80k–$250k</td></tr>
+        <tr><td>Executive Coaching</td><td>LinkedIn thought leadership, direct outreach, speaking</td><td>$60k–$180k</td></tr>
+        <tr><td>Counselling and Life Coaching</td><td>Referrals, GP network, SEO, word of mouth</td><td>$40k–$120k</td></tr>
+        <tr><td>Corporate Programs</td><td>Team workshop to program pipeline, neurodiverse workplace positioning</td><td>$50k–$300k</td></tr>
+        <tr><td>Online Courses and Digital Products</td><td>Gumroad, LinkedIn posts per product, email list lead magnet</td><td>$10k–$100k</td></tr>
+        <tr><td>Speaking</td><td>MHPN, conferences, corporate events, pitch proactively</td><td>$5k–$50k</td></tr>
       </tbody>
     </table>
-  </section>
+  </div>
 
-  <!-- BRAND VOICE -->
-  <section>
-    <h2>Brand Voice Rules</h2>
+  <!-- 8. BRAND VOICE -->
+  <div class="plan-section">
+    <div class="section-number">Section 8</div>
+    <h2>Brand Voice Guidelines</h2>
+    <p>These rules apply to everything — posts, emails, website copy, product descriptions. They are non-negotiable and should be checked before anything is published.</p>
+
     <div class="voice-grid">
       <div class="voice-do">
         <h3>Do</h3>
         <ul>
           <li>Warm, professional, clear</li>
-          <li>Strengths-based, not clinical</li>
-          <li>Australian English</li>
+          <li>Strengths-based — never problem-focused</li>
+          <li>Australian English always</li>
           <li>Short paragraphs, easy to scan</li>
           <li>Practical over theoretical</li>
-          <li>Close emails with "Thanks"</li>
-          <li>One improvement at a time</li>
-          <li>Name the problem in plain language</li>
+          <li>Use client language from the Language Bank</li>
+          <li>Name the problem the reader is experiencing right now</li>
+          <li>Close every email with "Thanks" — no other sign-off</li>
+          <li>One insight per piece is enough</li>
         </ul>
       </div>
       <div class="voice-dont">
         <h3>Don't</h3>
         <ul>
           <li>No exclamation marks</li>
-          <li>No em dashes in prose</li>
+          <li>No em dashes in prose (use commas or full stops)</li>
           <li>No clinical or therapy jargon</li>
           <li>Never call Coach4U a psychology practice</li>
-          <li>No "Best regards" or "Cheers" sign-offs</li>
-          <li>No generic productivity advice</li>
-          <li>No American English</li>
-          <li>No purple gradients or emoji-heavy design</li>
+          <li>Never use "therapy" or "therapeutic" in marketing copy</li>
+          <li>No "Best regards," "Cheers," or "Kind regards" sign-offs</li>
+          <li>No generic productivity advice ("just make a to-do list")</li>
+          <li>No American English spelling</li>
+          <li>No bundles of multiple changes in one piece</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
 
 </main>
 
 <footer>Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337</footer>
-
-<script>
-  const STORAGE_KEY = 'coach4u_plan_done';
-
-  function loadState() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
-  }
-
-  function saveState(state) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }
-
-  function toggleCheck(el) {
-    el.classList.toggle('done');
-    const state = loadState();
-    state[el.dataset.id] = el.classList.contains('done');
-    saveState(state);
-    updateProgress();
-  }
-
-  function updateProgress() {
-    const items = document.querySelectorAll('.check-item');
-    const done = document.querySelectorAll('.check-item.done').length;
-    const total = items.length;
-    const pct = total ? Math.round((done / total) * 100) : 0;
-    document.getElementById('prog-label').textContent = done + ' of ' + total + ' done';
-    document.getElementById('prog-pct').textContent = pct + '%';
-    document.getElementById('prog-bar').style.width = pct + '%';
-  }
-
-  function init() {
-    const state = loadState();
-    document.querySelectorAll('.check-item').forEach(el => {
-      if (state[el.dataset.id]) el.classList.add('done');
-    });
-    updateProgress();
-  }
-
-  init();
-</script>
 
 </body>
 </html>
