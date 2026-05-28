@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach4U Marketing Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #1B3664;
+      --light-blue: #5684C4;
+      --dark-grey: #2D2D2D;
+      --light-grey: #DDDDDD;
+      --bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      color: var(--dark-grey);
+      background: var(--bg);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    header {
+      background: var(--dark-blue);
+      padding: 2rem 1.5rem 1.75rem;
+    }
+
+    header h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: #ffffff;
+    }
+
+    header p {
+      color: rgba(255,255,255,0.72);
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--light-grey);
+    }
+
+    .card-list { display: grid; gap: 0.65rem; }
+
+    .card {
+      border: 1px solid var(--light-grey);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      text-decoration: none;
+      color: var(--dark-grey);
+      transition: border-color 0.15s;
+    }
+
+    a.card:hover { border-color: var(--light-blue); }
+
+    .tag {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      color: var(--light-blue);
+      background: #eef3fb;
+      border: 1px solid #c5d6ef;
+      border-radius: 6px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--dark-grey);
+      line-height: 1.5;
+    }
+
+    .card-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      font-size: 0.97rem;
+    }
+
+    .card-sub {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 0.15rem;
+    }
+
+    .card-arrow {
+      color: var(--light-blue);
+      font-size: 1.3rem;
+      margin-left: auto;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+
+    footer {
+      border-top: 1px solid var(--light-grey);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--dark-grey);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Coach4U Marketing Hub</h1>
+  <p>Your private reference for marketing tools, slash commands, and session insights.</p>
+</header>
+
+<main>
+
+  <section>
+    <h2>Slash Commands</h2>
+    <div class="card-list">
+      <div class="card">
+        <span class="tag">/thrivehq-insights</span>
+        <span class="card-desc">Turn a ThriveHQ session transcript into a full marketing insights report</span>
+      </div>
+      <div class="card">
+        <span class="tag">/copywriting</span>
+        <span class="card-desc">Write or improve marketing copy for a page, service description, or offer</span>
+      </div>
+      <div class="card">
+        <span class="tag">/emails</span>
+        <span class="card-desc">Build an email sequence — welcome series, nurture flow, re-engagement</span>
+      </div>
+      <div class="card">
+        <span class="tag">/social</span>
+        <span class="card-desc">Write LinkedIn posts, Reels scripts, or plan a content calendar</span>
+      </div>
+      <div class="card">
+        <span class="tag">/content-strategy</span>
+        <span class="card-desc">Plan what to write about and build content pillars for Coach4U</span>
+      </div>
+      <div class="card">
+        <span class="tag">/marketing-ideas</span>
+        <span class="card-desc">Brainstorm marketing tactics when you're stuck or want fresh ideas</span>
+      </div>
+      <div class="card">
+        <span class="tag">/customer-research</span>
+        <span class="card-desc">Analyse what clients say, build personas, extract voice-of-customer language</span>
+      </div>
+      <div class="card">
+        <span class="tag">/lead-magnets</span>
+        <span class="card-desc">Plan a downloadable resource or lead magnet to grow your email list</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>ThriveHQ Insights Reports</h2>
+    <div class="card-list">
+      <a class="card" href="Coach4U_Insights_ThriveHQ_2026-05-26.md">
+        <div class="card-body">
+          <div class="card-title">ThriveHQ Session Insights</div>
+          <div class="card-sub">26 May 2026</div>
+        </div>
+        <span class="card-arrow">&#8250;</span>
+      </a>
+      <a class="card" href="Coach4U_Insights_ThriveHQ_2026-03-31.md">
+        <div class="card-body">
+          <div class="card-title">ThriveHQ Session Insights</div>
+          <div class="card-sub">31 March 2026</div>
+        </div>
+        <span class="card-arrow">&#8250;</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Resources</h2>
+    <div class="card-list">
+      <a class="card" href="adhd-materials-sales-plan.md">
+        <div class="card-body">
+          <div class="card-title">ADHD Materials Sales Plan</div>
+          <div class="card-sub">Digital product strategy for ThriveHQ</div>
+        </div>
+        <span class="card-arrow">&#8250;</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337
+</footer>
+
+</body>
+</html>
