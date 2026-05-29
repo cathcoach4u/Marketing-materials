@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Strategy — Coach4U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #1B3664;
+      --light-blue: #5684C4;
+      --dark-grey: #2D2D2D;
+      --light-grey: #DDDDDD;
+      --bg: #ffffff;
+      --card: #f7f9fc;
+      --accent-soft: #eef3fb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.7; }
+
+    header { background: var(--dark-blue); padding: 1.4rem 1.25rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: #fff; }
+    header span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+    nav { background: #edf1f8; border-bottom: 1px solid var(--light-grey); display: flex; overflow-x: auto; }
+    nav a { padding: 0.75rem 1.1rem; font-size: 0.88rem; font-weight: 500; color: #555; text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; }
+    nav a:hover { color: var(--dark-blue); }
+    nav a.active { color: var(--dark-blue); border-bottom-color: var(--light-blue); font-family: 'Inter', sans-serif; font-weight: 700; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
+    .plan-section { margin-bottom: 2.75rem; }
+    .section-number { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--light-blue); font-weight: 500; margin-bottom: 0.3rem; }
+    h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 1.1rem; margin-bottom: 0.5rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--light-grey); }
+    h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.92rem; margin-bottom: 0.5rem; margin-top: 1rem; }
+    p { font-size: 0.91rem; margin-bottom: 0.7rem; color: var(--dark-grey); }
+
+    /* Hero */
+    .hero-card { background: var(--dark-blue); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.75rem; }
+    .hero-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); margin-bottom: 0.4rem; }
+    .hero-card h2 { color: #fff; border: none; padding: 0; margin-bottom: 0.6rem; font-size: 1.2rem; }
+    .hero-card p { color: rgba(255,255,255,0.85); margin-bottom: 0; font-size: 0.9rem; }
+    .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 1rem; }
+    @media (max-width: 560px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
+    .stat-pill { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem 0.5rem; text-align: center; }
+    .stat-pill .num { font-family: 'Inter', sans-serif; font-weight: 700; color: #fff; font-size: 1rem; display: block; }
+    .stat-pill .lbl { color: rgba(255,255,255,0.6); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; display: block; line-height: 1.3; }
+
+    /* Two-col grid */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .two-col { grid-template-columns: 1fr; } }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 540px) { .three-col { grid-template-columns: 1fr; } }
+
+    /* Standard card */
+    .card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.9rem 1rem; }
+    .card h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.87rem; margin-bottom: 0.3rem; }
+    .card p { font-size: 0.83rem; color: #555; margin: 0; line-height: 1.55; }
+    .card ul { padding-left: 1.1rem; font-size: 0.83rem; color: #555; line-height: 1.6; margin-top: 0.3rem; }
+    .card ul li { margin-bottom: 0.2rem; }
+
+    /* Keyword table */
+    .kw-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-top: 0.75rem; }
+    .kw-table th { text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.45rem 0.65rem; border-bottom: 2px solid var(--light-grey); }
+    .kw-table td { padding: 0.55rem 0.65rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    .kw-table tr:last-child td { border-bottom: none; }
+    .kw-table td:first-child { font-weight: 500; color: var(--dark-blue); }
+    .kw-table td .queries { font-size: 0.79rem; color: #555; line-height: 1.6; }
+    .kw-table td .queries code { background: var(--accent-soft); border: 1px solid #c5d6ef; border-radius: 4px; padding: 0.1rem 0.35rem; font-family: monospace; font-size: 0.76rem; color: var(--dark-blue); display: inline-block; margin: 0.1rem 0.15rem 0.1rem 0; white-space: nowrap; }
+    .diff-badge { font-size: 0.72rem; font-weight: 500; border-radius: 5px; padding: 0.15rem 0.45rem; white-space: nowrap; }
+    .diff-low { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .diff-med { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+    .diff-high { background: #fce4ec; color: #b71c1c; border: 1px solid #f48fb1; }
+
+    /* Priority list */
+    .priority-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+    .priority-item { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.85rem 1rem; display: flex; gap: 0.85rem; align-items: flex-start; }
+    .priority-num { background: var(--dark-blue); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; min-width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+    .priority-body h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.88rem; margin-bottom: 0.2rem; }
+    .priority-body p { font-size: 0.83rem; color: #555; margin: 0; line-height: 1.55; }
+
+    /* Checklist */
+    .check-list { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.75rem; }
+    .check-item { display: flex; gap: 0.7rem; align-items: flex-start; background: var(--card); border: 1px solid var(--light-grey); border-radius: 8px; padding: 0.7rem 0.9rem; }
+    .check-tick { color: var(--light-blue); font-size: 0.9rem; flex-shrink: 0; margin-top: 0.15rem; }
+    .check-item p { font-size: 0.84rem; color: #555; margin: 0; line-height: 1.55; }
+    .check-item strong { color: var(--dark-blue); }
+
+    /* Phase block */
+    .phase-grid { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; }
+    .phase-block { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 1rem 1.1rem; }
+    .phase-badge { display: inline-block; background: var(--dark-blue); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 5px; padding: 0.2rem 0.55rem; margin-bottom: 0.55rem; }
+    .phase-block h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .phase-block ul { padding-left: 1.1rem; font-size: 0.84rem; color: #555; line-height: 1.65; }
+    .phase-block ul li { margin-bottom: 0.25rem; }
+
+    /* Insight box */
+    .insight-box { background: var(--accent-soft); border-left: 3px solid var(--light-blue); border-radius: 0 8px 8px 0; padding: 0.9rem 1rem; margin-top: 0.75rem; }
+    .insight-box p { font-size: 0.86rem; color: #444; margin: 0; line-height: 1.65; }
+    .insight-box strong { color: var(--dark-blue); }
+
+    /* Warning box */
+    .warn-box { background: #fff8e8; border: 1px solid #f0d896; border-radius: 10px; padding: 0.9rem 1rem; margin-top: 0.75rem; }
+    .warn-box p { font-size: 0.86rem; color: #5a4500; margin: 0; line-height: 1.65; }
+    .warn-box strong { color: #3a2d00; }
+
+    /* Do/Don't */
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .do-dont { grid-template-columns: 1fr; } }
+    .do-col { background: #f0faf0; border: 1px solid #b2dfb2; border-radius: 10px; padding: 0.9rem 1rem; }
+    .dont-col { background: #fdf3f3; border: 1px solid #e8c8c8; border-radius: 10px; padding: 0.9rem 1rem; }
+    .do-col h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: #2e7d32; font-size: 0.87rem; margin-bottom: 0.5rem; }
+    .dont-col h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: #7a2a2a; font-size: 0.87rem; margin-bottom: 0.5rem; }
+    .do-col ul, .dont-col ul { padding-left: 1.1rem; font-size: 0.83rem; line-height: 1.6; }
+    .do-col ul { color: #2e7d32; }
+    .dont-col ul { color: #7a2a2a; }
+    .do-col ul li, .dont-col ul li { margin-bottom: 0.3rem; }
+
+    footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Coach4U Marketing Hub</h1>
+  <span>Session-driven. Agent-assisted.</span>
+</header>
+
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="content.html">Content Pipeline</a>
+  <a href="plan.html">Marketing Plan</a>
+  <a href="ndis-program.html">NDIS Program</a>
+  <a href="google-strategy.html" class="active">Google Strategy</a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="label">Strategy — Google Search and AI Overviews</div>
+    <h2>Getting Coach4U found on Google — and mentioned by AI</h2>
+    <p>A practical plan for ranking on Google Search and appearing in Google AI Overviews. Covers keywords, technical SEO for WordPress, Google Business Profile, and content approach — grounded in Google's own May 2026 guidance and current research.</p>
+    <div class="hero-stats">
+      <div class="stat-pill"><span class="num">48%</span><span class="lbl">of queries now trigger AI Overviews</span></div>
+      <div class="stat-pill"><span class="num">76%</span><span class="lbl">of AIO citations come from top-10 results</span></div>
+      <div class="stat-pill"><span class="num">5×</span><span class="lbl">higher conversion rate from AIO clicks vs organic</span></div>
+      <div class="stat-pill"><span class="num">Free</span><span class="lbl">no paid ads needed for this plan</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: THE CORE INSIGHT -->
+  <div class="plan-section">
+    <div class="section-number">Section 1</div>
+    <h2>The one thing you need to understand first</h2>
+    <p>Google AI Overviews and Google Search are not separate systems. Google confirmed in May 2026: AI features run on the same core ranking and quality systems as standard search. There is no separate "AI optimisation" strategy. <strong>If your page ranks in the top 10, it is likely to be cited in AI Overviews.</strong> If it does not rank, it will not be cited.</p>
+    <p>76% of all URLs cited in AI Overviews also rank in Google's top 10 organic results. The median ranking position of the most-cited URL is position 2. This means the plan is simple: rank well, and the AI visibility follows.</p>
+
+    <div class="insight-box">
+      <p><strong>What this means for Coach4U.</strong> The tactics that will get you cited when someone asks Google AI "where can I find an ADHD coach in Sydney" are the same tactics that will rank you organically. Original content, clear expertise, fast site, strong internal structure. No special files. No tricks. No separate AI strategy.</p>
+    </div>
+
+    <div class="warn-box">
+      <p><strong>What Google explicitly says does NOT work:</strong> llms.txt files, special AI markup, chunking content into tiny pieces, rewriting copy in FAQ-only format, adding every possible keyword to schema, or creating pages specifically for AI search. These are myths. Google's May 2026 guide names them directly.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: TARGET KEYWORDS -->
+  <div class="plan-section">
+    <div class="section-number">Section 2</div>
+    <h2>Target search queries</h2>
+    <p>These are the queries Coach4U should rank for. Difficulty ratings are realistic estimates for a small independent practice competing in the Australian market.</p>
+
+    <table class="kw-table">
+      <thead>
+        <tr>
+          <th>Topic area</th>
+          <th>Target queries</th>
+          <th>Difficulty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Couples counselling<br><small style="font-size:0.75rem;color:#888;">Highest-intent service</small></td>
+          <td class="queries">
+            <code>couples counselling Sydney</code>
+            <code>couples counselling Northern Beaches</code>
+            <code>EFT couples therapy Sydney</code>
+            <code>Gottman couples therapy Sydney</code>
+            <code>Imago relationship therapy Sydney</code>
+            <code>strengths-based couples counselling Sydney</code>
+          </td>
+          <td><span class="diff-badge diff-high">High</span></td>
+        </tr>
+        <tr>
+          <td>ADHD coaching<br><small style="font-size:0.75rem;color:#888;">ThriveHQ anchor</small></td>
+          <td class="queries">
+            <code>ADHD coaching adults Sydney</code>
+            <code>ADHD coaching online Australia</code>
+            <code>ADHD group coaching adults Australia</code>
+            <code>ADHD support adults online</code>
+            <code>Employment Assistance Fund ADHD coaching</code>
+            <code>is ADHD coaching covered Medicare Australia</code>
+          </td>
+          <td><span class="diff-badge diff-med">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Strengths coaching<br><small style="font-size:0.75rem;color:#888;">Differentiated niche</small></td>
+          <td class="queries">
+            <code>CliftonStrengths coach Sydney</code>
+            <code>Gallup strengths coach Australia</code>
+            <code>CliftonStrengths coaching for ADHD adults</code>
+            <code>strengths-based coaching couples</code>
+            <code>strengths-based ADHD coaching online</code>
+          </td>
+          <td><span class="diff-badge diff-low">Low–Med</span></td>
+        </tr>
+        <tr>
+          <td>Individual coaching<br><small style="font-size:0.75rem;color:#888;">Broad service</small></td>
+          <td class="queries">
+            <code>life coach Sydney</code>
+            <code>life coach Northern Beaches</code>
+            <code>personal coaching Sydney</code>
+            <code>coaching and counselling Sydney</code>
+          </td>
+          <td><span class="diff-badge diff-high">High</span></td>
+        </tr>
+        <tr>
+          <td>NDIS parent training<br><small style="font-size:0.75rem;color:#888;">New, low competition</small></td>
+          <td class="queries">
+            <code>NDIS parent training program</code>
+            <code>NDIS training for parents carers Sydney</code>
+            <code>NDIS funded parent coaching</code>
+            <code>group program parents disability NDIS</code>
+          </td>
+          <td><span class="diff-badge diff-low">Low</span></td>
+        </tr>
+        <tr>
+          <td>Suburb-level local<br><small style="font-size:0.75rem;color:#888;">Fastest to rank</small></td>
+          <td class="queries">
+            <code>couples counselling Manly</code>
+            <code>life coach Brookvale</code>
+            <code>relationship counselling Dee Why</code>
+            <code>coaching Mona Vale</code>
+            <code>ADHD coaching Northern Beaches</code>
+          </td>
+          <td><span class="diff-badge diff-low">Low</span></td>
+        </tr>
+        <tr>
+          <td>Long-tail question queries<br><small style="font-size:0.75rem;color:#888;">AI Overview targets</small></td>
+          <td class="queries">
+            <code>how does ADHD coaching work</code>
+            <code>what is strengths-based coaching</code>
+            <code>how to use NDIS funding for parent coaching</code>
+            <code>EFT vs Gottman couples therapy</code>
+            <code>what is CliftonStrengths assessment</code>
+          </td>
+          <td><span class="diff-badge diff-low">Low</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box" style="margin-top:0.75rem;">
+      <p><strong>Important: ADHD alone does not typically qualify for NDIS.</strong> Research confirms that ADHD on its own is not usually a basis for NDIS access. Marketing ThriveHQ as "NDIS-funded coaching" would be misleading for most prospective members. The better funding angle for employed adults is the <strong>Employment Assistance Fund (EAF)</strong> — funded by the Australian Government for employees and job seekers with disability. This is a legitimate, verifiable funding path worth adding to the ThriveHQ marketing page and a keyword cluster with real search demand: "Employment Assistance Fund ADHD coaching" and "is ADHD coaching covered by Medicare Australia."</p>
+    </div>
+
+    <div class="insight-box" style="margin-top:0.75rem;">
+      <p><strong>Where to start.</strong> NDIS parent training (for parents of children with disability, which is valid under Capacity Building) and CliftonStrengths coaching are your lowest-competition opportunities right now. These are niche enough that a well-written page could rank within weeks. Couples counselling Sydney is competitive and will take longer — but is worth the investment given the revenue potential.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: GOOGLE BUSINESS PROFILE -->
+  <div class="plan-section">
+    <div class="section-number">Section 3</div>
+    <h2>Google Business Profile</h2>
+    <p>Coach4U qualifies as a "service area business" (SAB). You can set up a GBP profile, hide your home address, and list service areas. The profile appears in Google Search and Maps for relevant searches in your chosen areas.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Profile type</h4>
+        <p>Set up as a <strong>service area business</strong>. Enter your address for verification only — it will not appear publicly. List Northern Beaches, Greater Sydney, and online (Australia) as service areas.</p>
+      </div>
+      <div class="card">
+        <h4>Primary category</h4>
+        <p>Use <strong>"Marriage counselor"</strong> as primary category (direct match for couples work). Add <strong>"Life coach"</strong> as secondary. Do not use Psychologist or Psychotherapist — these imply clinical registration you do not hold.</p>
+      </div>
+      <div class="card">
+        <h4>Key attributes to enable</h4>
+        <ul>
+          <li>Online appointments</li>
+          <li>Online services</li>
+          <li>Identifies as women-led (optional)</li>
+        </ul>
+        <p style="margin-top:0.5rem;">These confirm to Google — and to searchers — that you serve clients remotely.</p>
+      </div>
+      <div class="card">
+        <h4>Reviews are the biggest lever</h4>
+        <p>For SABs without a physical address, reviews are the single most powerful ranking signal in the local pack. 10 high-quality Google reviews will outperform most other GBP optimisation work.</p>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <p><strong>Honest limitation.</strong> Without a pinned physical address, Coach4U will not appear in the Google Maps local pack the same way a storefronted business does. For national reach, organic search via the website is a stronger channel than GBP. GBP is worth setting up for Sydney local search and to build review credibility — but do not expect it to drive national enquiries.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4: WORDPRESS SEO -->
+  <div class="plan-section">
+    <div class="section-number">Section 4</div>
+    <h2>WordPress technical SEO</h2>
+    <p>Only 43.4% of WordPress sites on mobile pass all three Google Core Web Vitals. The fixes below address the most common failure points. Start with the hosting speed check — it is the most common root cause for WordPress sites on GoDaddy.</p>
+
+    <h3>Install and configure</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>Rank Math (free)</h4>
+        <p>Replace or install over Yoast. Rank Math is 2.5MB vs Yoast's 7MB, handles LocalBusiness schema, Service schema, sitemaps, and redirections at no cost. Do not run both plugins simultaneously.</p>
+      </div>
+      <div class="card">
+        <h4>Caching plugin</h4>
+        <p>WP Rocket ($59/year) is the most effective paid option. W3 Total Cache is free. Avoid LiteSpeed Cache — it only works with LiteSpeed servers, and GoDaddy shared hosting uses Apache.</p>
+      </div>
+      <div class="card">
+        <h4>Image optimisation</h4>
+        <p>Install ShortPixel or Imagify. These compress and convert all images to WebP automatically on upload. Do not lazy-load your LCP image (the main hero/header) — this is a common mistake that directly hurts Core Web Vitals.</p>
+      </div>
+      <div class="card">
+        <h4>Hosting speed check first</h4>
+        <p>Run coach4u.com.au through PageSpeed Insights. If Time to First Byte (TTFB) is above 600ms, the problem is the server, not the plugins. Upgrading to GoDaddy Managed WordPress will fix this — plugins alone cannot.</p>
+      </div>
+    </div>
+
+    <h3>Schema markup to add</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>LocalBusiness / ProfessionalService</h4>
+        <p>Add to Homepage and Contact page via Rank Math. Captures practice name, phone, service area, hours. Critical for local search signals.</p>
+      </div>
+      <div class="card">
+        <h4>Service schema</h4>
+        <p>Add to each individual service page — couples counselling, individual coaching, ADHD coaching, NDIS program. Rank Math handles this via its on-page settings.</p>
+      </div>
+      <div class="card">
+        <h4>Person schema</h4>
+        <p>Add to the About page. Name, credentials, qualifications, social profiles. This is an E-E-A-T signal — it tells Google that a real expert with real credentials wrote the content.</p>
+      </div>
+      <div class="card">
+        <h4>FAQPage schema</h4>
+        <p>Add to any page with a visible Q&A section. Generates rich results in Google. Only apply where the page content visibly matches — do not add schema for content that is not on the page.</p>
+      </div>
+    </div>
+
+    <h3>Technical fixes</h3>
+    <div class="check-list">
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>Google Search Console:</strong> Set up and submit sitemap (Rank Math generates it at yourdomain.com.au/sitemap.xml). This is how Google discovers new and updated content.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>Permalink structure:</strong> Settings > Permalinks > Post Name. URLs should read /couples-counselling, not /?p=123. Set once and do not change.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>Noindex thin pages:</strong> Apply noindex to tag archives, date archives, author archives, and WordPress search result pages. These generate duplicate thin content that dilutes the site.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>HTTPS forced site-wide:</strong> Verify every URL redirects to HTTPS. Mixed content (some pages HTTP, some HTTPS) creates ranking issues.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>Image alt text:</strong> Fill in descriptive alt text for every image. This is an accessibility requirement and an SEO signal — especially for a practice where the About photo and session environment matter to searchers.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>Author bio with credentials:</strong> Every published page should show Cath's name and qualifications. Google's E-E-A-T framework rewards demonstrated real-world expertise. For health and wellbeing content this matters more than most niches.</p></div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: CONTENT STRUCTURE -->
+  <div class="plan-section">
+    <div class="section-number">Section 5</div>
+    <h2>Content structure for Google</h2>
+    <p>Google rewards sites that clearly own a topic area. The pillar page approach — one comprehensive page per core topic, supported by shorter posts answering sub-questions — is the most reliable way to build authority over time.</p>
+
+    <div class="three-col">
+      <div class="card">
+        <h4>Pillar 1: ADHD Coaching</h4>
+        <ul>
+          <li>Pillar page: What is ADHD coaching and how does it work?</li>
+          <li>Supporting: ADHD in adults vs children</li>
+          <li>Supporting: ADHD and relationships</li>
+          <li>Supporting: How ThriveHQ works</li>
+          <li>Supporting: NDIS funding for ADHD coaching</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Pillar 2: Couples Counselling</h4>
+        <ul>
+          <li>Pillar page: Couples counselling Sydney — what to expect</li>
+          <li>Supporting: EFT vs Gottman — what is the difference?</li>
+          <li>Supporting: When is couples counselling useful?</li>
+          <li>Supporting: How Imago therapy works</li>
+          <li>Supporting: Relationships and attachment styles</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Pillar 3: Strengths Coaching</h4>
+        <ul>
+          <li>Pillar page: CliftonStrengths coaching — how it works</li>
+          <li>Supporting: What are your top 5 strengths?</li>
+          <li>Supporting: Strengths and ADHD</li>
+          <li>Supporting: Using strengths in relationships</li>
+          <li>Supporting: Strengths for leaders and teams</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <p><strong>Why this structure works for AI Overviews.</strong> 44% of AI citations come from the first 30% of a page. A pillar page that opens with a clear, direct answer to the main question — and then expands — is exactly the format that earns citations. Write the answer in the opening paragraph, not after a preamble. Then use H2/H3 headings for the rest.</p>
+    </div>
+
+    <h3>Content signals that get cited in AI Overviews</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>First-hand expertise</h4>
+        <p>Google explicitly rewards content based on "unique perspective from personal experience." Your frameworks (ThriveHQ Brain Pulse, SAFEty Pulse, Name-Claim-Aim) are original. Write about how they work in practice — not in generic advice language. This is exactly the non-commodity content Google cannot source elsewhere.</p>
+      </div>
+      <div class="card">
+        <h4>Original data and outcomes</h4>
+        <p>Content with original statistics is cited 30–40% more in AI responses. You do not need a clinical trial — even anonymised observations from your practice ("most members report X within the first 4 weeks") count as original data. Use them.</p>
+      </div>
+      <div class="card">
+        <h4>Fresh content</h4>
+        <p>85% of AIO citations come from content published within the last two years. For Coach4U, this means publishing new content regularly (not just editing existing pages) and refreshing high-value pages at least once per year.</p>
+      </div>
+      <div class="card">
+        <h4>LinkedIn and Instagram as citation sources</h4>
+        <p>LinkedIn is the second most-cited domain in AI Overviews, and the first for professional service queries. Instagram now processes roughly 6.5 billion searches per day. Optimise your Instagram bio with location, specialisation, and a clear call to action. Both platforms feed AI citations directly. Use /social to publish weekly.</p>
+      </div>
+    </div>
+
+    <h3>Australian directory listings</h3>
+    <p>Listing consistently across health and coaching directories builds "citations" — references to Coach4U's name, address, and phone number across the web. NAP consistency (identical name, address, and phone format across every listing) is a local SEO ranking factor. These directories are worth prioritising:</p>
+    <div class="check-list">
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>HealthShare and HotDoc</strong> — primary health and allied health directories in Australia. Set up a profile on both.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>Health Engine</strong> — widely used for allied health bookings. A listing here builds citation authority even if bookings come through your own site.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>PACFA or ACA directory</strong> — list under your relevant professional membership. These are trusted domains in Google's eyes for counselling searches.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>Gallup-certified coach directory</strong> — for CliftonStrengths coaching, the Gallup partner or certified coach directory is a high-authority niche citation.</p></div>
+      <div class="check-item"><span class="check-tick">&#10003;</span><p><strong>NAP consistency:</strong> use exactly the same business name spelling, phone format, and address wording across every listing. Inconsistencies confuse Google's local ranking system.</p></div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: DO AND DON'T -->
+  <div class="plan-section">
+    <div class="section-number">Section 6</div>
+    <h2>What to do and what to avoid</h2>
+
+    <div class="do-dont">
+      <div class="do-col">
+        <h4>Do</h4>
+        <ul>
+          <li>Write from first-hand experience with your frameworks</li>
+          <li>Put the key answer in the first paragraph of every page</li>
+          <li>Use clear H2/H3 headings throughout</li>
+          <li>Refresh key service pages at least once per year</li>
+          <li>Add FAQ sections to service pages with schema</li>
+          <li>Build pillar pages that own a topic fully</li>
+          <li>Get Google reviews from current and past clients</li>
+          <li>Publish to LinkedIn regularly — it feeds AI citations</li>
+          <li>Fix TTFB first if it is above 600ms</li>
+          <li>Add schema for Person, LocalBusiness, Service</li>
+          <li>Link related pages together internally</li>
+        </ul>
+      </div>
+      <div class="dont-col">
+        <h4>Do not</h4>
+        <ul>
+          <li>Create a separate AI writing strategy — it does not exist</li>
+          <li>Add llms.txt or special AI markup files</li>
+          <li>Chunk content into tiny pieces for AI</li>
+          <li>Rewrite in FAQ-only format across the whole site</li>
+          <li>Over-invest in schema trying to trigger AIO</li>
+          <li>Create pages for every keyword variation</li>
+          <li>Use the category "Psychologist" in GBP</li>
+          <li>Add LiteSpeed Cache on GoDaddy shared hosting</li>
+          <li>Apply lazy loading to the hero/header image (hurts LCP)</li>
+          <li>Leave author bio blank on published pages</li>
+          <li>Run Yoast and Rank Math simultaneously</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: 90-DAY ACTION PLAN -->
+  <div class="plan-section">
+    <div class="section-number">Section 7</div>
+    <h2>90-day action plan</h2>
+
+    <div class="phase-grid">
+      <div class="phase-block">
+        <div class="phase-badge">Month 1 — Foundation</div>
+        <h4>Technical setup and quick wins</h4>
+        <ul>
+          <li>Set up Google Search Console and submit sitemap</li>
+          <li>Run PageSpeed Insights — note TTFB. If above 600ms, plan hosting upgrade</li>
+          <li>Install Rank Math, configure LocalBusiness and Service schema</li>
+          <li>Fix permalink structure (Post Name format)</li>
+          <li>Apply noindex to tag/date/author archives</li>
+          <li>Install image optimisation plugin (ShortPixel or Imagify)</li>
+          <li>Set up Google Business Profile as service area business</li>
+          <li>Ask 3–5 existing clients for a Google review</li>
+        </ul>
+      </div>
+      <div class="phase-block">
+        <div class="phase-badge">Month 2 — Content foundation</div>
+        <h4>Pillar pages and service page optimisation</h4>
+        <ul>
+          <li>Write or rewrite the ADHD coaching pillar page — open with a direct answer, use the ThriveHQ framework as the original angle</li>
+          <li>Write the NDIS parent training page on coach4u.com.au — low competition, urgent given the Term 3 launch timeline</li>
+          <li>Add FAQ section to the couples counselling page with FAQPage schema</li>
+          <li>Add Cath's bio and credentials to every service page</li>
+          <li>Add internal links from blog posts to pillar pages</li>
+          <li>Start LinkedIn publishing cadence — use /social for weekly posts</li>
+        </ul>
+      </div>
+      <div class="phase-block">
+        <div class="phase-badge">Month 3 — Authority building</div>
+        <h4>Long-tail content, reviews, and monitoring</h4>
+        <ul>
+          <li>Write 2–3 supporting blog posts per pillar (answer one specific question each)</li>
+          <li>Write the CliftonStrengths coaching pillar page</li>
+          <li>Check Search Console for queries where coach4u.com.au appears on page 2 — these are the fastest ranking improvements (optimise those specific pages)</li>
+          <li>Ask a further 5 clients for Google reviews</li>
+          <li>Review NDIS program page performance — update content based on any term change in the NDIS Price Guide</li>
+          <li>If TTFB was above 600ms in month 1: complete hosting upgrade this month</li>
+        </ul>
+      </div>
+      <div class="phase-block">
+        <div class="phase-badge">Ongoing — Maintenance</div>
+        <h4>Monthly rhythm</h4>
+        <ul>
+          <li>One new supporting blog post per month minimum</li>
+          <li>Check Search Console monthly — focus on impressions growing, clicks following</li>
+          <li>Refresh any high-impression page that is not converting clicks (title tag or meta description is usually the fix)</li>
+          <li>One new Google review per month — ask in follow-up emails</li>
+          <li>LinkedIn posts weekly — these feed AI Overviews for professional queries</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: PRIORITY ORDER -->
+  <div class="plan-section">
+    <div class="section-number">Section 8</div>
+    <h2>Single-action priority order</h2>
+    <p>If you can only do one thing at a time, do them in this order.</p>
+    <div class="priority-list">
+      <div class="priority-item">
+        <div class="priority-num">1</div>
+        <div class="priority-body"><h4>Set up Google Search Console</h4><p>Free, takes 20 minutes. Submit your sitemap. This is how you find out what you currently rank for, what pages have errors, and what queries are driving (or not driving) traffic. Everything else depends on having this data.</p></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">2</div>
+        <div class="priority-body"><h4>Run a speed check and fix TTFB if needed</h4><p>PageSpeed Insights is free. If TTFB is above 600ms, every other technical fix is cosmetic. Fix the foundation first.</p></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">3</div>
+        <div class="priority-body"><h4>Set up Google Business Profile</h4><p>30 minutes. Service area business type, correct categories, online appointment attributes. Start asking for reviews immediately after setup.</p></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">4</div>
+        <div class="priority-body"><h4>Write the NDIS parent training page</h4><p>Lowest competition of all your target queries. A clear, well-structured page here could rank within weeks. Use /copywriting to draft it.</p></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">5</div>
+        <div class="priority-body"><h4>Write the ADHD coaching pillar page</h4><p>ThriveHQ and the Brain Pulse framework are proprietary. No other site can write what you can write about this. This is your strongest AIO opportunity — Google's AI will be asked about ADHD coaching and you want to be the cited source.</p></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">6</div>
+        <div class="priority-body"><h4>Get 10 Google reviews</h4><p>For a service area business, reviews are the highest-leverage GBP activity. Ask every satisfied client directly — not in a bulk email, but personally.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: REALISTIC TIMELINES -->
+  <div class="plan-section">
+    <div class="section-number">Section 9</div>
+    <h2>Realistic timelines</h2>
+    <p>SEO is a slow-build channel. These timelines are based on Australian coaching and allied health SEO research — set expectations accordingly before measuring results.</p>
+    <div class="three-col">
+      <div class="card">
+        <h4>1–3 months</h4>
+        <ul>
+          <li>Technical issues resolved</li>
+          <li>GBP live and verified</li>
+          <li>Search Console showing indexed pages</li>
+          <li>Suburb-level keywords (e.g. "ADHD coaching Northern Beaches") may reach page 1</li>
+          <li>NDIS parent training page may rank — very low competition</li>
+        </ul>
+      </div>
+      <div class="card" style="background:var(--dark-blue);border-color:var(--dark-blue);">
+        <h4 style="color:#fff;">3–6 months</h4>
+        <ul style="color:rgba(255,255,255,0.8);">
+          <li>Initial Google rankings visible for pillar pages</li>
+          <li>CliftonStrengths and strengths coaching queries ranking</li>
+          <li>ADHD coaching pillar page showing in top 20</li>
+          <li>AI Overview citations beginning to appear for niche queries</li>
+          <li>GBP reviews building and local pack visibility improving</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>6–12 months</h4>
+        <ul>
+          <li>Meaningful new-client enquiries from organic search</li>
+          <li>Competitive terms (couples counselling Sydney) moving toward page 1</li>
+          <li>AI Overviews citing Coach4U content for ADHD and strengths queries</li>
+          <li>LinkedIn publishing contributing to AI citation volume</li>
+          <li>Directory citations building domain authority</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <p><strong>The fastest wins.</strong> Suburb-level keywords (e.g. "relationship counselling Manly") and low-competition niche queries (NDIS parent training, CliftonStrengths coach Australia) can reach page 1 within 3–4 months because almost no one is competing for them specifically. Start there while building authority for the harder terms.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337</footer>
+
+</body>
+</html>
