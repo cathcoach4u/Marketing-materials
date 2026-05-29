@@ -123,6 +123,38 @@
     .caveat-box { background: var(--accent-soft); border-left: 3px solid var(--light-blue); border-radius: 0 8px 8px 0; padding: 0.85rem 1rem; margin-top: 1rem; font-size: 0.84rem; color: #444; }
     .caveat-box strong { color: var(--dark-blue); }
 
+    /* Partnership comparison */
+    .partner-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .partner-compare { grid-template-columns: 1fr; } }
+    .partner-card { border-radius: 12px; padding: 1.25rem; }
+    .partner-card.option-a { background: var(--dark-blue); color: #fff; }
+    .partner-card.option-b { background: var(--card); border: 1px solid var(--light-grey); }
+    .partner-card .opt-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 0.4rem; }
+    .partner-card.option-a .opt-label { color: rgba(255,255,255,0.55); }
+    .partner-card.option-b .opt-label { color: var(--light-blue); }
+    .partner-card .opt-rate { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 0.1rem; }
+    .partner-card.option-a .opt-rate { color: #fff; }
+    .partner-card.option-b .opt-rate { color: var(--dark-blue); }
+    .partner-card .opt-sub { font-size: 0.78rem; margin-bottom: 1rem; }
+    .partner-card.option-a .opt-sub { color: rgba(255,255,255,0.6); }
+    .partner-card.option-b .opt-sub { color: #888; }
+    .partner-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.45rem 0; border-bottom: 1px solid; font-size: 0.85rem; }
+    .partner-card.option-a .partner-row { border-color: rgba(255,255,255,0.12); }
+    .partner-card.option-b .partner-row { border-color: var(--light-grey); }
+    .partner-row:last-child { border-bottom: none; padding-top: 0.65rem; }
+    .partner-row .row-label { }
+    .partner-card.option-a .partner-row .row-label { color: rgba(255,255,255,0.7); }
+    .partner-card.option-b .partner-row .row-label { color: #555; }
+    .partner-row .row-val { font-family: 'Inter', sans-serif; font-weight: 700; }
+    .partner-card.option-a .partner-row .row-val { color: #fff; }
+    .partner-card.option-b .partner-row .row-val { color: var(--dark-blue); }
+    .partner-row.net-row .row-val { font-size: 1rem; }
+    .partner-card.option-a .partner-row.net-row .row-val { color: #fff; }
+    .partner-card.option-b .partner-row.net-row .row-val { color: var(--light-blue); }
+    .diff-box { background: #fff8e8; border: 1px solid #f0d896; border-radius: 10px; padding: 1rem 1.1rem; margin-top: 0.75rem; }
+    .diff-box p { font-size: 0.87rem; color: #5a4500; margin: 0; line-height: 1.6; }
+    .diff-box strong { color: #3a2d00; }
+
     footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
   </style>
 </head>
@@ -595,6 +627,75 @@
 
     <div class="caveat-box">
       <strong>Final note on pricing accuracy.</strong> All NDIS rates in this document are based on 2024–25 Price Guide figures. Before launch, verify the current Price Guide on the NDIS website (ndis.gov.au). The line item, structure, and approach remain valid but the dollar amounts should be confirmed against the current guide.
+    </div>
+  </div>
+
+
+  <!-- SECTION 11: PARTNERSHIP SCENARIOS -->
+  <div class="plan-section">
+    <div class="section-number">Section 11</div>
+    <h2>Marketing Partnership — ASK Allied Health</h2>
+    <p>Two commission scenarios for the marketing partnership. The realistic revenue model ($7,600 per cohort, 4 cohorts per year) is used as the baseline. Gross revenue is what participants pay in total; the commission is paid to your marketing partner from that gross before your operating costs.</p>
+    <p>Your operating costs (preparation time, materials, report writing) are separate and sit within your net share. The figures below show the split of gross program revenue only.</p>
+
+    <div class="partner-compare">
+
+      <div class="partner-card option-a">
+        <div class="opt-label">Option A — Recommended</div>
+        <div class="opt-rate">20%</div>
+        <div class="opt-sub">Commission to ASK Allied Health</div>
+        <div class="partner-row">
+          <span class="row-label">Gross per cohort</span>
+          <span class="row-val">$7,600</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (per cohort)</span>
+          <span class="row-val">$1,520</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Annual gross (4 cohorts)</span>
+          <span class="row-val">$30,400</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (annual)</span>
+          <span class="row-val">$6,080</span>
+        </div>
+        <div class="partner-row net-row">
+          <span class="row-label">Your gross annual share</span>
+          <span class="row-val">$24,320</span>
+        </div>
+      </div>
+
+      <div class="partner-card option-b">
+        <div class="opt-label">Option B — Current ask</div>
+        <div class="opt-rate">30%</div>
+        <div class="opt-sub">Commission to ASK Allied Health</div>
+        <div class="partner-row">
+          <span class="row-label">Gross per cohort</span>
+          <span class="row-val">$7,600</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (per cohort)</span>
+          <span class="row-val">$2,280</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Annual gross (4 cohorts)</span>
+          <span class="row-val">$30,400</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (annual)</span>
+          <span class="row-val">$9,120</span>
+        </div>
+        <div class="partner-row net-row">
+          <span class="row-label">Your gross annual share</span>
+          <span class="row-val">$21,280</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="diff-box">
+      <p><strong>The difference: $3,040 per year.</strong> At 30% you pay your partner $3,040 more annually than at 20% — for the same work on their side. A standard referral or marketing commission for a contained program is typically 10–20%. 30% is the rate more commonly associated with ongoing sales roles or where the partner carries significant ongoing delivery responsibility. If your partner's scope is lead generation and referrals only, 20% is commercially appropriate and still a meaningful income for them ($6,080/year for 4 cohorts). If they are doing intake management, ongoing promotion, and client liaison, revisit the scope and consider a tiered structure.</p>
     </div>
   </div>
 
