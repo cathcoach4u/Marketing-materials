@@ -20,7 +20,7 @@
     body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.6; }
 
     header { background: var(--dark-blue); padding: 1.4rem 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    header img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid rgba(255,255,255,0.4); }
+    header img { height: 44px; background: #fff; border-radius: 8px; padding: 4px 10px; }
     header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: #fff; }
     header span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
 
@@ -77,13 +77,21 @@
     .insight-card .angles li { margin-bottom: 0.2rem; }
     .insight-card .arrow { color: var(--light-blue); font-size: 1.1rem; float: right; margin-top: -1.5rem; }
 
+    /* Team */
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+    @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
+    .team-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 1rem; display: flex; align-items: center; gap: 0.9rem; }
+    .team-card img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--light-blue); }
+    .team-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .team-card p { font-size: 0.82rem; color: #666; margin: 0; }
+
     footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="Assets/Cath-Baker-Headshot.jpg" alt="Cath Baker">
+  <img src="Assets/COACH4U%20(Final).jpg" alt="Coach4U">
   <h1>Coach4U Marketing Hub</h1>
   <span>Session-driven. Agent-assisted.</span>
 </header>
@@ -194,6 +202,27 @@
           <li>What the Brain Pulse actually does</li>
         </ul>
       </a>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section>
+    <h2>Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="Assets/Cath-Baker-Headshot.jpg" alt="Cath Baker">
+        <div>
+          <h3>Cath Baker</h3>
+          <p>Founder, Strengths-Based Coach and Counsellor</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="Assets/Andrew-Headshot.jpeg" alt="Andrew">
+        <div>
+          <h3>Andrew</h3>
+          <p>Marketing Manager</p>
+        </div>
+      </div>
     </div>
   </section>
 
