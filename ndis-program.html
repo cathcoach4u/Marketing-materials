@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDIS Parent Training Program — Coach4U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #1B3664;
+      --light-blue: #5684C4;
+      --dark-grey: #2D2D2D;
+      --light-grey: #DDDDDD;
+      --bg: #ffffff;
+      --card: #f7f9fc;
+      --accent-soft: #eef3fb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.7; }
+
+    header { background: var(--dark-blue); padding: 1.4rem 1.25rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: #fff; }
+    header span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+    nav { background: #edf1f8; border-bottom: 1px solid var(--light-grey); display: flex; overflow-x: auto; }
+    nav a { padding: 0.75rem 1.1rem; font-size: 0.88rem; font-weight: 500; color: #555; text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; }
+    nav a:hover { color: var(--dark-blue); }
+    nav a.active { color: var(--dark-blue); border-bottom-color: var(--light-blue); font-family: 'Inter', sans-serif; font-weight: 700; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
+
+    .plan-section { margin-bottom: 2.5rem; }
+    .section-number { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--light-blue); font-weight: 500; margin-bottom: 0.3rem; }
+    h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 1.1rem; margin-bottom: 0.5rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--light-grey); }
+    h3 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.92rem; margin-bottom: 0.5rem; margin-top: 1rem; }
+    p { font-size: 0.91rem; margin-bottom: 0.7rem; color: var(--dark-grey); }
+
+    /* Hero card */
+    .hero-card { background: var(--dark-blue); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; color: #fff; }
+    .hero-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); margin-bottom: 0.4rem; }
+    .hero-card h2 { color: #fff; border: none; padding: 0; margin-bottom: 0.6rem; font-size: 1.2rem; }
+    .hero-card p { color: rgba(255,255,255,0.85); margin-bottom: 0; }
+    .hero-card .key-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 1rem; }
+    @media (max-width: 560px) { .hero-card .key-stats { grid-template-columns: repeat(2, 1fr); } }
+    .stat-pill { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem 0.5rem; text-align: center; }
+    .stat-pill .num { font-family: 'Inter', sans-serif; font-weight: 700; color: #fff; font-size: 1.1rem; display: block; }
+    .stat-pill .lbl { color: rgba(255,255,255,0.6); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; display: block; }
+
+    /* NDIS basics cards */
+    .basics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .basics-grid { grid-template-columns: 1fr; } }
+    .basics-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.9rem 1rem; }
+    .basics-card h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .basics-card p { font-size: 0.83rem; color: #555; margin: 0; line-height: 1.55; }
+    .basics-card .code { display: inline-block; background: var(--accent-soft); border: 1px solid #c5d6ef; color: var(--dark-blue); font-family: monospace; font-size: 0.78rem; padding: 0.15rem 0.4rem; border-radius: 4px; margin-top: 0.4rem; }
+
+    /* Pricing breakdown */
+    .price-breakdown { background: var(--card); border: 1px solid var(--light-grey); border-radius: 12px; padding: 1.25rem; margin-top: 0.75rem; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--light-grey); }
+    .price-row:last-child { border-bottom: none; }
+    .price-row.total { background: var(--dark-blue); color: #fff; margin: 0.5rem -1.25rem -1.25rem; padding: 1rem 1.25rem; border-radius: 0 0 12px 12px; border: none; }
+    .price-row.total .price-label { color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; }
+    .price-row.total .price-value { color: #fff; font-size: 1.1rem; }
+    .price-row.subtotal { background: var(--accent-soft); margin: 0.4rem -1.25rem; padding: 0.65rem 1.25rem; }
+    .price-label { font-size: 0.86rem; color: var(--dark-grey); }
+    .price-label small { display: block; font-size: 0.74rem; color: #888; margin-top: 0.15rem; }
+    .price-value { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.95rem; }
+
+    /* Scenarios */
+    .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 560px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-card { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 1rem; text-align: center; }
+    .scenario-card.featured { background: var(--dark-blue); border-color: var(--dark-blue); }
+    .scenario-card .scen-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--light-blue); font-weight: 500; margin-bottom: 0.35rem; }
+    .scenario-card.featured .scen-label { color: rgba(255,255,255,0.6); }
+    .scenario-card .scen-amount { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--dark-blue); margin-bottom: 0.35rem; }
+    .scenario-card.featured .scen-amount { color: #fff; }
+    .scenario-card .scen-desc { font-size: 0.78rem; color: #666; line-height: 1.5; }
+    .scenario-card.featured .scen-desc { color: rgba(255,255,255,0.75); }
+
+    /* 10-week timeline */
+    .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.4rem; margin-top: 0.75rem; }
+    @media (max-width: 560px) { .timeline { grid-template-columns: repeat(2, 1fr); } }
+    .week-block { background: var(--card); border: 1px solid var(--light-grey); border-radius: 8px; padding: 0.7rem 0.6rem; position: relative; }
+    .week-block .week-num { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--light-blue); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .week-block h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.8rem; margin-bottom: 0.3rem; line-height: 1.3; }
+    .week-block p { font-size: 0.74rem; color: #666; margin: 0; line-height: 1.45; }
+
+    /* Variables */
+    .variable-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+    .var-item { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.85rem 1rem; display: grid; grid-template-columns: 180px 1fr 100px; gap: 1rem; align-items: center; }
+    @media (max-width: 560px) { .var-item { grid-template-columns: 1fr; } }
+    .var-name { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.87rem; }
+    .var-desc { font-size: 0.83rem; color: #555; line-height: 1.5; }
+    .var-current { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--light-blue); font-size: 0.92rem; text-align: right; }
+    @media (max-width: 560px) { .var-current { text-align: left; padding-top: 0.3rem; border-top: 1px solid var(--light-grey); } }
+
+    /* Cancellation policy */
+    .cancel-policy { background: #fff8e8; border: 1px solid #f0d896; border-radius: 12px; padding: 1.1rem 1.2rem; margin-top: 0.75rem; }
+    .cancel-policy h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: #7a5a00; font-size: 0.92rem; margin-bottom: 0.5rem; }
+    .cancel-policy p { font-size: 0.86rem; color: #5a4500; margin-bottom: 0.5rem; }
+    .cancel-policy ul { padding-left: 1.2rem; font-size: 0.86rem; color: #5a4500; }
+    .cancel-policy ul li { margin-bottom: 0.3rem; }
+    .cancel-policy ul li strong { color: #4a3500; }
+
+    /* Setup checklist */
+    .setup-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+    .setup-item { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.85rem 1rem; display: flex; gap: 0.8rem; align-items: flex-start; }
+    .setup-num { background: var(--dark-blue); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; min-width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+    .setup-body h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.88rem; margin-bottom: 0.25rem; }
+    .setup-body p { font-size: 0.83rem; color: #555; margin: 0; line-height: 1.55; }
+
+    /* Risks */
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .risk-grid { grid-template-columns: 1fr; } }
+    .risk-card { background: #fdf3f3; border: 1px solid #e8c8c8; border-radius: 10px; padding: 0.9rem 1rem; }
+    .risk-card h4 { font-family: 'Inter', sans-serif; font-weight: 700; color: #7a2a2a; font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .risk-card p { font-size: 0.82rem; color: #5a2a2a; margin: 0; line-height: 1.55; }
+
+    /* Caveat */
+    .caveat-box { background: var(--accent-soft); border-left: 3px solid var(--light-blue); border-radius: 0 8px 8px 0; padding: 0.85rem 1rem; margin-top: 1rem; font-size: 0.84rem; color: #444; }
+    .caveat-box strong { color: var(--dark-blue); }
+
+    /* Partnership comparison */
+    .partner-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.75rem; }
+    @media (max-width: 520px) { .partner-compare { grid-template-columns: 1fr; } }
+    .partner-card { border-radius: 12px; padding: 1.25rem; }
+    .partner-card.option-a { background: var(--dark-blue); color: #fff; }
+    .partner-card.option-b { background: var(--card); border: 1px solid var(--light-grey); }
+    .partner-card .opt-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 0.4rem; }
+    .partner-card.option-a .opt-label { color: rgba(255,255,255,0.55); }
+    .partner-card.option-b .opt-label { color: var(--light-blue); }
+    .partner-card .opt-rate { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 0.1rem; }
+    .partner-card.option-a .opt-rate { color: #fff; }
+    .partner-card.option-b .opt-rate { color: var(--dark-blue); }
+    .partner-card .opt-sub { font-size: 0.78rem; margin-bottom: 1rem; }
+    .partner-card.option-a .opt-sub { color: rgba(255,255,255,0.6); }
+    .partner-card.option-b .opt-sub { color: #888; }
+    .partner-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.45rem 0; border-bottom: 1px solid; font-size: 0.85rem; }
+    .partner-card.option-a .partner-row { border-color: rgba(255,255,255,0.12); }
+    .partner-card.option-b .partner-row { border-color: var(--light-grey); }
+    .partner-row:last-child { border-bottom: none; padding-top: 0.65rem; }
+    .partner-row .row-label { }
+    .partner-card.option-a .partner-row .row-label { color: rgba(255,255,255,0.7); }
+    .partner-card.option-b .partner-row .row-label { color: #555; }
+    .partner-row .row-val { font-family: 'Inter', sans-serif; font-weight: 700; }
+    .partner-card.option-a .partner-row .row-val { color: #fff; }
+    .partner-card.option-b .partner-row .row-val { color: var(--dark-blue); }
+    .partner-row.net-row .row-val { font-size: 1rem; }
+    .partner-card.option-a .partner-row.net-row .row-val { color: #fff; }
+    .partner-card.option-b .partner-row.net-row .row-val { color: var(--light-blue); }
+    .diff-box { background: #fff8e8; border: 1px solid #f0d896; border-radius: 10px; padding: 1rem 1.1rem; margin-top: 0.75rem; }
+    .diff-box p { font-size: 0.87rem; color: #5a4500; margin: 0; line-height: 1.6; }
+    .diff-box strong { color: #3a2d00; }
+
+    footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Coach4U Marketing Hub</h1>
+  <span>Session-driven. Agent-assisted.</span>
+</header>
+
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="content.html">Content Pipeline</a>
+  <a href="plan.html">Marketing Plan</a>
+  <a href="ndis-program.html" class="active">NDIS Program</a>
+  <a href="google-strategy.html">Google Strategy</a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="label">New offering — Planning document</div>
+    <h2>Strengths-Based Parenting: a 10-week NDIS-funded group program</h2>
+    <p>A structured group coaching program for parents of children with disability. Delivered online, funded through participants' NDIS plans under the Training for Parents and Carers line item. Builds on Coach4U's strengths-based, neurodiversity-affirming approach.</p>
+    <div class="key-stats">
+      <div class="stat-pill"><span class="num">10</span><span class="lbl">Weeks</span></div>
+      <div class="stat-pill"><span class="num">10</span><span class="lbl">Max parents</span></div>
+      <div class="stat-pill"><span class="num">1.5h</span><span class="lbl">Per session</span></div>
+      <div class="stat-pill"><span class="num">$10k+</span><span class="lbl">Per cohort</span></div>
+    </div>
+  </div>
+
+  <!-- 1. NDIS BASICS -->
+  <div class="plan-section">
+    <div class="section-number">Section 1</div>
+    <h2>How NDIS Funding Works for This Program</h2>
+    <p>NDIS participants receive funding allocated across categories. Parent training is funded under Capacity Building, not Core Supports. The funding sits in the participant's plan and is claimed by the provider session by session.</p>
+
+    <div class="basics-grid">
+      <div class="basics-card">
+        <h4>Funding category</h4>
+        <p>Capacity Building → Improved Daily Living. This is for supports that build a participant's skills or, in this case, the skills of the parents and carers supporting them.</p>
+        <span class="code">Support Category 15</span>
+      </div>
+      <div class="basics-card">
+        <h4>Line item</h4>
+        <p>Training for Parents/Carers. This line item explicitly funds training delivered to parents and carers of NDIS participants — not just to the participant directly.</p>
+        <span class="code">15_038_0117_1_3</span>
+      </div>
+      <div class="basics-card">
+        <h4>Hourly rate cap</h4>
+        <p>The NDIS Price Guide sets a maximum hourly rate. As of 2024–25 this is approximately $193.99 per hour for this line item. Providers cannot charge above this cap but can charge below it.</p>
+        <span class="code">~$193.99/hr cap</span>
+      </div>
+      <div class="basics-card">
+        <h4>Who you can invoice</h4>
+        <p>Without NDIS registration, you can invoice self-managed and plan-managed participants. To invoice NDIA-managed participants you need to be a registered NDIS provider. Most parents in your target market are plan-managed.</p>
+        <span class="code">Self &amp; plan-managed</span>
+      </div>
+      <div class="basics-card">
+        <h4>Eligible participants</h4>
+        <p>The child must be an NDIS participant with funding allocated to Training for Parents/Carers in their plan. Parents do not need their own NDIS plan. This is the child's funding, used to train the parent.</p>
+      </div>
+      <div class="basics-card">
+        <h4>Group delivery</h4>
+        <p>NDIS allows group delivery using a participant-to-provider ratio. For a 1:10 ratio, you can claim the hourly rate divided by the group size, plus separately claimable non-face-to-face time for preparation, materials, and reports.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. PRICING BREAKDOWN -->
+  <div class="plan-section">
+    <div class="section-number">Section 2</div>
+    <h2>What You Can Charge — Per Participant, Per Session</h2>
+    <p>The maximum chargeable amount per participant comes from three streams: group delivery time, non-face-to-face preparation, and individual reports or follow-up. All three are NDIS claimable under the same line item.</p>
+
+    <div class="price-breakdown">
+      <div class="price-row">
+        <div class="price-label">Group delivery — face-to-face time<small>1.5 hrs × ($193.99 ÷ 10 participants) per session</small></div>
+        <div class="price-value">$29.10</div>
+      </div>
+      <div class="price-row">
+        <div class="price-label">Non-face-to-face — session prep<small>0.5 hrs apportioned per participant @ $193.99/hr</small></div>
+        <div class="price-value">$9.70</div>
+      </div>
+      <div class="price-row">
+        <div class="price-label">Materials and resources<small>Workbook pages, handouts apportioned per session</small></div>
+        <div class="price-value">$8.00</div>
+      </div>
+      <div class="price-row subtotal">
+        <div class="price-label"><strong>Per participant, per session</strong></div>
+        <div class="price-value">$46.80</div>
+      </div>
+      <div class="price-row">
+        <div class="price-label">Per participant, full 10-week program<small>$46.80 × 10 sessions</small></div>
+        <div class="price-value">$468</div>
+      </div>
+      <div class="price-row">
+        <div class="price-label">Individual progress report (end of program)<small>1.5 hrs writing + review @ $193.99/hr</small></div>
+        <div class="price-value">$291</div>
+      </div>
+      <div class="price-row total">
+        <div class="price-label">Total per participant, complete program</div>
+        <div class="price-value">$759</div>
+      </div>
+    </div>
+
+    <div class="caveat-box">
+      <strong>Note on the cap.</strong> The figures above are conservative and well within the price cap. You could charge more by extending session length, increasing non-face-to-face time, or adding individual check-ins. The maximum realistic per-participant total for a 10-week program is around $1,400–$1,600 if you include weekly individual check-ins and detailed reporting.
+    </div>
+  </div>
+
+  <!-- 3. REVENUE SCENARIOS -->
+  <div class="plan-section">
+    <div class="section-number">Section 3</div>
+    <h2>Revenue Scenarios — Per Cohort and Annual</h2>
+    <p>Three scenarios based on group size and program structure. All assume one 10-week cohort. Annual figures assume 4 cohorts per year (one per school term).</p>
+
+    <h3>Per cohort revenue</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <div class="scen-label">Conservative</div>
+        <div class="scen-amount">$5,300</div>
+        <div class="scen-desc">7 participants enrolled, basic non-face-to-face time, no individual reports</div>
+      </div>
+      <div class="scenario-card featured">
+        <div class="scen-label">Realistic</div>
+        <div class="scen-amount">$7,600</div>
+        <div class="scen-desc">10 participants enrolled, standard non-face-to-face, end-of-program reports</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scen-label">Maximised</div>
+        <div class="scen-amount">$14,500</div>
+        <div class="scen-desc">10 participants, full non-face-to-face, weekly individual check-ins, detailed reports</div>
+      </div>
+    </div>
+
+    <h3>Annual revenue at 4 cohorts per year</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <div class="scen-label">Conservative</div>
+        <div class="scen-amount">$21,200</div>
+        <div class="scen-desc">~50% capacity, simple structure</div>
+      </div>
+      <div class="scenario-card featured">
+        <div class="scen-label">Realistic</div>
+        <div class="scen-amount">$30,400</div>
+        <div class="scen-desc">Full capacity, balanced structure</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scen-label">Maximised</div>
+        <div class="scen-amount">$58,000</div>
+        <div class="scen-desc">Full capacity, full service wrap</div>
+      </div>
+    </div>
+
+    <div class="caveat-box">
+      <strong>Time commitment.</strong> At realistic scenario, each cohort takes around 25 hours of your direct time (15 hrs delivery + 10 hrs prep, reports, admin). Across 4 cohorts that is 100 hours per year, or about 2 hours per week averaged. The effective hourly rate is around $300/hr inclusive of non-billable admin.
+    </div>
+  </div>
+
+  <!-- 4. 10-WEEK PROGRAM STRUCTURE -->
+  <div class="plan-section">
+    <div class="section-number">Section 4</div>
+    <h2>10-Week Program Structure</h2>
+    <p>Draft curriculum. Each week is 1.5 hours, live online via Microsoft Teams. The program builds in sequence — early weeks focus on understanding, middle weeks on skill-building, final weeks on application and integration.</p>
+
+    <div class="timeline">
+      <div class="week-block">
+        <div class="week-num">Week 1</div>
+        <h4>Foundations and welcome</h4>
+        <p>Group agreements, intro to strengths-based parenting, what makes this approach different.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 2</div>
+        <h4>Knowing your child</h4>
+        <p>Spotting your child's natural strengths, energy patterns, and what calms or activates them.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 3</div>
+        <h4>Knowing yourself</h4>
+        <p>Your own capacity, regulation, and the Window of Tolerance. You can't pour from an empty cup.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 4</div>
+        <h4>Communication that lands</h4>
+        <p>Language and tone that works with neurodivergent brains. Co-regulation in everyday moments.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 5</div>
+        <h4>Routines and scaffolding</h4>
+        <p>Building structure that supports your child without becoming rigid. Good day plan, bad day plan.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 6</div>
+        <h4>Meltdowns and recovery</h4>
+        <p>What's happening in the nervous system. How to respond in the moment and repair afterwards.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 7</div>
+        <h4>Strengths in conflict</h4>
+        <p>When your strengths and your child's strengths clash. Reframing conflict as a strengths mismatch.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 8</div>
+        <h4>Self-compassion as a parenting skill</h4>
+        <p>Letting go of guilt, modelling self-kindness, and parenting from values not fear.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 9</div>
+        <h4>Working with school and supports</h4>
+        <p>Advocating for your child without burning out. Using NDIS reviews and school meetings well.</p>
+      </div>
+      <div class="week-block">
+        <div class="week-num">Week 10</div>
+        <h4>Integration and what's next</h4>
+        <p>Pulling it all together. Each parent leaves with a personalised plan. Optional follow-up support.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. VARIABLES YOU CONTROL -->
+  <div class="plan-section">
+    <div class="section-number">Section 5</div>
+    <h2>Variables You Control</h2>
+    <p>These are the dials you can turn. Each one affects revenue, time commitment, and the participant experience. Current recommended settings shown on the right.</p>
+
+    <div class="variable-list">
+      <div class="var-item">
+        <div class="var-name">Group size cap</div>
+        <div class="var-desc">Maximum 10 keeps the group intimate enough for real discussion and individual attention. Below 8 the group dynamic suffers. Above 12 it becomes a lecture, not coaching.</div>
+        <div class="var-current">8–10 parents</div>
+      </div>
+      <div class="var-item">
+        <div class="var-name">Session length</div>
+        <div class="var-desc">1.5 hours is the sweet spot. Long enough for content + discussion, short enough that parents can fit it into their week. 2 hours would increase per-participant revenue but reduce attendance.</div>
+        <div class="var-current">1.5 hours</div>
+      </div>
+      <div class="var-item">
+        <div class="var-name">Program length</div>
+        <div class="var-desc">10 weeks aligns with a school term and is long enough for real behaviour change. 6 weeks is too short, 12+ weeks risks drop-off. Splitting into 2 terms loses momentum.</div>
+        <div class="var-current">10 weeks</div>
+      </div>
+      <div class="var-item">
+        <div class="var-name">Delivery format</div>
+        <div class="var-desc">Online via Teams suits Coach4U's existing setup and reaches parents Australia-wide. In-person delivery would limit market but allow higher rates.</div>
+        <div class="var-current">Online only</div>
+      </div>
+      <div class="var-item">
+        <div class="var-name">Individual check-ins</div>
+        <div class="var-desc">Optional add-on. 15–30 min individual call between sessions. Significantly increases per-participant revenue and improves outcomes but increases your time commitment.</div>
+        <div class="var-current">Add-on option</div>
+      </div>
+      <div class="var-item">
+        <div class="var-name">End-of-program report</div>
+        <div class="var-desc">A 2–3 page written summary for each participant. Provides documented evidence for plan reviews and is fully claimable as non-face-to-face time.</div>
+        <div class="var-current">Included</div>
+      </div>
+      <div class="var-item">
+        <div class="var-name">Cohort frequency</div>
+        <div class="var-desc">4 cohorts per year aligned with school terms is sustainable. 6 cohorts per year would maximise revenue but risk burnout and waitlist management.</div>
+        <div class="var-current">4 per year</div>
+      </div>
+      <div class="var-item">
+        <div class="var-name">Self-funded spots</div>
+        <div class="var-desc">Option to offer 1–2 spots per cohort to parents without NDIS funding at a standard coaching rate. Diversifies revenue and broadens reach.</div>
+        <div class="var-current">2 spots</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. NO-SHOW POLICY -->
+  <div class="plan-section">
+    <div class="section-number">Section 6</div>
+    <h2>Getting Paid for Your Time — Cancellation and No-Show Policy</h2>
+    <p>This is the critical piece. You are committing 10 weeks of facilitation time and capping the group at 10 spots. When someone enrolls, that spot is unavailable to others. You need to be paid for it whether they attend or not.</p>
+
+    <div class="cancel-policy">
+      <h4>NDIS cancellation rules work in your favour</h4>
+      <p>The NDIS Price Guide allows providers to charge full rate for short-notice cancellations and no-shows, provided the policy is in the service agreement and the participant has agreed to it.</p>
+      <ul>
+        <li><strong>Less than 7 clear business days notice</strong> for capacity building supports: 100% of the scheduled support fee is chargeable</li>
+        <li><strong>No-show without notice:</strong> full session fee chargeable</li>
+        <li><strong>The 7-day rule</strong> means once a cohort starts, any missed session is billable as long as the participant cannot give 7 business days notice (which is impossible for weekly sessions)</li>
+        <li><strong>Maximum claims per year:</strong> NDIS limits cancellations to 12 per participant per year, but for a 10-week program with 10 sessions you are well within that</li>
+      </ul>
+    </div>
+
+    <h3>How to make this work in practice</h3>
+    <p>Build the cancellation policy into your service agreement. Explain it upfront in plain language so parents understand from the start. Then enforce it. The structure that works is enrolment plus commitment, not pay-as-you-go.</p>
+
+    <div class="basics-grid">
+      <div class="basics-card">
+        <h4>Enrolment, not attendance</h4>
+        <p>Parents enrol for the full 10-week program. Their NDIS plan is invoiced weekly for each scheduled session regardless of attendance. The spot is theirs whether they use it or not.</p>
+      </div>
+      <div class="basics-card">
+        <h4>One advance week's notice</h4>
+        <p>If a parent knows they will miss a session, they let you know the week before. This gives you the option to record a brief catch-up message or share notes. The session is still billed.</p>
+      </div>
+      <div class="basics-card">
+        <h4>Replacement content for missed sessions</h4>
+        <p>For each missed session, send a brief written summary or recording link. This is genuinely valuable and removes any feeling that the parent is paying for nothing.</p>
+      </div>
+      <div class="basics-card">
+        <h4>Exit policy</h4>
+        <p>If a parent needs to withdraw entirely, 2 weeks notice required. This protects you and the group dynamic, and aligns with NDIS service agreement best practice.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. SERVICE AGREEMENT -->
+  <div class="plan-section">
+    <div class="section-number">Section 7</div>
+    <h2>Service Agreement Essentials</h2>
+    <p>Every participant needs a signed service agreement before the program starts. NDIS requires it and it protects you. Use <strong>/copywriting</strong> to draft the agreement. Key clauses to include:</p>
+
+    <div class="basics-grid">
+      <div class="basics-card">
+        <h4>Scope of service</h4>
+        <p>Name the program, the line item being claimed, the dates and times of sessions, the total program fee, and what is included (group sessions, materials, final report).</p>
+      </div>
+      <div class="basics-card">
+        <h4>Cancellation policy</h4>
+        <p>State the 7-business-day notice rule. State that sessions missed within that window are charged at full rate. Explain that this is consistent with NDIS Price Guide rules.</p>
+      </div>
+      <div class="basics-card">
+        <h4>Privacy and group confidentiality</h4>
+        <p>Group members agree to keep what is shared in group confidential. State your privacy practices and how participant information is stored and shared.</p>
+      </div>
+      <div class="basics-card">
+        <h4>Goals and outcomes</h4>
+        <p>Each participant sets 1–2 personal goals at the start of the program. These are documented in the agreement and referred to in the final report. Required for NDIS evidence.</p>
+      </div>
+      <div class="basics-card">
+        <h4>Code of conduct</h4>
+        <p>Brief statement of how participants are expected to engage in group sessions — respectful, on-time, cameras on where possible. Reserve the right to remove disruptive participants.</p>
+      </div>
+      <div class="basics-card">
+        <h4>Plan manager details</h4>
+        <p>Collect plan manager contact details and NDIS number at enrolment. You will invoice the plan manager weekly. Confirm funding availability for the full program upfront.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. SETUP CHECKLIST -->
+  <div class="plan-section">
+    <div class="section-number">Section 8</div>
+    <h2>Setup Checklist Before Launch</h2>
+    <p>What needs to be in place before you can sell the first cohort. This is sequenced — don't skip ahead.</p>
+
+    <div class="setup-list">
+      <div class="setup-item">
+        <div class="setup-num">1</div>
+        <div class="setup-body">
+          <h4>Verify NDIS Price Guide and line item</h4>
+          <p>Confirm current hourly rate cap and line item code on the NDIS website. Rates change annually on 1 July. Use <strong>/customer-research</strong> to check what other providers charge for similar programs.</p>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-num">2</div>
+        <div class="setup-body">
+          <h4>Decide on NDIS registration question</h4>
+          <p>For Year 1, recommend operating unregistered and invoicing plan-managed and self-managed participants only. Registration is a significant compliance overhead and only opens access to NDIA-managed plans, which are a smaller portion of the market.</p>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-num">3</div>
+        <div class="setup-body">
+          <h4>Build the service agreement template</h4>
+          <p>Draft using the essentials in Section 7. Get reviewed by an NDIS-aware accountant or legal contact. Keep it plain language, 2–3 pages maximum.</p>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-num">4</div>
+        <div class="setup-body">
+          <h4>Finalise the curriculum</h4>
+          <p>Build out each week's content. One slide deck per week, one parent handout per week. Use <strong>/copywriting</strong> for handouts. Allow 1 hour prep per week of content.</p>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-num">5</div>
+        <div class="setup-body">
+          <h4>Create a landing page</h4>
+          <p>One page on coach4u.com.au explaining the program, who it's for, dates, how NDIS funding works, and a form to register interest. Use <strong>/copywriting</strong> to write it.</p>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-num">6</div>
+        <div class="setup-body">
+          <h4>Set up invoicing</h4>
+          <p>Decide on invoicing software (Xero is fine). Confirm format required by major plan managers. Set up a weekly invoice template with the correct line item code.</p>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-num">7</div>
+        <div class="setup-body">
+          <h4>Pre-launch marketing</h4>
+          <p>Announce the program 6 weeks before start date. Channels: LinkedIn post, email to existing list, MHPN network, ADHD-focused Facebook groups, plan manager directories. Use <strong>/marketing-ideas</strong>.</p>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-num">8</div>
+        <div class="setup-body">
+          <h4>Trial with one pilot cohort</h4>
+          <p>Run first cohort at conservative pricing with 5–7 participants. Collect feedback. Adjust curriculum and structure for cohort 2. Get permission to use feedback as testimonials.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. RISKS -->
+  <div class="plan-section">
+    <div class="section-number">Section 9</div>
+    <h2>Risks to Watch</h2>
+    <p>Things that could go wrong. Plan for them in advance.</p>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <h4>NDIS plan funding gaps</h4>
+        <p>A parent commits but the child's plan doesn't have enough Training for Parents/Carers funding. Confirm funding availability before enrolment. Get plan manager confirmation in writing.</p>
+      </div>
+      <div class="risk-card">
+        <h4>NDIS Price Guide changes</h4>
+        <p>Rates and rules change annually on 1 July. Build a review point into your annual planning to update fees and the service agreement.</p>
+      </div>
+      <div class="risk-card">
+        <h4>Plan manager payment delays</h4>
+        <p>Some plan managers pay weekly, others monthly. Cash flow impact if you are running multiple cohorts. Build a 4–6 week cash buffer.</p>
+      </div>
+      <div class="risk-card">
+        <h4>Group cohesion issues</h4>
+        <p>A disruptive participant can break a group. Screen at intake — a 30-minute pre-program call lets you assess fit and brief expectations. Reserve the right to remove participants.</p>
+      </div>
+      <div class="risk-card">
+        <h4>Low cohort numbers</h4>
+        <p>First cohort may not fill. Decide your minimum viable number (e.g. 5) and what happens below that — delay start, run smaller, or refund deposits.</p>
+      </div>
+      <div class="risk-card">
+        <h4>Scope creep into therapy</h4>
+        <p>Some parents will want individual therapy support. Be clear: this is coaching and training, not therapy. Refer to your individual coaching service for deeper work. Keep the group on curriculum.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. NEXT STEPS -->
+  <div class="plan-section">
+    <div class="section-number">Section 10</div>
+    <h2>Immediate Next Steps</h2>
+    <p>The first decisions to lock in before any of this can move forward.</p>
+
+    <div class="basics-grid">
+      <div class="basics-card">
+        <h4>1. Confirm NDIS rate and line item</h4>
+        <p>Spend 30 minutes on the NDIS website verifying current rate cap and line item code. Update the numbers on this page once confirmed.</p>
+      </div>
+      <div class="basics-card">
+        <h4>2. Decide on launch date</h4>
+        <p>Pilot cohort could start at the beginning of next school term. Marketing needs 6 weeks lead time. Work backwards from your chosen date.</p>
+      </div>
+      <div class="basics-card">
+        <h4>3. Build service agreement</h4>
+        <p>The single most important document. Without this you cannot start. Use Section 7 as the brief.</p>
+      </div>
+      <div class="basics-card">
+        <h4>4. Build the landing page</h4>
+        <p>Use <strong>/copywriting</strong> to draft the program landing page on coach4u.com.au. Include the funding explainer so parents understand how to access this.</p>
+      </div>
+    </div>
+
+    <div class="caveat-box">
+      <strong>Final note on pricing accuracy.</strong> All NDIS rates in this document are based on 2024–25 Price Guide figures. Before launch, verify the current Price Guide on the NDIS website (ndis.gov.au). The line item, structure, and approach remain valid but the dollar amounts should be confirmed against the current guide.
+    </div>
+  </div>
+
+
+  <!-- SECTION 11: PARTNERSHIP SCENARIOS -->
+  <div class="plan-section">
+    <div class="section-number">Section 11</div>
+    <h2>Marketing Partnership — ASK Allied Health</h2>
+    <p>Two commission scenarios for the marketing partnership. The realistic revenue model ($7,600 per cohort, 4 cohorts per year) is used as the baseline. Gross revenue is what participants pay in total; the commission is paid to your marketing partner from that gross before your operating costs.</p>
+    <p>Your operating costs (preparation time, materials, report writing) are separate and sit within your net share. The figures below show the split of gross program revenue only.</p>
+
+    <div class="partner-compare">
+
+      <div class="partner-card option-a">
+        <div class="opt-label">Option A — Recommended</div>
+        <div class="opt-rate">20%</div>
+        <div class="opt-sub">Commission to ASK Allied Health</div>
+        <div class="partner-row">
+          <span class="row-label">Gross per cohort</span>
+          <span class="row-val">$7,600</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (per cohort)</span>
+          <span class="row-val">$1,520</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Annual gross (4 cohorts)</span>
+          <span class="row-val">$30,400</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (annual)</span>
+          <span class="row-val">$6,080</span>
+        </div>
+        <div class="partner-row net-row">
+          <span class="row-label">Your gross annual share</span>
+          <span class="row-val">$24,320</span>
+        </div>
+      </div>
+
+      <div class="partner-card option-b">
+        <div class="opt-label">Option B — Current ask</div>
+        <div class="opt-rate">30%</div>
+        <div class="opt-sub">Commission to ASK Allied Health</div>
+        <div class="partner-row">
+          <span class="row-label">Gross per cohort</span>
+          <span class="row-val">$7,600</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (per cohort)</span>
+          <span class="row-val">$2,280</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Annual gross (4 cohorts)</span>
+          <span class="row-val">$30,400</span>
+        </div>
+        <div class="partner-row">
+          <span class="row-label">Partner earns (annual)</span>
+          <span class="row-val">$9,120</span>
+        </div>
+        <div class="partner-row net-row">
+          <span class="row-label">Your gross annual share</span>
+          <span class="row-val">$21,280</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="diff-box">
+      <p><strong>The difference: $3,040 per year.</strong> At 30% you pay your partner $3,040 more annually than at 20% — for the same work on their side. A standard referral or marketing commission for a contained program is typically 10–20%. 30% is the rate more commonly associated with ongoing sales roles or where the partner carries significant ongoing delivery responsibility. If your partner's scope is lead generation and referrals only, 20% is commercially appropriate and still a meaningful income for them ($6,080/year for 4 cohorts). If they are doing intake management, ongoing promotion, and client liaison, revisit the scope and consider a tiered structure.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337</footer>
+
+</body>
+</html>

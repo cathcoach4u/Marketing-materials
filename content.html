@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Pipeline — Coach4U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #1B3664;
+      --light-blue: #5684C4;
+      --dark-grey: #2D2D2D;
+      --light-grey: #DDDDDD;
+      --bg: #ffffff;
+      --card: #f7f9fc;
+      --done-bg: #f0f4f0;
+      --done-text: #888;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--dark-grey); background: var(--bg); font-size: 0.95rem; line-height: 1.6; }
+
+    header { background: var(--dark-blue); padding: 1.4rem 1.25rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: #fff; }
+    header span { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+    nav { background: #edf1f8; border-bottom: 1px solid var(--light-grey); display: flex; overflow-x: auto; }
+    nav a { padding: 0.75rem 1.1rem; font-size: 0.88rem; font-weight: 500; color: #555; text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; }
+    nav a:hover { color: var(--dark-blue); }
+    nav a.active { color: var(--dark-blue); border-bottom-color: var(--light-blue); font-family: 'Inter', sans-serif; font-weight: 700; }
+
+    main { max-width: 820px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
+    section { margin-bottom: 2.5rem; }
+    h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 1.05rem; margin-bottom: 1rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--light-grey); }
+    p { font-size: 0.92rem; margin-bottom: 0.6rem; }
+
+    /* Progress bar */
+    .progress-wrap { margin-bottom: 1.25rem; }
+    .progress-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 0.4rem; }
+    .progress-track { background: var(--light-grey); border-radius: 99px; height: 6px; }
+    .progress-bar { background: var(--light-blue); border-radius: 99px; height: 6px; transition: width 0.3s; }
+
+    /* Content idea cards */
+    .idea-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .idea-item { background: var(--card); border: 1px solid var(--light-grey); border-radius: 10px; padding: 0.85rem 1rem; display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; transition: border-color 0.15s; }
+    .idea-item:hover { border-color: var(--light-blue); }
+    .idea-item.done { background: var(--done-bg); border-color: #c8d8c8; }
+    .idea-item.done .idea-title { color: var(--done-text); text-decoration: line-through; }
+    .idea-item.done .idea-meta { color: #aaa; }
+    .idea-check { width: 20px; height: 20px; border: 2px solid var(--light-grey); border-radius: 5px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .idea-item.done .idea-check { background: #5a9e5a; border-color: #5a9e5a; }
+    .idea-check svg { display: none; }
+    .idea-item.done .idea-check svg { display: block; }
+    .idea-body { flex: 1; }
+    .idea-title { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .idea-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; font-size: 0.8rem; color: #666; }
+    .idea-desc { font-size: 0.84rem; color: #555; margin-top: 0.3rem; }
+    .badge { border-radius: 5px; padding: 0.15rem 0.45rem; font-size: 0.75rem; font-weight: 500; white-space: nowrap; }
+    .badge-social { background: #e8f0fb; color: var(--dark-blue); }
+    .badge-email { background: #fff3e0; color: #7a4f00; }
+    .badge-blog { background: #f0f7f0; color: #2a5a2a; }
+    .badge-video { background: #f5e8fb; color: #5a1a7a; }
+    .badge-session { font-size: 0.72rem; color: #aaa; }
+
+    /* Language bank */
+    .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    @media (max-width: 520px) { .lang-grid { grid-template-columns: 1fr; } }
+    .lang-item { background: var(--card); border-left: 3px solid var(--light-blue); border-radius: 0 8px 8px 0; padding: 0.6rem 0.8rem; font-size: 0.86rem; font-style: italic; color: #444; }
+    .lang-item span { display: block; font-style: normal; font-size: 0.72rem; color: #aaa; margin-top: 0.2rem; }
+
+    /* Products table */
+    .product-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 1rem; }
+    .product-table th { text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--dark-blue); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.45rem 0.6rem; border-bottom: 2px solid var(--light-grey); }
+    .product-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    .product-table tr:last-child td { border-bottom: none; }
+    .product-table td:last-child { color: var(--light-blue); font-weight: 500; white-space: nowrap; }
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+    .status-todo { background: #ccc; }
+    .status-wip { background: #f5a623; }
+    .status-done { background: #5a9e5a; }
+
+    .note-box { background: #edf1f8; border-radius: 10px; padding: 0.9rem 1rem; font-size: 0.85rem; color: #555; }
+    .note-box strong { color: var(--dark-blue); }
+
+    footer { border-top: 1px solid var(--light-grey); padding: 1.25rem; text-align: center; font-size: 0.8rem; color: #888; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Coach4U Marketing Hub</h1>
+  <span>Session-driven. Agent-assisted.</span>
+</header>
+
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="content.html" class="active">Content Pipeline</a>
+  <a href="plan.html">Marketing Plan</a>
+  <a href="ndis-program.html">NDIS Program</a>
+  <a href="google-strategy.html">Google Strategy</a>
+</nav>
+
+<main>
+
+  <!-- CONTENT IDEAS -->
+  <section>
+    <h2>Content Ideas Pipeline</h2>
+    <p>Tap an idea to mark it as created. Ideas are drawn from ThriveHQ session reports.</p>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="prog-label">0 of 10 created</span>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" id="prog-bar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="idea-list" id="idea-list">
+
+      <div class="idea-item" data-id="idea-1" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">Don't put the phone away. Replace what it gives you.</div>
+          <div class="idea-meta">
+            <span class="badge badge-social">LinkedIn post</span>
+            <span class="badge badge-session">26 May 2026</span>
+          </div>
+          <div class="idea-desc">A counterintuitive reframe of "just stop scrolling." The ADHD brain needs dopamine, not deprivation. End with what ThriveHQ offers. Use <strong>/social</strong> to write this.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-2" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">What does a study anchor look like for your brain?</div>
+          <div class="idea-meta">
+            <span class="badge badge-blog">Blog or email</span>
+            <span class="badge badge-session">26 May 2026</span>
+          </div>
+          <div class="idea-desc">How a member built a personalised study system using their strengths profile and AI. Practical, specific, replicable. Use <strong>/copywriting</strong> or <strong>/emails</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-3" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">The AI podcast trick that makes boring content click</div>
+          <div class="idea-meta">
+            <span class="badge badge-video">Short video</span>
+            <span class="badge badge-social">Social post</span>
+            <span class="badge badge-session">26 May 2026</span>
+          </div>
+          <div class="idea-desc">NotebookLM converts study notes into a two-person audio conversation. For ADHD learners who struggle with reading, this changes everything. Use <strong>/social</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-4" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">The ideation loop: when your brain won't let you commit</div>
+          <div class="idea-meta">
+            <span class="badge badge-email">Email</span>
+            <span class="badge badge-social">LinkedIn</span>
+            <span class="badge badge-session">26 May 2026</span>
+          </div>
+          <div class="idea-desc">The "but what if I did this instead" feeling. How to stay the course without suppressing the ideas that keep generating. Use <strong>/emails</strong> or <strong>/social</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-5" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">My cup has been filled in all directions</div>
+          <div class="idea-meta">
+            <span class="badge badge-social">Social post</span>
+            <span class="badge badge-session">26 May 2026</span>
+          </div>
+          <div class="idea-desc">What quiet, sustained progress looks like in ADHD coaching. Not a dramatic breakthrough. Just waking up and feeling okay. Use <strong>/social</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-6" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">I'll do it with you, not for you</div>
+          <div class="idea-meta">
+            <span class="badge badge-social">LinkedIn post</span>
+            <span class="badge badge-session">31 March 2026</span>
+          </div>
+          <div class="idea-desc">Body doubling reframed for families and relationships. How ThriveHQ members apply this beyond the session. Use <strong>/social</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-7" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">AI helps. Community helps differently.</div>
+          <div class="idea-meta">
+            <span class="badge badge-social">LinkedIn</span>
+            <span class="badge badge-email">Email</span>
+            <span class="badge badge-session">31 March 2026</span>
+          </div>
+          <div class="idea-desc">AI removes friction. ThriveHQ removes shame and isolation. Both have a place, but they are not the same thing. Use <strong>/social</strong> or <strong>/emails</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-8" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">You avoided it for days. It took an hour.</div>
+          <div class="idea-meta">
+            <span class="badge badge-social">Social post</span>
+            <span class="badge badge-session">31 March 2026</span>
+          </div>
+          <div class="idea-desc">The procrastination gap is one of the most relatable ADHD experiences. Naming it creates connection and opens the door to strategies. Use <strong>/social</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-9" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">Scaffolding that fits your brain</div>
+          <div class="idea-meta">
+            <span class="badge badge-blog">Blog or email</span>
+            <span class="badge badge-session">31 March 2026</span>
+          </div>
+          <div class="idea-desc">Why generic productivity systems fail ADHD brains, and how finding your own structure changes everything. Use <strong>/copywriting</strong> or <strong>/emails</strong>.</div>
+        </div>
+      </div>
+
+      <div class="idea-item" data-id="idea-10" onclick="toggleIdea(this)">
+        <div class="idea-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="idea-body">
+          <div class="idea-title">What the Brain Pulse actually does</div>
+          <div class="idea-meta">
+            <span class="badge badge-video">Short video</span>
+            <span class="badge badge-email">Email</span>
+            <span class="badge badge-session">31 March 2026</span>
+          </div>
+          <div class="idea-desc">A real example of a member using the weekly check-in to redirect their day. Concrete proof that the tool works. Use <strong>/social</strong> or <strong>/emails</strong>.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CLIENT LANGUAGE BANK -->
+  <section>
+    <h2>Client Language Bank</h2>
+    <p>Paraphrased phrases drawn directly from ThriveHQ sessions. Use these in copy, posts, and emails to mirror how clients actually talk about their experience.</p>
+    <div class="lang-grid">
+      <div class="lang-item">"My brain just won't give me that focused time when I feel overwhelmed"<span>26 May 2026</span></div>
+      <div class="lang-item">"I know I should be doing it each week but I just can't until the panic kicks in"<span>26 May 2026</span></div>
+      <div class="lang-item">"It's like a mouse wheel that just keeps turning"<span>26 May 2026</span></div>
+      <div class="lang-item">"I've got all these ideas and goals but they come at me so fast I end up paralysed"<span>26 May 2026</span></div>
+      <div class="lang-item">"I just need it all in one place"<span>26 May &amp; 31 March 2026</span></div>
+      <div class="lang-item">"AI broke it down for me when nothing else could"<span>26 May 2026</span></div>
+      <div class="lang-item">"I don't want to put my phone away, I want something better to do with it"<span>26 May 2026</span></div>
+      <div class="lang-item">"My cup has been filled in all directions"<span>26 May 2026</span></div>
+      <div class="lang-item">"I avoided it for days and it only took an hour"<span>31 March 2026</span></div>
+      <div class="lang-item">"I don't know where to start, it's just so daunting"<span>31 March 2026</span></div>
+      <div class="lang-item">"My brain goes blank when there's too much information"<span>31 March 2026</span></div>
+      <div class="lang-item">"I just need to find what actually works for my brain"<span>31 March 2026</span></div>
+      <div class="lang-item">"I felt embarrassed, like I should have had more control"<span>31 March 2026</span></div>
+      <div class="lang-item">"I finally feel like I'm changing my older habits"<span>31 March 2026</span></div>
+    </div>
+  </section>
+
+  <!-- DIGITAL PRODUCTS PIPELINE -->
+  <section>
+    <h2>Digital Products Pipeline</h2>
+    <p>Proprietary framework resources for sale on Gumroad, embedded on coach4u.com.au. ThriveHQ members receive all at no extra cost.</p>
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Format</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ThriveHQ Brain Pulse self-assessment + band guide</td>
+          <td>PDF</td>
+          <td>$25</td>
+          <td><span class="status-dot status-todo"></span>To build</td>
+        </tr>
+        <tr>
+          <td>SAFEty Pulse self-reflection worksheet</td>
+          <td>PDF</td>
+          <td>$18</td>
+          <td><span class="status-dot status-todo"></span>To build</td>
+        </tr>
+        <tr>
+          <td>Strengths for ADHD workbook (Name-Claim-Aim)</td>
+          <td>PDF</td>
+          <td>$35</td>
+          <td><span class="status-dot status-todo"></span>To build</td>
+        </tr>
+        <tr>
+          <td>Weekly Reset planner (four ThriveHQ rooms)</td>
+          <td>PDF</td>
+          <td>$15</td>
+          <td><span class="status-dot status-todo"></span>To build</td>
+        </tr>
+        <tr>
+          <td>ThriveHQ Starter Kit (Brain Pulse + Weekly Reset + Purpose doc)</td>
+          <td>Bundle PDF</td>
+          <td>$49</td>
+          <td><span class="status-dot status-todo"></span>To build</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note-box">
+      <strong>Recommended first build:</strong> Brain Pulse self-assessment. It is the most distinctive framework and the most useful standalone tool. Set up Gumroad and connect to coach4u.com.au. Use <strong>/lead-magnets</strong> to plan the lead magnet version.
+    </div>
+  </section>
+
+</main>
+
+<footer>Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337</footer>
+
+<script>
+  const STORAGE_KEY = 'coach4u_content_done';
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function toggleIdea(el) {
+    el.classList.toggle('done');
+    const state = loadState();
+    state[el.dataset.id] = el.classList.contains('done');
+    saveState(state);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const items = document.querySelectorAll('.idea-item');
+    const done = document.querySelectorAll('.idea-item.done').length;
+    const total = items.length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById('prog-label').textContent = done + ' of ' + total + ' created';
+    document.getElementById('prog-pct').textContent = pct + '%';
+    document.getElementById('prog-bar').style.width = pct + '%';
+  }
+
+  function init() {
+    const state = loadState();
+    document.querySelectorAll('.idea-item').forEach(el => {
+      if (state[el.dataset.id]) el.classList.add('done');
+    });
+    updateProgress();
+  }
+
+  init();
+</script>
+
+</body>
+</html>

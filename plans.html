@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach4U Marketing Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #1B3664;
+      --light-blue: #5684C4;
+      --dark-grey: #2D2D2D;
+      --light-grey: #DDDDDD;
+      --bg: #ffffff;
+      --card-bg: #f8fafd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      color: var(--dark-grey);
+      background: var(--bg);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    header {
+      background: var(--dark-blue);
+      padding: 1.75rem 1.5rem 1.5rem;
+    }
+
+    header h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #ffffff;
+    }
+
+    header p {
+      color: rgba(255,255,255,0.7);
+      margin-top: 0.35rem;
+      font-size: 0.92rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+    }
+
+    .back-link:hover { color: #fff; }
+
+    nav {
+      background: #f4f7fc;
+      border-bottom: 1px solid var(--light-grey);
+      padding: 0 1.25rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 0.85rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #666;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover { color: var(--dark-blue); }
+    nav a.active { color: var(--dark-blue); border-bottom-color: var(--light-blue); font-family: 'Inter', sans-serif; font-weight: 700; }
+
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 1rem;
+    }
+
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      font-size: 1.15rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--light-grey);
+    }
+
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p { margin-bottom: 0.75rem; font-size: 0.95rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Positioning statement */
+    .positioning-box {
+      background: var(--dark-blue);
+      color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .positioning-box p {
+      color: white;
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* Differentiators */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 560px) { .diff-grid { grid-template-columns: 1fr; } }
+
+    .diff-card {
+      background: var(--card-bg);
+      border: 1px solid var(--light-grey);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+    }
+
+    .diff-card h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--light-blue);
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .diff-card p { font-size: 0.88rem; color: var(--dark-grey); margin: 0; }
+
+    /* Brand voice rules */
+    .voice-list {
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .voice-list li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.92rem;
+    }
+
+    .voice-list li span.tick { color: var(--light-blue); font-weight: 700; flex-shrink: 0; }
+    .voice-list li span.cross { color: #c0392b; font-weight: 700; flex-shrink: 0; }
+
+    /* Service cards */
+    .service-card {
+      border: 1px solid var(--light-grey);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      background: var(--card-bg);
+    }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .service-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      font-size: 1rem;
+    }
+
+    .service-price {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      color: var(--light-blue);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    @media (max-width: 520px) { .service-grid { grid-template-columns: 1fr; } }
+
+    .service-block h4 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #888;
+      margin-bottom: 0.3rem;
+    }
+
+    .service-block ul {
+      list-style: none;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .service-block ul li::before { content: "• "; color: var(--light-blue); }
+
+    .agent-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--light-grey);
+      align-items: center;
+    }
+
+    .agent-label {
+      font-size: 0.78rem;
+      color: #888;
+      margin-right: 0.25rem;
+    }
+
+    .agent-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      color: var(--light-blue);
+      background: #eef3fb;
+      border: 1px solid #c5d6ef;
+      border-radius: 6px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* Revenue */
+    .revenue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 520px) { .revenue-grid { grid-template-columns: 1fr; } }
+
+    .revenue-card {
+      background: var(--dark-blue);
+      border-radius: 10px;
+      padding: 1.1rem;
+      text-align: center;
+    }
+
+    .revenue-card .year {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .revenue-card .amount {
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .stream-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .stream-table th {
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 2px solid var(--light-grey);
+    }
+
+    .stream-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.88rem;
+    }
+
+    .stream-table tr:last-child td { border-bottom: none; }
+    .stream-table td:last-child { color: var(--light-blue); font-weight: 500; }
+
+    /* Action plan */
+    .phase-card {
+      border-left: 3px solid var(--light-blue);
+      padding: 1rem 1.1rem;
+      background: var(--card-bg);
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1rem;
+    }
+
+    .phase-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--light-blue);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .phase-card h3 { margin-bottom: 0.6rem; }
+
+    .task-list {
+      list-style: none;
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .task-list li {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      align-items: flex-start;
+    }
+
+    .task-list li::before {
+      content: "→";
+      color: var(--light-blue);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* Key messages */
+    .message-card {
+      background: var(--card-bg);
+      border: 1px solid var(--light-grey);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .message-card .audience {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--light-blue);
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .message-card blockquote {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--dark-blue);
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .message-card p { font-size: 0.88rem; color: #666; margin: 0; }
+
+    footer {
+      border-top: 1px solid var(--light-grey);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--dark-grey);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="back-link" href="index.html">← Back to Hub</a>
+  <h1>Coach4U Marketing Planner</h1>
+  <p>Use this page alongside the slash commands to plan and execute your marketing.</p>
+</header>
+
+<nav>
+  <a href="#positioning" class="active">Positioning</a>
+  <a href="#services">Services</a>
+  <a href="#revenue">Revenue</a>
+  <a href="#action-plan">Action Plan</a>
+  <a href="#messages">Key Messages</a>
+  <a href="#brand-voice">Brand Voice</a>
+</nav>
+
+<main>
+
+  <!-- POSITIONING -->
+  <section id="positioning">
+    <h2>Positioning</h2>
+    <div class="positioning-box">
+      <p>Helping teams and individuals thrive through strengths-based coaching, counselling, and collaboration.</p>
+    </div>
+    <p>Coach4U sits between traditional therapy and generic life coaching — offering more structure and measurable progress than counselling, and more psychological depth than most coaching services. The niche is the combination: evidence-based methods, delivered in a coaching style, with a strengths-first philosophy.</p>
+
+    <div class="diff-grid" style="margin-top:1.1rem;">
+      <div class="diff-card">
+        <h4>Integrative model</h4>
+        <p>Evidence-based counselling techniques (EFT, Gottman, Narrative Therapy) delivered through a coaching lens — action-focused, not problem-focused.</p>
+      </div>
+      <div class="diff-card">
+        <h4>Strengths-first</h4>
+        <p>Every service leads with what clients are already good at. Challenges are framed as opportunities to use strengths in a new way.</p>
+      </div>
+      <div class="diff-card">
+        <h4>ADHD and neurodiversity expertise</h4>
+        <p>ThriveHQ is a flagship differentiator. Lived experience informs the approach. Extends to couples and organisational work with neurodiverse teams.</p>
+      </div>
+      <div class="diff-card">
+        <h4>Continuous support ecosystem</h4>
+        <p>Daily check-ins, group community, digital tools, and structured frameworks keep clients engaged between sessions — not just during them.</p>
+      </div>
+      <div class="diff-card">
+        <h4>Structured pacing</h4>
+        <p>Programs follow designed frameworks and stages (e.g. Stabilise, Understand, Integrate, Sustain for couples). Clients see tangible progress, not open-ended sessions.</p>
+      </div>
+      <div class="diff-card">
+        <h4>Fully online, Australia-wide</h4>
+        <p>All services delivered via Microsoft Teams. Accessible to clients anywhere, flexible to fit around busy schedules.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h2>Services</h2>
+
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-name">ThriveHQ — ADHD Group Coaching</div>
+        <div class="service-price">6-month membership</div>
+      </div>
+      <div class="service-grid">
+        <div class="service-block">
+          <h4>Who it's for</h4>
+          <ul>
+            <li>Adults living with ADHD</li>
+            <li>Those who've tried self-help and therapy but feel stuck</li>
+            <li>People who want community, not just one-on-one support</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Outcomes</h4>
+          <ul>
+            <li>Reduced overwhelm and chaos</li>
+            <li>ADHD-friendly habits built around their strengths</li>
+            <li>Progress on meaningful goals without rigid pressure</li>
+            <li>Feeling understood in a judgment-free space</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>What's included</h4>
+          <ul>
+            <li>Twice-weekly live group coaching calls</li>
+            <li>Daily WhatsApp check-ins</li>
+            <li>Private online community</li>
+            <li>Brain Pulse weekly self-assessment</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Marketing angles</h4>
+          <ul>
+            <li>"Works with your brain, not against it"</li>
+            <li>From chaos toward calm, focus, and self-compassion</li>
+            <li>Community that shows up alongside you</li>
+            <li>NotebookLM, AI tools, and practical strategies</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agent-row">
+        <span class="agent-label">Use to plan content:</span>
+        <span class="agent-tag">/thrivehq-insights</span>
+        <span class="agent-tag">/social</span>
+        <span class="agent-tag">/emails</span>
+        <span class="agent-tag">/lead-magnets</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-name">Individual Coaching and Counselling</div>
+        <div class="service-price">1:1 private sessions</div>
+      </div>
+      <div class="service-grid">
+        <div class="service-block">
+          <h4>Who it's for</h4>
+          <ul>
+            <li>Adults feeling stuck in life or career</li>
+            <li>People seeking confidence and self-awareness</li>
+            <li>Those navigating major life transitions</li>
+            <li>ADHD coaching (individual)</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Outcomes</h4>
+          <ul>
+            <li>Clarity on personal goals and direction</li>
+            <li>Sustainable habits and self-management</li>
+            <li>Improved confidence and daily wellbeing</li>
+            <li>Renewed motivation and sense of purpose</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Focus areas</h4>
+          <ul>
+            <li>Confidence and self-awareness</li>
+            <li>Stress and overwhelm</li>
+            <li>Relationships and communication</li>
+            <li>Career direction and purpose</li>
+            <li>Personal growth using strengths</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Marketing angles</h4>
+          <ul>
+            <li>Clarity, not just coping</li>
+            <li>Tailored to how you think and work</li>
+            <li>Evidence-based without the clinical feel</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agent-row">
+        <span class="agent-label">Use to plan content:</span>
+        <span class="agent-tag">/copywriting</span>
+        <span class="agent-tag">/social</span>
+        <span class="agent-tag">/content-strategy</span>
+        <span class="agent-tag">/customer-research</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-name">Couples Coaching and Counselling</div>
+        <div class="service-price">$250 + GST / 1.5hr session</div>
+      </div>
+      <div class="service-grid">
+        <div class="service-block">
+          <h4>Who it's for</h4>
+          <ul>
+            <li>Couples with communication breakdowns</li>
+            <li>Partners navigating ADHD dynamics</li>
+            <li>Couples after trust issues or betrayal</li>
+            <li>Those facing major life transitions together</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Outcomes</h4>
+          <ul>
+            <li>Clearer communication and conflict resolution</li>
+            <li>Rebuilt trust and deeper connection</li>
+            <li>Greater relationship satisfaction</li>
+            <li>Practical skills that hold beyond sessions</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Methods used</h4>
+          <ul>
+            <li>Gottman Method</li>
+            <li>Emotionally Focused Therapy (EFT)</li>
+            <li>Imago Dialogue</li>
+            <li>Narrative Therapy</li>
+            <li>CliftonStrengths in relationships</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Marketing angles</h4>
+          <ul>
+            <li>"Understanding each other, not just tolerating each other"</li>
+            <li>Structure when conversations keep going in circles</li>
+            <li>ADHD-informed couples support</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agent-row">
+        <span class="agent-label">Use to plan content:</span>
+        <span class="agent-tag">/copywriting</span>
+        <span class="agent-tag">/social</span>
+        <span class="agent-tag">/emails</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-name">Business and Leadership Coaching</div>
+        <div class="service-price">Half-day $2,500–$4,000 / Full-day $4,500–$7,500</div>
+      </div>
+      <div class="service-grid">
+        <div class="service-block">
+          <h4>Who it's for</h4>
+          <ul>
+            <li>SMEs and corporate departments</li>
+            <li>Executive and leadership teams</li>
+            <li>Remote and hybrid teams</li>
+            <li>NFP organisations</li>
+            <li>Neurodiverse workplaces</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Outcomes</h4>
+          <ul>
+            <li>Stronger leadership capacity</li>
+            <li>Higher team engagement and cohesion</li>
+            <li>Clearer vision and strategic focus</li>
+            <li>Sustainable performance improvement</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Workshop types</h4>
+          <ul>
+            <li>CliftonStrengths team workshops</li>
+            <li>Team communication programs</li>
+            <li>Conflict resolution</li>
+            <li>Leadership alignment sessions</li>
+            <li>Strategy and culture workshops</li>
+            <li>Multi-session programs $8k–$25k+</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Marketing angles</h4>
+          <ul>
+            <li>Teams that know their strengths outperform</li>
+            <li>Neurodiverse team expertise</li>
+            <li>ROI-linked team engagement</li>
+            <li>Practical, not theoretical</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agent-row">
+        <span class="agent-label">Use to plan content:</span>
+        <span class="agent-tag">/copywriting</span>
+        <span class="agent-tag">/content-strategy</span>
+        <span class="agent-tag">/marketing-ideas</span>
+        <span class="agent-tag">/lead-magnets</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-name">Career Coaching</div>
+        <div class="service-price">1:1 private sessions</div>
+      </div>
+      <div class="service-grid">
+        <div class="service-block">
+          <h4>Who it's for</h4>
+          <ul>
+            <li>Professionals considering career transitions</li>
+            <li>People experiencing burnout or role change</li>
+            <li>Those wanting to align work with strengths and values</li>
+          </ul>
+        </div>
+        <div class="service-block">
+          <h4>Outcomes</h4>
+          <ul>
+            <li>Clarity on values, passions, and direction</li>
+            <li>Strengths mapped to career opportunities</li>
+            <li>Fulfilling career that fits how they work</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agent-row">
+        <span class="agent-label">Use to plan content:</span>
+        <span class="agent-tag">/copywriting</span>
+        <span class="agent-tag">/social</span>
+        <span class="agent-tag">/customer-research</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- REVENUE -->
+  <section id="revenue">
+    <h2>Revenue Targets</h2>
+
+    <div class="revenue-grid">
+      <div class="revenue-card">
+        <div class="year">Year 1</div>
+        <div class="amount">$120k–$220k</div>
+      </div>
+      <div class="revenue-card">
+        <div class="year">Year 2</div>
+        <div class="amount">$250k–$450k</div>
+      </div>
+      <div class="revenue-card">
+        <div class="year">Year 3</div>
+        <div class="amount">$500k+</div>
+      </div>
+    </div>
+
+    <table class="stream-table">
+      <thead>
+        <tr>
+          <th>Revenue Stream</th>
+          <th>Target Range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Team Workshops</td>
+          <td>$80k–$250k</td>
+        </tr>
+        <tr>
+          <td>Executive Coaching</td>
+          <td>$60k–$180k</td>
+        </tr>
+        <tr>
+          <td>Counselling and Life Coaching</td>
+          <td>$40k–$120k</td>
+        </tr>
+        <tr>
+          <td>Corporate Programs</td>
+          <td>$50k–$300k</td>
+        </tr>
+        <tr>
+          <td>Online Courses and Digital Products</td>
+          <td>$10k–$100k</td>
+        </tr>
+        <tr>
+          <td>Speaking</td>
+          <td>$5k–$50k</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACTION PLAN -->
+  <section id="action-plan">
+    <h2>12-Month Action Plan</h2>
+
+    <div class="phase-card">
+      <div class="phase-label">Months 1–3 — Foundation</div>
+      <h3>Build the platform</h3>
+      <ul class="task-list">
+        <li>Launch website with clear service pages for each offering</li>
+        <li>Set up LinkedIn presence with consistent posting schedule</li>
+        <li>Build and publish the core workshop offer (CliftonStrengths team)</li>
+        <li>Begin networking — referral sources, allied professionals</li>
+        <li>Run first webinar (ADHD or strengths topic)</li>
+        <li>Set up email list and welcome sequence</li>
+      </ul>
+      <div class="agent-row" style="margin-top:0.75rem;">
+        <span class="agent-label">Agents to use now:</span>
+        <span class="agent-tag">/copywriting</span>
+        <span class="agent-tag">/social</span>
+        <span class="agent-tag">/emails</span>
+        <span class="agent-tag">/content-strategy</span>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-label">Months 4–6 — Momentum</div>
+      <h3>Build credibility and pipeline</h3>
+      <ul class="task-list">
+        <li>Collect and publish client testimonials across all services</li>
+        <li>Build referral partnerships with HR professionals, EAPs, allied health</li>
+        <li>Launch email marketing to warm audience</li>
+        <li>Run first paid team workshops and document outcomes</li>
+        <li>Develop LinkedIn thought leadership content pipeline</li>
+        <li>Begin corporate outreach for workshop pipeline</li>
+      </ul>
+      <div class="agent-row" style="margin-top:0.75rem;">
+        <span class="agent-label">Agents to use now:</span>
+        <span class="agent-tag">/customer-research</span>
+        <span class="agent-tag">/marketing-ideas</span>
+        <span class="agent-tag">/lead-magnets</span>
+        <span class="agent-tag">/emails</span>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-label">Key success factors</div>
+      <h3>What drives growth</h3>
+      <ul class="task-list">
+        <li>Strong LinkedIn presence with consistent thought leadership</li>
+        <li>Corporate workshop pipeline — repeat business is the multiplier</li>
+        <li>Referral partnerships with professionals who see the same clients</li>
+        <li>Clear strengths positioning that differentiates from generic coaching</li>
+        <li>Testimonials that speak to specific outcomes, not just satisfaction</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KEY MESSAGES -->
+  <section id="messages">
+    <h2>Key Messages by Audience</h2>
+
+    <div class="message-card">
+      <div class="audience">ADHD Adults / ThriveHQ</div>
+      <blockquote>"You've tried the planners, the apps, the advice. The problem isn't you. It's a system built for a brain that isn't yours."</blockquote>
+      <p>Focus on: working with the brain not against it, community over isolation, practical tools not willpower.</p>
+    </div>
+
+    <div class="message-card">
+      <div class="audience">Couples</div>
+      <blockquote>"You're not bad at communication. You've just never had a space where both of you could actually be heard at the same time."</blockquote>
+      <p>Focus on: structure for hard conversations, ADHD-informed couples work, real skills not just venting.</p>
+    </div>
+
+    <div class="message-card">
+      <div class="audience">Business / Team Leaders</div>
+      <blockquote>"Your team isn't underperforming because they don't care. They're underperforming because they don't know how to use each other's strengths."</blockquote>
+      <p>Focus on: measurable team outcomes, neurodiverse team expertise, CliftonStrengths as a practical tool.</p>
+    </div>
+
+    <div class="message-card">
+      <div class="audience">Individuals / Career</div>
+      <blockquote>"You already have the strengths. The gap is knowing how to use them — and trusting yourself enough to start."</blockquote>
+      <p>Focus on: clarity over motivation, strengths as building blocks, practical next steps not just reflection.</p>
+    </div>
+  </section>
+
+  <!-- BRAND VOICE -->
+  <section id="brand-voice">
+    <h2>Brand Voice Rules</h2>
+    <p style="margin-bottom:1rem;">Every piece of content — social, email, copy, video script — should follow these rules.</p>
+
+    <ul class="voice-list">
+      <li><span class="tick">✓</span> Australian English in all written content</li>
+      <li><span class="tick">✓</span> Warm, grounded, professional — not clinical</li>
+      <li><span class="tick">✓</span> Short paragraphs, easy to scan</li>
+      <li><span class="tick">✓</span> Use real client language (paraphrased) — it resonates more than polished copy</li>
+      <li><span class="tick">✓</span> Lead with outcomes, not process</li>
+      <li><span class="tick">✓</span> Strengths-based framing — what's possible, not what's broken</li>
+      <li><span class="cross">✗</span> No exclamation marks</li>
+      <li><span class="cross">✗</span> No em dashes in prose — use commas or full stops</li>
+      <li><span class="cross">✗</span> No clinical or diagnostic language (disorder, syndrome, trauma)</li>
+      <li><span class="cross">✗</span> Never call Coach4U a psychology practice</li>
+      <li><span class="cross">✗</span> No therapy jargon (intervention, treatment, attachment wounds)</li>
+      <li><span class="cross">✗</span> No generic productivity advice that ignores how the brain actually works</li>
+    </ul>
+
+    <div style="margin-top:1.25rem; padding:1rem; background:#f4f7fc; border-radius:10px; border:1px solid var(--light-grey);">
+      <h3 style="margin-bottom:0.5rem;">Using the agents</h3>
+      <p style="font-size:0.9rem;">All slash commands know the Coach4U brand. When you use <span class="agent-tag">/copywriting</span> or <span class="agent-tag">/social</span>, the output will follow these rules automatically. You do not need to repeat brand instructions every time.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Strengths-Based Coaching and Counselling | www.coach4u.com.au | cath@coach4u.com.au | 0402 313 337
+</footer>
+
+</body>
+</html>

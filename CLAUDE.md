@@ -241,6 +241,23 @@ A good response:
 
 ---
 
+## Slash Commands (quick reference)
+
+Type these at the start of a message to activate a specialist mode.
+
+| Command | Use it when you want to... |
+|---|---|
+| `/thrivehq-insights` | Turn a ThriveHQ session transcript into a full marketing insights report |
+| `/copywriting` | Write or improve marketing copy for a page, service description, or offer |
+| `/emails` | Build an email sequence — welcome series, nurture flow, re-engagement |
+| `/social` | Write LinkedIn posts, Reels scripts, or plan a content calendar |
+| `/content-strategy` | Plan what to write about and build content pillars for Coach4U |
+| `/marketing-ideas` | Brainstorm marketing tactics when you're stuck or want fresh ideas |
+| `/customer-research` | Analyse what clients say, build personas, extract voice-of-customer language |
+| `/lead-magnets` | Plan a downloadable resource or lead magnet to grow your email list |
+
+---
+
 ## What bad output looks like (don't do this)
 
 - Generic AI-aesthetic styling (purple gradients, emoji-heavy, default Tailwind look)
