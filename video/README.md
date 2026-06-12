@@ -28,7 +28,7 @@ Remotion is the one that runs where Claude Code runs.
 - **Brand:** public-facing marketing videos follow the Brand Lock in this repo's `CLAUDE.md`
   (Inter Bold headings, Montserrat body, `#1B3664` / `#5684C4`). Sub-brand videos (ThriveHQ,
   Couples, NDIS, Strengths) swap in their own palette and tone from
-  `internal-coach4u-hub/docs/brand-and-voice.md`.
+  `brand-and-voice.md` in this repo.
 - **Fonts:** inline the fonts as base64 in `src/fontface.ts`. Headless Chrome cannot reach
   Google Fonts through the sandbox proxy, and `delayRender` at module scope breaks the render,
   so embedding the font avoids both. Do not reintroduce a network or `delayRender` font loader.
@@ -86,7 +86,7 @@ entirely and one URL serves every page.
 ## How a new session picks this up
 
 1. Read this file, plus `CLAUDE.md` (brand lock) and, for sub-brand work,
-   `internal-coach4u-hub/docs/brand-and-voice.md`.
+   `brand-and-voice.md` in this repo.
 2. Copy the structure of `internal-coach4u-hub/video/thrivehq-onboarding/` into
    `video/<new-project>/` here and adapt it.
 3. The ElevenLabs key is already an env var. Regenerate voice if the wording changed; the rest

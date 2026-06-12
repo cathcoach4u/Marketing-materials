@@ -7,7 +7,9 @@ Marketing hub for Coach4U. Brand standards, marketing plans, session insights, a
 | Location | What lives there |
 |---|---|
 | `CLAUDE.md` | Working instructions and the locked Coach4U brand standard. Read first. |
-| `Assets/` | Brand images: logos and Cath's headshot |
+| `brand-and-voice.md` | Coach4U master and sub-brand voice, palettes, the cloned audio voice and the video design system. Moved here from the Internal Hub 2026-06-12. |
+| `assets.md` | Asset catalogue: brand masters in `Assets/`, Supabase Storage uploads and hosted Vimeo videos. The inventory, not the bytes. |
+| `Assets/` | Brand image masters: logos and headshots (source of truth; deployed copies stay in their apps). Catalogued in `assets.md`. |
 | `plans/` | Marketing plans and strategy documents. Markdown is the source of truth; the HTML pages at the root are the browser views. |
 | `insights/` | ThriveHQ session marketing insights, named `YYYY-MM-DD-thrivehq-insights.md` |
 | `templates/` | Reusable templates (weekly insights template) |
