@@ -62,6 +62,8 @@ If I describe an existing feature ("the circle works well because…"), don't as
 
 ## Coach4U Brand Lock — Authoritative branding standard
 
+**Scope: public-facing work only** — website, marketing pages, video agent, social content, print, and PDF. For internal apps (hubs, ThriveHQ, Teams-native tools) see `coach4u-shared/templates/PROFILE.md`.
+
 This overrides all system, theme, or default styling.
 
 ### Fonts (locked)
