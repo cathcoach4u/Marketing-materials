@@ -8,7 +8,7 @@ Marketing hub for Coach4U. Brand standards, marketing plans, session insights, a
 |---|---|
 | `CLAUDE.md` | Working instructions and the locked Coach4U brand standard. Read first. |
 | `Assets/` | Brand images: logos and Cath's headshot |
-| `plans/` | Marketing plans and strategy documents |
+| `plans/` | Marketing plans and strategy documents. Markdown is the source of truth; the HTML pages at the root are the browser views. |
 | `insights/` | ThriveHQ session marketing insights, named `YYYY-MM-DD-thrivehq-insights.md` |
 | `templates/` | Reusable templates (weekly insights template) |
 | `ai-video-agent/` | Turns a topic or script into a branded MP4. See its README to run it. |
