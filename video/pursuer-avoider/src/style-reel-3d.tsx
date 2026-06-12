@@ -136,14 +136,14 @@ export const Heart3D: React.FC = () => {
   const t = frame / 30;
   const geo = useHeartGeometry();
   const stars = useStarField();
-  const beat = 1.6 * (1 + 0.05 * Math.pow(Math.max(0, Math.sin(t * 3.6)), 6));
+  const beat = 1.1 * (1 + 0.05 * Math.pow(Math.max(0, Math.sin(t * 3.6)), 6));
   return (
     <AbsoluteFill style={{background: '#120a1c'}}>
       <ThreeCanvas
         width={width}
         height={height}
         gl={{antialias: true}}
-        camera={{position: [0, 0.4, 6.4], fov: 40}}
+        camera={{position: [0, 0.4, 7.6], fov: 40}}
         onCreated={({camera}) => camera.lookAt(0, 0, 0)}
       >
         <color attach="background" args={['#120a1c']} />
@@ -185,12 +185,12 @@ const CARDS = [
 export const Carousel3D: React.FC = () => {
   const frame = useCurrentFrame();
   const spin = frame * 0.55;
-  const dive = interpolate(frame, [0, 90], [1750, 950], {extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)});
-  const RADIUS = 620;
+  const dive = interpolate(frame, [0, 90], [2100, 1350], {extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)});
+  const RADIUS = 520;
   return (
     <AbsoluteFill style={{background: `radial-gradient(circle at 50% 40%, #15264a 0%, #070e1e 75%)`, fontFamily, overflow: 'hidden'}}>
       <div style={{position: 'absolute', inset: 0, perspective: dive, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <div style={{position: 'relative', width: 0, height: 0, transformStyle: 'preserve-3d', transform: `rotateX(-14deg) rotateY(${spin}deg)`}}>
+        <div style={{position: 'relative', width: 0, height: 0, transformStyle: 'preserve-3d', transform: `translateY(-60px) rotateX(-9deg) rotateY(${spin}deg)`}}>
           {CARDS.map((c, i) => {
             const ang = (i / CARDS.length) * 360;
             // depth cue: cards facing away dim down
@@ -217,7 +217,7 @@ export const Carousel3D: React.FC = () => {
                   textAlign: 'center',
                   padding: '0 22px',
                   transform: `rotateY(${ang}deg) translateZ(${RADIUS}px)`,
-                  opacity: 0.35 + 0.65 * Math.max(0, -facing),
+                  opacity: 0.35 + 0.65 * Math.max(0, facing),
                   boxShadow: '0 18px 50px rgba(0,0,0,.4)',
                   backfaceVisibility: 'hidden',
                 }}
