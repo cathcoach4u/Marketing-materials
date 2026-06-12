@@ -1,5 +1,9 @@
 # Coach4U AI Video Agent
 
+> **Legacy.** This pipeline is superseded by the Remotion + ElevenLabs approach documented in
+> [`video/README.md`](../video/README.md), brought across from the Internal Hub on 2026-06-12.
+> Use that for all new videos. This folder is kept for reference and still runs as described below.
+
 Turns a topic or narration script into a fully branded Coach4U MP4 video.
 
 **Pipeline:** topic/script → Claude script writer → ElevenLabs audio → Pillow slides → ffmpeg → output.mp4

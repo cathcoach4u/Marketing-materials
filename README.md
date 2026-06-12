@@ -11,7 +11,8 @@ Marketing hub for Coach4U. Brand standards, marketing plans, session insights, a
 | `plans/` | Marketing plans and strategy documents. Markdown is the source of truth; the HTML pages at the root are the browser views. |
 | `insights/` | ThriveHQ session marketing insights, named `YYYY-MM-DD-thrivehq-insights.md` |
 | `templates/` | Reusable templates (weekly insights template) |
-| `ai-video-agent/` | Turns a topic or script into a branded MP4. See its README to run it. |
+| `video/` | Video production source of truth (`video/README.md`): the Remotion + ElevenLabs pipeline, brand conventions, Vimeo hosting, and the digital uploads workflow. New video projects go in `video/<project-name>/`. |
+| `ai-video-agent/` | Legacy video pipeline (Pillow slides + ffmpeg). Superseded by `video/README.md`. Kept for reference. |
 | `shared/branding/brand.json` | Brand colours, fonts and footer in machine-readable form |
 
 ## Planning pages (HTML, open in a browser)
