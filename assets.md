@@ -26,8 +26,9 @@ in Supabase Storage and on Vimeo. Updated 2026-06-12.
 | `Assets/C4U.png` | Coach4U logo, transparent PNG (the master of the deployed copies) |
 | `Assets/COACH4U (Final).jpg` | Coach4U logo, full colour JPG |
 | `Assets/Cath-Baker-Headshot.jpg` | Cath's headshot (used on the hub Team section) |
-| `Assets/Cath Baker Image.jpg` | Duplicate of the headshot (same image, older filename) |
 | `Assets/Andrew-Headshot.jpeg` | Andrew's headshot (Marketing Manager, Team section) |
+
+Note: the Internal Hub keeps its own `Assets/Cath Baker Image.jpg` working copy because the live ThriveHQ intro page loads it. That copy stays; the duplicate here was removed 2026-06-12.
 
 ## Supabase Storage — `coach4u-public`
 
