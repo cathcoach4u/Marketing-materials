@@ -86,21 +86,21 @@ const SoundBadge: React.FC = () => {
 export const IntroScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const mark = spring({frame: frame - 8, fps, config: {damping: 14, mass: 0.8}});
-  const eyebrow = spring({frame: frame - 4, fps, config: {damping: 16}});
-  const line = spring({frame: frame - 64, fps, config: {damping: 16, mass: 0.8}});
+  // The stamp is PRESENT from frame 0 (no blank opening / poster frame). Just a gentle settle.
+  const settle = spring({frame, fps, config: {damping: 18, mass: 0.9}});
+  const tagOpacity = 0.55 + 0.45 * spring({frame: frame - 40, fps, config: {damping: 18}});
   const breathe = 1 + 0.01 * Math.sin(frame / 16);
   return (
     <AbsoluteFill style={{background: BG, fontFamily, alignItems: 'center', justifyContent: 'center'}}>
       <div style={{position: 'absolute', top: 0, left: 0, right: 0, height: 10, background: `linear-gradient(90deg,${NAVY},${TEAL})`}} />
       <div style={{textAlign: 'center', transform: `scale(${breathe})`}}>
-        <div style={{opacity: eyebrow, color: TEAL, fontSize: 30, fontWeight: 800, letterSpacing: '5px', textTransform: 'uppercase', marginBottom: 26}}>
+        <div style={{color: TEAL, fontSize: 30, fontWeight: 800, letterSpacing: '5px', textTransform: 'uppercase', marginBottom: 26}}>
           A Coach4U video
         </div>
-        <div style={{opacity: mark, transform: `scale(${0.7 + 0.3 * mark})`, color: NAVY, fontSize: 128, fontWeight: 800, letterSpacing: '-3px', lineHeight: 1}}>
+        <div style={{transform: `scale(${0.94 + 0.06 * settle})`, color: NAVY, fontSize: 128, fontWeight: 800, letterSpacing: '-3px', lineHeight: 1}}>
           Coach<span style={{color: TEAL}}>4U</span>
         </div>
-        <div style={{opacity: line, transform: `translateY(${(1 - line) * 18}px)`, marginTop: 34}}>
+        <div style={{opacity: tagOpacity, marginTop: 34}}>
           <div style={{color: MUTE, fontSize: 30, fontWeight: 700, letterSpacing: '1px', marginBottom: 8}}>for relationships</div>
           <div style={{color: NAVY, fontSize: 52, fontWeight: 800, letterSpacing: '-1px'}}>
             Truly connected, <span style={{color: TEAL}}>fully present</span>.
@@ -135,42 +135,49 @@ export const TitleScene: React.FC = () => {
 export const StoryScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const t = (frame % 26) / 26;
+  const t = (frame % 24) / 24;
   const stride = Math.sin(t * Math.PI * 2);
-  const exit = interpolate(frame, [10, 110], [0, 560], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
-  const chase = interpolate(frame, [30, 120], [0, 180], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.quad)});
-  const moving = frame > 10 && frame < 110;
-  const chaseMoving = frame > 30 && frame < 120;
-  const think = spring({frame: frame - 26, fps, config: {damping: 12}});
-  const speak = spring({frame: frame - 70, fps, config: {damping: 12}});
+  // An ongoing chase: both keep walking, the gap never closes — and as the pursuer reaches
+  // harder, the avoider pulls FURTHER away (the avoider drifts faster, so the gap widens).
+  const drive = interpolate(frame, [16, 150], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
+  const pursuerX = 180 + drive * 250;
+  const avoiderX = 520 + drive * 330; // moves away faster → gap grows
+  const reach = 0.4 + drive * 0.6; // pursuer reaches harder over time
+  const hd = 3 + drive * 8; // avoider hunches more over time
+  const walking = frame > 16 && frame < 152;
+  const speak = spring({frame: frame - 24, fps, config: {damping: 12}});
+  const think = spring({frame: frame - 24, fps, config: {damping: 12}});
   return (
     <AbsoluteFill style={{background: BG, fontFamily}}>
       <div style={{position: 'absolute', top: 90, left: 0, right: 0, textAlign: 'center'}}>
         <Chip>Does this sound familiar?</Chip>
       </div>
-      <Ground y={240} />
-      {/* avoider walks off right */}
-      <div style={{position: 'absolute', bottom: 247, left: 560 + exit}}>
-        <Walker color={AV} step={moving ? stride : 0} headDrop={6} lean={-3} />
+      <Ground y={210} />
+      {/* PURSUER — keeps reaching, leaning forward, chasing */}
+      <div style={{position: 'absolute', bottom: 217, left: pursuerX, textAlign: 'center'}}>
+        <Walker color={PU} step={walking ? stride : 0} reach={reach} lean={6} />
+        <div style={{color: PU_DK, fontWeight: 800, fontSize: 30, marginTop: 8}}>the pursuer</div>
+        <div style={{color: MUTE, fontWeight: 600, fontSize: 22}}>keeps reaching</div>
       </div>
-      {/* thought cloud follows the avoider */}
-      <div style={{position: 'absolute', bottom: 640, left: 520 + exit, transform: `scale(${think})`, transformOrigin: 'bottom left'}}>
-        <div style={{position: 'relative', background: '#e7efee', border: `4px solid ${AV}`, color: AV, borderRadius: 60, padding: '18px 30px', fontSize: 31, fontWeight: 600, fontStyle: 'italic'}}>
-          If I stay, I'll only make it worse.
-          <span style={{position: 'absolute', bottom: -22, left: '46%', width: 18, height: 18, borderRadius: '50%', background: '#e7efee', border: `4px solid ${AV}`}} />
-        </div>
-      </div>
-      {/* pursuer follows */}
-      <div style={{position: 'absolute', bottom: 247, left: 120 + chase}}>
-        <Walker color={PU} step={chaseMoving ? -stride : 0} reach={0.8} lean={5} />
-      </div>
-      <div style={{position: 'absolute', bottom: 620, left: 80 + chase, transform: `scale(${speak})`, transformOrigin: 'bottom left'}}>
-        <div style={{position: 'relative', background: '#e9faf6', border: `4px solid ${PU}`, color: PU_DK, borderRadius: 24, padding: '18px 30px', fontSize: 31, fontWeight: 700}}>
-          &ldquo;We're not finished. Please come back.&rdquo;
+      <div style={{position: 'absolute', bottom: 600, left: pursuerX - 30, transform: `scale(${speak})`, transformOrigin: 'bottom left'}}>
+        <div style={{position: 'relative', background: '#e9faf6', border: `4px solid ${PU}`, color: PU_DK, borderRadius: 24, padding: '14px 24px', fontSize: 28, fontWeight: 700, whiteSpace: 'nowrap'}}>
+          &ldquo;Please don't walk away.&rdquo;
           <span style={{position: 'absolute', bottom: -19, left: 60, borderTop: `19px solid ${PU}`, borderLeft: '12px solid transparent', borderRight: '12px solid transparent'}} />
         </div>
       </div>
-      <Caption delay={120}>And the more one reaches, the further the other goes.</Caption>
+      {/* AVOIDER — keeps pulling away, hunched, head down */}
+      <div style={{position: 'absolute', bottom: 217, left: avoiderX, textAlign: 'center'}}>
+        <Walker color={AV} step={walking ? stride : 0} headDrop={hd} lean={-3} />
+        <div style={{color: AV, fontWeight: 800, fontSize: 30, marginTop: 8}}>the avoider</div>
+        <div style={{color: MUTE, fontWeight: 600, fontSize: 22}}>keeps pulling away</div>
+      </div>
+      <div style={{position: 'absolute', bottom: 600, left: avoiderX - 10, transform: `scale(${think})`, transformOrigin: 'bottom left'}}>
+        <div style={{position: 'relative', background: '#e7efee', border: `4px solid ${AV}`, color: AV, borderRadius: 50, padding: '14px 24px', fontSize: 27, fontWeight: 600, fontStyle: 'italic', whiteSpace: 'nowrap'}}>
+          I need to get away.
+          <span style={{position: 'absolute', bottom: -20, left: '42%', width: 16, height: 16, borderRadius: '50%', background: '#e7efee', border: `4px solid ${AV}`}} />
+        </div>
+      </div>
+      <Caption delay={120}>The more one reaches, the further the other pulls away.</Caption>
     </AbsoluteFill>
   );
 };
@@ -206,23 +213,36 @@ export const ResearchScene: React.FC = () => {
 // 4 · TWO INSTINCTS — figures step apart
 export const InstinctsScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const apart = interpolate(frame, [20, 80], [0, 120], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
-  const bob = Math.sin(frame / 13) * 4;
+  const t = (frame % 24) / 24;
+  const stride = Math.sin(t * Math.PI * 2);
+  const walking = frame > 18 && frame < 92;
+  // The pursuer steps TOWARDS the middle (reaching); the avoider steps AWAY (backwards).
+  const toward = interpolate(frame, [18, 90], [0, 110], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
+  const away = interpolate(frame, [18, 90], [0, 150], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
+  const reach = 0.4 + interpolate(frame, [18, 90], [0, 0.5], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   return (
     <AbsoluteFill style={{background: BG, fontFamily}}>
       <div style={{position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center'}}>
         <div style={{...useEnter(0), color: NAVY, fontSize: 64, fontWeight: 800, letterSpacing: '-1px', lineHeight: 1.15}}>One moves towards.<br />One moves away.</div>
       </div>
-      <Ground y={260} />
-      <div style={{position: 'absolute', bottom: 267 + bob, left: 300 - apart}}>
-        <Walker color={PU} reach={0.7} lean={4} />
-        <div style={{textAlign: 'center', color: PU_DK, fontWeight: 800, fontSize: 30, marginTop: 8}}>the pursuer</div>
+      <Ground y={250} />
+      {/* pursuer steps toward the middle, reaching */}
+      <div style={{position: 'absolute', bottom: 257, left: 280 + toward, textAlign: 'center'}}>
+        <Walker color={PU} step={walking ? stride : 0} reach={reach} lean={6} />
+        <div style={{color: PU_DK, fontWeight: 800, fontSize: 32, marginTop: 8}}>the pursuer</div>
+        <div style={{color: MUTE, fontWeight: 600, fontSize: 23}}>moves towards</div>
       </div>
-      <div style={{position: 'absolute', bottom: 267 - bob, right: 300 - apart}}>
-        <Walker color={AV} flip headDrop={5} lean={-3} />
-        <div style={{textAlign: 'center', color: AV, fontWeight: 800, fontSize: 30, marginTop: 8}}>the avoider</div>
+      {/* arrows showing the two directions */}
+      <div style={{position: 'absolute', bottom: 470, left: 0, right: 0, textAlign: 'center', color: '#cbd5e1', fontSize: 40, fontWeight: 800}}>
+        <span style={{color: PU}}>&#8594;</span> &nbsp;&nbsp; <span style={{color: AV}}>&#8594;</span>
       </div>
-      <Caption delay={60}>Neither is wrong. The roles can even swap.</Caption>
+      {/* avoider steps away (backwards, to the right) */}
+      <div style={{position: 'absolute', bottom: 257, right: 200 - away, textAlign: 'center'}}>
+        <Walker color={AV} flip step={walking ? stride : 0} headDrop={5} lean={-3} />
+        <div style={{color: AV, fontWeight: 800, fontSize: 32, marginTop: 8}}>the avoider</div>
+        <div style={{color: MUTE, fontWeight: 600, fontSize: 23}}>moves away</div>
+      </div>
+      <Caption delay={70}>Neither is wrong. The roles can even swap.</Caption>
     </AbsoluteFill>
   );
 };
@@ -469,7 +489,8 @@ export const CloseScene: React.FC = () => {
   const stride = Math.sin(t * Math.PI * 2);
   const come = interpolate(frame, [6, 86], [0, 255], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
   const walking = frame > 6 && frame < 86;
-  const sub = spring({frame: frame - 150, fps, config: {damping: 16}});
+  const sub2 = spring({frame: frame - 150, fps, config: {damping: 16}});
+  const sub3 = spring({frame: frame - 168, fps, config: {damping: 16}});
   const words = ['Back', 'to', 'each', 'other.'];
   return (
     <AbsoluteFill style={{background: BG, fontFamily}}>
@@ -480,14 +501,17 @@ export const CloseScene: React.FC = () => {
       <div style={{position: 'absolute', bottom: 257, right: 110 + come}}>
         <Walker color={AV} flip step={walking ? -stride : 0} reach={walking ? 0.3 : 0.6} headDrop={walking ? 4 : 0} />
       </div>
-      <div style={{position: 'absolute', top: 200, left: 0, right: 0, textAlign: 'center'}}>
+      <div style={{position: 'absolute', top: 190, left: 0, right: 0, textAlign: 'center'}}>
         <div style={{fontSize: 100, fontWeight: 800, letterSpacing: '-2px'}}>
           {words.map((w, i) => (
             <TagWord key={i} delay={90 + i * 7} color={w === 'each' || w === 'other.' ? TEAL : NAVY}>{w}</TagWord>
           ))}
         </div>
-        <div style={{color: MUTE, fontSize: 42, fontWeight: 700, marginTop: 20, opacity: sub}}>Truly connected, fully present.</div>
-        <div style={{color: '#94a3b8', fontSize: 26, fontWeight: 600, marginTop: 34, opacity: sub}}>www.coach4u.com.au</div>
+        <div style={{marginTop: 22, display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center'}}>
+          <div style={{color: NAVY, fontSize: 50, fontWeight: 800, letterSpacing: '-1px', opacity: sub2}}>Truly connected.</div>
+          <div style={{color: TEAL, fontSize: 50, fontWeight: 800, letterSpacing: '-1px', opacity: sub3}}>Fully present.</div>
+        </div>
+        <div style={{color: '#94a3b8', fontSize: 26, fontWeight: 600, marginTop: 30, opacity: sub3}}>www.coach4u.com.au</div>
       </div>
     </AbsoluteFill>
   );
