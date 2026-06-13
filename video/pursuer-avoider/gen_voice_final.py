@@ -1,0 +1,92 @@
+import os, re, json, subprocess, requests
+
+KEY = os.environ["ELEVENLABS_API_KEY"]
+VOICE = os.environ.get("ELEVENLABS_VOICE_ID", "V50HFUKIgwPl4QEG3try")
+FPS = 30
+BIN = os.path.join(os.getcwd(), "node_modules", ".bin", "remotion")
+
+LEADIN = 1.2
+GAP = 0.95
+TAIL = 2.2
+
+# One segment per scene — matched to the locked deck (v7) wording.
+SEGMENTS = [
+    "We call it the dance. Why you are stuck in the same argument, and the way back to each other.",
+    "An argument starts. Halfway through, one of you walks out, and does not come back. The other is left standing there, hurt, wanting one thing only. To feel connected again.",
+    "Research has a name for this. Across seventy-four studies, no communication pattern predicts unhappiness more strongly. Four schools of research. One dance.",
+    "When you feel disconnected, one of you moves towards, and one of you moves away. Neither of you is wrong.",
+    "The pursuer reaches out. Wants to talk now. Asks, follows, seeks reassurance. Underneath sits a fear. If I stop reaching, we will drift apart.",
+    "The avoider goes quiet. Needs space. Calm on the outside, flooded on the inside. Their fear is different. If I engage, I will only make it worse.",
+    "Imago therapy calls them the hailstorm and the turtle. The louder it hails, the deeper the turtle retreats.",
+    "And here is the trap. Each one's way of staying safe is exactly what sets off the other. Round and round it goes.",
+    "But when you see the scared child behind your partner's reaction, the anger begins to turn into empathy.",
+    "And the dance cannot continue, if one of you changes your steps.",
+    "Because it is not your characters. It is a cycle. And a cycle can be changed.",
+    "Step one. Name the dance, not the partner. I think we are in our dance right now. Can we slow down?",
+    "Step two. The turtle says when. I need half an hour. I am not going anywhere, and I will come back at eight.",
+    "Step three. The storm softens. Okay. Eight works. Thank you for telling me.",
+    "This week, just notice the dance, and notice which step is yours. Because the goal was never to win the argument. It is to find your way back to each other. Truly connected, fully present.",
+]
+
+os.makedirs("build_audio_final", exist_ok=True)
+os.makedirs("public", exist_ok=True)
+
+
+def probe_dur(path):
+    out = subprocess.run([BIN, "ffprobe", "-v", "error", "-show_entries", "format=duration",
+                          "-of", "csv=p=0", path], capture_output=True, text=True)
+    try:
+        return float(out.stdout.strip())
+    except ValueError:
+        info = subprocess.run([BIN, "ffmpeg", "-i", path], capture_output=True, text=True)
+        m = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.\d+)", info.stderr)
+        h, mn, s = m.groups()
+        return int(h) * 3600 + int(mn) * 60 + float(s)
+
+
+spoken = []
+for i, seg in enumerate(SEGMENTS):
+    r = requests.post(
+        f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE}",
+        headers={"xi-api-key": KEY, "Content-Type": "application/json", "Accept": "audio/mpeg"},
+        json={"text": seg, "model_id": "eleven_multilingual_v2",
+              "voice_settings": {"stability": 0.55, "similarity_boost": 0.75, "style": 0.0, "use_speaker_boost": True}},
+        timeout=120,
+    )
+    if r.status_code != 200:
+        print("TTS error", i, r.status_code, r.text[:200]); raise SystemExit(1)
+    p = f"build_audio_final/seg{i}.mp3"
+    open(p, "wb").write(r.content)
+    spoken.append(probe_dur(p))
+    print(f"seg {i}: {spoken[i]:.2f}s")
+
+scene_dur = []
+for i in range(len(SEGMENTS)):
+    lead = LEADIN if i == 0 else 0.0
+    tail = TAIL if i == len(SEGMENTS) - 1 else GAP
+    scene_dur.append(lead + spoken[i] + tail)
+
+cum = [0.0]
+for d in scene_dur:
+    cum.append(cum[-1] + d)
+start_f = [round(t * FPS) for t in cum]
+frames = [start_f[i + 1] - start_f[i] for i in range(len(SEGMENTS))]
+
+inputs = []
+filt = []
+for i in range(len(SEGMENTS)):
+    inputs += ["-i", f"build_audio_final/seg{i}.mp3"]
+    lead = LEADIN if i == 0 else 0.0
+    tail = TAIL if i == len(SEGMENTS) - 1 else GAP
+    pre = f"adelay={int(lead*1000)}|{int(lead*1000)}," if lead > 0 else ""
+    filt.append(f"[{i}]{pre}apad=pad_dur={tail}[a{i}]")
+concat_in = "".join(f"[a{i}]" for i in range(len(SEGMENTS)))
+filt.append(f"{concat_in}concat=n={len(SEGMENTS)}:v=0:a=1[out]")
+cmd = [BIN, "ffmpeg", "-y"] + inputs + ["-filter_complex", ";".join(filt),
+       "-map", "[out]", "-c:a", "libmp3lame", "-q:a", "3", "public/voiceover-final.mp3"]
+res = subprocess.run(cmd, capture_output=True, text=True)
+if res.returncode != 0:
+    print("ffmpeg concat failed:\n", res.stderr[-1500:]); raise SystemExit(1)
+
+json.dump({"frames": frames, "total": sum(frames)}, open("src/timing-final.json", "w"))
+print("total:", round(sum(frames) / FPS, 1), "s  frames:", frames)
