@@ -34,8 +34,8 @@ export const TheDanceVideo: React.FC<{withAudio?: boolean}> = ({withAudio = fals
     <StopScene />,
     <ReframeScene />,
     <StepScene num={1} title="Name the dance, not the partner" quote={'“I think we’re in our dance right now. Can we slow down?”'} />,
-    <StepScene num={2} title="The turtle says when" sub="A pause with a return time feels safe." quote={'“I need half an hour. I’m not going anywhere, and I’ll come back at eight.”'} />,
-    <StepScene num={3} title="The storm softens" sub="Easing off is what makes the conversation possible." quote={'“Okay. Eight works. Thank you for telling me.”'} />,
+    <StepScene num={2} title="The storm softens" sub="The pursuer's move: lead with the feeling and the need, not blame." quote={'“I’m feeling disconnected. Can we talk when you’re ready?”'} />,
+    <StepScene num={3} title="The turtle returns" sub="The avoider's move: ask before you flood, give a time, and come back." quote={'“I need twenty minutes to settle. Then I’ll come back.”'} />,
     <CloseScene />,
   ];
   return (

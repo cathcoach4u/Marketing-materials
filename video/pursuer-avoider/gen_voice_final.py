@@ -1,4 +1,4 @@
-import os, re, json, subprocess, requests
+import os, re, json, shutil, subprocess, requests
 
 KEY = os.environ["ELEVENLABS_API_KEY"]
 VOICE = os.environ.get("ELEVENLABS_VOICE_ID", "V50HFUKIgwPl4QEG3try")
@@ -23,8 +23,8 @@ SEGMENTS = [
     "And the dance can't continue, if one of you changes your steps.",
     "Because it's not your characters. It's a cycle. And a cycle can be changed.",
     "Step one. Name the dance, not the partner. I think we're in our dance right now. Can we slow down?",
-    "Step two. The turtle says when. I need half an hour. I'm not going anywhere, and I'll come back at eight.",
-    "Step three. The storm softens. Okay. Eight works. Thank you for telling me.",
+    "Step two. The storm softens. If you tend to chase, lead with how you feel, and what you need, not with blame. I'm feeling disconnected, and it's making me anxious. Can we talk when you're ready?",
+    "Step three. The turtle returns. If you tend to pull away, ask for space before you flood, give it a time, then come back. I need twenty minutes to settle. Then I'll come back to this.",
     "This week, just notice the dance, and notice which step is yours. Because the goal was never to win the argument. It's to find your way back to each other. Truly connected. Fully present.",
 ]
 
@@ -89,6 +89,10 @@ for i, seg in enumerate(SEGMENTS):
         print("TTS error", i, r.status_code, r.text[:200]); raise SystemExit(1)
     p = f"build_audio_final/seg{i}.mp3"
     open(p, "wb").write(r.content)
+    # Locked pronunciation: the opening "dance" uses the confirmed take (Australian).
+    if i == 0 and os.path.exists("locked/seg0_locked.mp3"):
+        shutil.copy("locked/seg0_locked.mp3", p)
+        print("seg 0: using locked opening take")
     spoken.append(probe_dur(p))
     print(f"seg {i}: {spoken[i]:.2f}s")
 
