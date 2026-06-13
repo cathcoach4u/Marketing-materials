@@ -36,8 +36,8 @@ SEGMENTS = [
     "Step two. If you move towards, soften how you reach. I'm feeling disconnected, and it's making me anxious. Can we talk when you're ready?",
     # 12 step three — the one who moves away
     "Step three. If you move away, stay connected while taking space. I'm getting overwhelmed. I need twenty minutes. Then I'll come back.",
-    # 13 CLOSURE — the lead; the approved closing line is a locked take spliced on below
-    "Small changes. Different steps. But they change the whole dance. This week, just notice it. Because the goal was never to win the argument. It was",
+    # 13 CLOSURE — one continuous take, ending on "And fully present" so it lands without a splice
+    "Small changes. Different steps. But they change the whole dance. This week, just notice it. Because the goal was never to win the argument. It was to find your way back to each other. Truly connected. And fully present.",
 ]
 
 os.makedirs("build_audio_final", exist_ok=True)
@@ -101,16 +101,6 @@ for i, seg in enumerate(SEGMENTS):
         print("TTS error", i, r.status_code, r.text[:200]); raise SystemExit(1)
     p = f"build_audio_final/seg{i}.mp3"
     open(p, "wb").write(r.content)
-    # The closing line ("to find your way back to each other. Truly connected. And fully present.")
-    # is a locked, approved take that lands; splice it onto the lead so the video ends cleanly.
-    if i == len(SEGMENTS) - 1 and os.path.exists("locked/closing_locked.mp3"):
-        cr = subprocess.run([BIN, "ffmpeg", "-y", "-i", p, "-i", "locked/closing_locked.mp3",
-                             "-filter_complex", "[0]apad=pad_dur=0.18[a];[a][1]concat=n=2:v=0:a=1[out]",
-                             "-map", "[out]", "-c:a", "libmp3lame", "-q:a", "3", "build_audio_final/seg_last.mp3"],
-                            capture_output=True, text=True)
-        if cr.returncode != 0:
-            print("closing concat failed:\n", cr.stderr[-800:]); raise SystemExit(1)
-        shutil.copy("build_audio_final/seg_last.mp3", p)
     spoken.append(probe_dur(p))
     print(f"seg {i}: {spoken[i]:.2f}s")
 
