@@ -11,21 +11,21 @@ TAIL = 2.2
 
 # One segment per scene — matched to the locked deck (v7) wording.
 SEGMENTS = [
-    "We call it the dance. Why you are stuck in the same argument, and the way back to each other.",
-    "An argument starts. Halfway through, one of you walks out, and does not come back. The other is left standing there, hurt, wanting one thing only. To feel connected again.",
+    "We call it the dance. Why you're stuck in the same argument, and the way back to each other.",
+    "An argument starts. Halfway through, one of you walks out, and doesn't come back. The other is left standing there, hurt, wanting one thing only. To feel connected again.",
     "Research has a name for this. Across seventy-four studies, no communication pattern predicts unhappiness more strongly. Four schools of research. One dance.",
     "When you feel disconnected, one of you moves towards, and one of you moves away. Neither of you is wrong.",
-    "The pursuer reaches out. Wants to talk now. Asks, follows, seeks reassurance. Underneath sits a fear. If I stop reaching, we will drift apart.",
-    "The avoider goes quiet. Needs space. Calm on the outside, flooded on the inside. Their fear is different. If I engage, I will only make it worse.",
+    "The pursuer reaches out. Wants to talk now. Asks, follows, seeks reassurance. Underneath sits a fear. If I stop reaching, we'll drift apart.",
+    "The avoider goes quiet. Needs space. Calm on the outside, flooded on the inside. Their fear is different. If I engage, I'll only make it worse.",
     "Imago therapy calls them the hailstorm and the turtle. The louder it hails, the deeper the turtle retreats.",
-    "And here is the trap. Each one's way of staying safe is exactly what sets off the other. Round and round it goes.",
+    "And here's the trap. Each one's way of staying safe is exactly what sets off the other. Round and round it goes.",
     "But when you see the scared child behind your partner's reaction, the anger begins to turn into empathy.",
-    "And the dance cannot continue, if one of you changes your steps.",
-    "Because it is not your characters. It is a cycle. And a cycle can be changed.",
-    "Step one. Name the dance, not the partner. I think we are in our dance right now. Can we slow down?",
-    "Step two. The turtle says when. I need half an hour. I am not going anywhere, and I will come back at eight.",
+    "And the dance can't continue, if one of you changes your steps.",
+    "Because it's not your characters. It's a cycle. And a cycle can be changed.",
+    "Step one. Name the dance, not the partner. I think we're in our dance right now. Can we slow down?",
+    "Step two. The turtle says when. I need half an hour. I'm not going anywhere, and I'll come back at eight.",
     "Step three. The storm softens. Okay. Eight works. Thank you for telling me.",
-    "This week, just notice the dance, and notice which step is yours. Because the goal was never to win the argument. It is to find your way back to each other. Truly connected, fully present.",
+    "This week, just notice the dance, and notice which step is yours. Because the goal was never to win the argument. It's to find your way back to each other. Truly connected, fully present.",
 ]
 
 os.makedirs("build_audio_final", exist_ok=True)

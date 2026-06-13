@@ -46,6 +46,37 @@ ThriveHQ onboarding video, live at Vimeo `1200318724`). Its `README.md` has the 
 re-render commands and a file-by-file map. Copy that project's structure as the starting
 point for any new video here, then swap the scenes, palette and narration.
 
+## Voice & narration learnings (locked 2026-06-13, from The Dance)
+
+These apply to every Coach4U video. They were paid for in re-records, so follow them first time.
+
+1. **Write narration the way Cath speaks — use contractions.** "doesn't" not "does not",
+   "you're" not "you are", "it's" not "it is", "I'll" not "I will", "we're" not "we are",
+   "can't" not "cannot". Spoken word needs contractions or it sounds stiff and read-aloud.
+   On-screen quotes that are also spoken should match the contracted narration (and in
+   single-quoted JS/TSX strings, use a curly apostrophe `’` so the string doesn't break).
+2. **Never time-stretch the voice to slow it down.** ffmpeg `atempo` below about `0.92`
+   slurs and warbles Cath's voice. To slow a moment, add real silence (pauses) between
+   phrases, not a stretch. Generate at natural pace and control rhythm with the gaps.
+3. **Spell acronyms/shorthand the way they sound.** "Coach4U" reads as a hard, sharp "four";
+   write it **"A Coach for you video."** so the brand stamp lands softly. Same for any `4U`,
+   `&`, or initialism — phonetic spelling for the voice track only.
+4. **The brand stamp needs space and warmth.** A short opener line should be read a touch
+   slower and warmer than the body, with a clear full-stop pause after it, or it rushes past
+   and doesn't register.
+5. **Decide delivery by ear, not by guessing.** For any voice choice, render two short
+   variants and let Cath pick rather than committing one and iterating slowly.
+
+### Standard video intro (every Coach4U video opens with this)
+
+- **Brand stamp:** "A Coach for you video." (pause)
+- **Per-series mission line** (swap per series), then the **locked series tagline**.
+  Couples/relationships: "Helping those in relationships be truly connected, and fully
+  present with each other." The comma after "connected," keeps the voice flowing through to
+  "and fully present" — do not break it into two sentences.
+- Visual: navy-to-teal brand bar, the Coach4U mark on the stamp, the line fading in as it is
+  spoken. Built as a reusable scene 0 in front of each video's own title.
+
 ## Hosting: Vimeo (video) vs Supabase Storage (files)
 
 - **Video goes to Vimeo.** Purpose-built player, transcoding and streaming bandwidth.

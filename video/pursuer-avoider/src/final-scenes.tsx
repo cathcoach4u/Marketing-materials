@@ -127,7 +127,7 @@ export const StoryScene: React.FC = () => {
       {/* thought cloud follows the avoider */}
       <div style={{position: 'absolute', bottom: 640, left: 520 + exit, transform: `scale(${think})`, transformOrigin: 'bottom left'}}>
         <div style={{position: 'relative', background: '#e7efee', border: `4px solid ${AV}`, color: AV, borderRadius: 60, padding: '18px 30px', fontSize: 31, fontWeight: 600, fontStyle: 'italic'}}>
-          If I stay, I will only make it worse.
+          If I stay, I'll only make it worse.
           <span style={{position: 'absolute', bottom: -22, left: '46%', width: 18, height: 18, borderRadius: '50%', background: '#e7efee', border: `4px solid ${AV}`}} />
         </div>
       </div>
@@ -137,7 +137,7 @@ export const StoryScene: React.FC = () => {
       </div>
       <div style={{position: 'absolute', bottom: 620, left: 80 + chase, transform: `scale(${speak})`, transformOrigin: 'bottom left'}}>
         <div style={{position: 'relative', background: '#e9faf6', border: `4px solid ${PU}`, color: PU_DK, borderRadius: 24, padding: '18px 30px', fontSize: 31, fontWeight: 700}}>
-          &ldquo;We are not finished. Please come back.&rdquo;
+          &ldquo;We're not finished. Please come back.&rdquo;
           <span style={{position: 'absolute', bottom: -19, left: 60, borderTop: `19px solid ${PU}`, borderLeft: '12px solid transparent', borderRight: '12px solid transparent'}} />
         </div>
       </div>
@@ -404,7 +404,7 @@ export const ReframeScene: React.FC = () => (
   <AbsoluteFill style={{background: BG, fontFamily, alignItems: 'center', justifyContent: 'center', padding: '0 90px', textAlign: 'center'}}>
     <div style={{...useEnter(0), marginBottom: 26}}><Chip>The part to hold onto</Chip></div>
     <div style={{...useEnter(8), color: NAVY, fontSize: 92, fontWeight: 800, letterSpacing: '-2px', lineHeight: 1.15}}>
-      It is not your characters.<br />It is a <span style={{color: TEAL}}>cycle</span>.
+      It's not your characters.<br />It's a <span style={{color: TEAL}}>cycle</span>.
     </div>
     <div style={{...useEnter(22), color: MUTE, fontSize: 38, fontWeight: 700, marginTop: 26}}>The dance is the problem, not the dancers.</div>
   </AbsoluteFill>
