@@ -39,6 +39,35 @@ Remotion is the one that runs where Claude Code runs.
 - **What gets committed:** source only. `node_modules/`, `out/` (the MP4s) and `public/`
   binaries are not committed. They are regenerable, and the finished MP4 lives on Vimeo.
 
+## The Coach4U video framework (mandatory, locked 2026-06-13)
+
+**A video's job is to move the viewer through emotional states that lead to behaviour change,
+not to explain concepts.** Depth and research live in the science page and the in-session deck,
+never in the video. Every Coach4U video follows this seven-beat arc:
+
+1. **Recognition** — open on lived experience, the repeated dynamic. No labels, no theory. The
+   viewer thinks "this is us."
+2. **Validation** — normalise it, reduce blame, make both partners make sense.
+3. **Simple understanding** — ONE model only. No stacking frameworks, no repetition.
+4. **Emotional shift (the pivot)** — the heart of the video, slower and more developed than any
+   other beat. Show what we see (behaviour), what we don't see, and what's underneath.
+5. **Hope and agency** — change is possible. Do not jump straight to steps.
+6. **Action** — maximum three steps, each with the exact words a client can say. Reduce
+   intensity, not effort.
+7. **Closure** — end on meaning and reconnection, not instruction. Close on the tagline.
+
+**Clinical framing:** people are reacting to perceived disconnection and trying, in different
+ways, to get back to connection. Avoid "just protecting themselves", cold "needs" language, and
+diagnostic terms.
+
+**Rules:** one idea only; no early teaching; research is one or two lines maximum and only after
+recognition; if a section feels repetitive, cut it rather than explain again. Australian
+English, warm and direct, short speakable sentences.
+
+This framework is the structure. The visual system (the two cartoon figures, the two-teal
+palette, the labelled-loop trap, the Coach4U stamp, the tagline close) is compatible and carries
+across every video.
+
 ## The worked template
 
 `internal-coach4u-hub/video/thrivehq-onboarding/` is the complete reference project (the

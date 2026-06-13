@@ -9,23 +9,35 @@ LEADIN = 1.2
 GAP = 0.95
 TAIL = 2.2
 
-# One segment per scene — matched to the locked deck (v7) wording.
+# One segment per scene — re-cut to the Coach4U video framework (Recognition, Validation,
+# Simple Understanding, Emotional Shift, Hope, Action, Closure). See ../README.md.
 SEGMENTS = [
-    "We call it the dance. Why you're stuck in the same argument, and the way back to each other.",
-    "An argument starts, and a gap opens up between you. One of you pulls away to cool down. But the more they pull away, the more the other reaches. And the more they reach, the further their partner retreats. One is the pursuer. One is the avoider.",
-    "Research has a name for this. Across seventy-four studies, no communication pattern predicts unhappiness more strongly. Four schools of research. One dance.",
-    "When you feel disconnected, one of you moves towards, and one of you moves away. Neither of you is wrong.",
-    "The pursuer reaches out. Wants to talk now. Asks, follows, seeks reassurance. Underneath sits a fear. If I stop reaching, we'll drift apart.",
-    "The avoider goes quiet. Needs space. Calm on the outside, flooded on the inside. Their fear is different. If I engage, I'll only make it worse.",
-    "Imago therapy calls them the hailstorm, and the turtle. And these aren't flaws in who you are. The hailstorm often learned, long ago, that they had to be loud to be heard. The turtle learned that going quiet was the only way to feel safe. So the louder it hails, the deeper the turtle hides.",
-    "And here's why it spins. To the one reaching, silence feels like being abandoned, so they reach even harder. To the one retreating, the reaching feels like a storm, so they pull even further away. Each of you reads the other's move as the very thing you fear the most. Round, and round, it goes.",
-    "But when you see the scared child behind your partner's reaction, the anger begins to turn into empathy.",
-    "And the dance can't continue, if one of you changes your steps.",
-    "Because it's not your characters. It's a cycle. And a cycle can be changed.",
-    "Step one. Name the dance, not the partner. I think we're in our dance right now. Can we slow down?",
-    "Step two. The storm softens. If you tend to chase, lead with how you feel, and what you need, not with blame. I'm feeling disconnected, and it's making me anxious. Can we talk when you're ready?",
-    "Step three. The turtle returns. If you tend to pull away, ask for space before you flood, give it a time, then come back. I need twenty minutes to settle. Then I'll come back to this.",
-    "This week, just notice the dance, and notice which step is yours. Because the goal was never to win the argument. It's to find your way back to each other. Truly connected. Fully present.",
+    # 1 RECOGNITION — lived experience, no labels
+    "You have the same argument, over and over. One of you wants to talk it through. The other needs space. The more one reaches, the more the other pulls away. And before long, neither of you feels understood.",
+    # 2 name it lightly (+ one line of research, after recognition)
+    "We call this the dance. It's the most studied pattern in couples research.",
+    # 3 VALIDATION — both make sense, reduce blame
+    "When disconnection happens, we tend to move in two different directions. One moves towards, trying to talk, fix, reconnect. The other moves away, trying to settle, think, get some space. Neither is wrong. They're just different responses to the same moment.",
+    # 4 what's really happening — both trying to get back to connection
+    "Because underneath the behaviour, something more important is happening. The one reaching is often feeling, I'm losing you, I need to fix this. The one pulling away is often feeling, I'm overwhelmed, I need to steady myself. Both are trying, in their own way, to get back to connection.",
+    # 5 SIMPLE UNDERSTANDING — one model: hailstorm and turtle
+    "But the way they do it pushes the other further away. Imago therapy calls this the hailstorm, and the turtle. The hailstorm learned they had to be loud to be heard. The turtle learned that going quiet was the safest option. So the louder it hails, the deeper the turtle hides.",
+    # 6 the trap
+    "And here's the trap. To the one reaching, silence feels like abandonment, so they reach harder. To the one pulling away, intensity feels like pressure, so they pull further away. Each becomes the very thing the other fears. Round, and round, it goes.",
+    # 7 EMOTIONAL SHIFT, part one — what's underneath (the pivot, slow)
+    "The problem is, we only see the behaviour. We don't see what's underneath it. Under the storm, is a need for closeness. Under the silence, is a need to feel safe. And when those don't feel secure, we react in ways that disconnect us even more.",
+    # 8 EMOTIONAL SHIFT, part two — the shift
+    "But when you start to see what's underneath your partner's reaction, something shifts. The frustration softens. And you begin to see someone who is struggling, not attacking.",
+    # 9 HOPE AND AGENCY
+    "Because this pattern can change. If it was created by two people, it can be changed by one different step. You're not the problem. The pattern is.",
+    # 10 ACTION step one
+    "So how do you change the dance? Step one. Name the pattern, not the partner. I think we're in that pattern again. Can we slow this down?",
+    # 11 step two — the one who moves towards
+    "Step two. If you move towards, soften how you reach. I'm feeling disconnected, and it's making me anxious. Can we talk when you're ready?",
+    # 12 step three — the one who moves away
+    "Step three. If you move away, stay connected while taking space. I'm getting overwhelmed. I need twenty minutes. Then I'll come back.",
+    # 13 CLOSURE — meaning and reconnection
+    "Small changes. Different steps. But they change the whole dance. This week, just notice it. Because the goal was never to win the argument. It was to find your way back to each other. Truly connected. Fully present.",
 ]
 
 os.makedirs("build_audio_final", exist_ok=True)
@@ -89,10 +101,6 @@ for i, seg in enumerate(SEGMENTS):
         print("TTS error", i, r.status_code, r.text[:200]); raise SystemExit(1)
     p = f"build_audio_final/seg{i}.mp3"
     open(p, "wb").write(r.content)
-    # Locked pronunciation: the opening "dance" uses the confirmed take (Australian).
-    if i == 0 and os.path.exists("locked/seg0_locked.mp3"):
-        shutil.copy("locked/seg0_locked.mp3", p)
-        print("seg 0: using locked opening take")
     spoken.append(probe_dur(p))
     print(f"seg {i}: {spoken[i]:.2f}s")
 

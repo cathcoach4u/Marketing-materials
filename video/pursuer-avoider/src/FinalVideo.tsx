@@ -2,40 +2,39 @@ import {AbsoluteFill, Audio, Series, staticFile} from 'remotion';
 import timing from './timing-final.json';
 import {
   IntroScene,
-  TitleScene,
   StoryScene,
-  ResearchScene,
+  TitleScene,
   InstinctsScene,
-  PursuerScene,
-  AvoiderScene,
+  InnerFeelingsScene,
   ImagoScene,
   TrapCycle,
-  TurnScene,
-  StopScene,
+  UnderneathScene,
+  ShiftScene,
   ReframeScene,
   StepScene,
   CloseScene,
 } from './final-scenes';
 
-// THE DANCE — 15 scenes, re-cut from the locked deck. Frame counts are
-// timestamp-synced to the narration (gen_voice_final.py).
+// THE DANCE — re-cut to the Coach4U video framework (see ../README.md):
+// Recognition, Validation, Simple Understanding, Emotional Shift, Hope, Action, Closure.
+// Frame counts are timestamp-synced to the narration (gen_voice_final.py).
 export const TheDanceVideo: React.FC<{withAudio?: boolean}> = ({withAudio = false}) => {
+  // Scene order follows the framework: stamp, recognition, name it, validation,
+  // what's underneath x2 (the pivot), one model, the trap, hope, three steps, closure.
   const scenes: React.ReactNode[] = [
     <IntroScene />,
-    <TitleScene />,
     <StoryScene />,
-    <ResearchScene />,
+    <TitleScene />,
     <InstinctsScene />,
-    <PursuerScene />,
-    <AvoiderScene />,
+    <InnerFeelingsScene />,
     <ImagoScene />,
     <TrapCycle />,
-    <TurnScene />,
-    <StopScene />,
+    <UnderneathScene />,
+    <ShiftScene />,
     <ReframeScene />,
-    <StepScene num={1} title="Name the dance, not the partner" quote={'“I think we’re in our dance right now. Can we slow down?”'} />,
-    <StepScene num={2} title="The storm softens" sub="The pursuer's move: lead with the feeling and the need, not blame." quote={'“I’m feeling disconnected. Can we talk when you’re ready?”'} />,
-    <StepScene num={3} title="The turtle returns" sub="The avoider's move: ask before you flood, give a time, and come back." quote={'“I need twenty minutes to settle. Then I’ll come back.”'} />,
+    <StepScene num={1} title="Name the pattern, not the partner" quote={'“I think we’re in that pattern again. Can we slow this down?”'} />,
+    <StepScene num={2} title="Soften how you reach" sub="If you move towards." quote={'“I’m feeling disconnected, and it’s making me anxious. Can we talk when you’re ready?”'} />,
+    <StepScene num={3} title="Stay connected while taking space" sub="If you move away." quote={'“I’m getting overwhelmed. I need twenty minutes. Then I’ll come back.”'} />,
     <CloseScene />,
   ];
   return (

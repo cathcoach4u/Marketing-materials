@@ -106,6 +106,7 @@ export const IntroScene: React.FC = () => {
             Truly connected, <span style={{color: TEAL}}>fully present</span>.
           </div>
         </div>
+        <div style={{opacity: tagOpacity, marginTop: 40}}><SoundBadge /></div>
       </div>
     </AbsoluteFill>
   );
@@ -121,11 +122,10 @@ export const TitleScene: React.FC = () => {
       <Ground />
       <div style={{position: 'absolute', bottom: 207 + bob, left: 90}}><Walker color={PU} reach={0.4} /></div>
       <div style={{position: 'absolute', bottom: 207 - bob, right: 90}}><Walker color={AV} flip headDrop={5} /></div>
-      <div style={{position: 'absolute', top: 150, left: 0, right: 0, textAlign: 'center'}}>
-        <div style={{color: TEAL, fontSize: 30, fontWeight: 800, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: 18}}>Your Relationship Coach</div>
-        <div style={{color: NAVY, fontSize: 130, fontWeight: 800, letterSpacing: '-3px', lineHeight: 1}}>The <span style={{color: TEAL}}>Dance</span></div>
-        <div style={{color: MUTE, fontSize: 38, fontWeight: 700, marginTop: 22, lineHeight: 1.35}}>Why you're stuck in the same argument,<br />and the way back to each other.</div>
-        <div style={{marginTop: 30}}><SoundBadge /></div>
+      <div style={{position: 'absolute', top: 175, left: 0, right: 0, textAlign: 'center'}}>
+        <div style={{color: TEAL, fontSize: 30, fontWeight: 800, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: 18}}>We call this</div>
+        <div style={{color: NAVY, fontSize: 140, fontWeight: 800, letterSpacing: '-3px', lineHeight: 1}}>The <span style={{color: TEAL}}>Dance</span></div>
+        <div style={{color: MUTE, fontSize: 36, fontWeight: 700, marginTop: 24, lineHeight: 1.35}}>The most studied pattern in couples research.</div>
       </div>
     </AbsoluteFill>
   );
@@ -506,13 +506,107 @@ export const StopScene: React.FC = () => {
 };
 
 // 11 · REFRAME
+// WHAT'S REALLY HAPPENING — both trying to get back to connection
+export const InnerFeelingsScene: React.FC = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const b1 = spring({frame: frame - 16, fps, config: {damping: 12}});
+  const b2 = spring({frame: frame - 34, fps, config: {damping: 12}});
+  return (
+    <AbsoluteFill style={{background: BG, fontFamily}}>
+      <div style={{position: 'absolute', top: 86, left: 0, right: 0, textAlign: 'center'}}>
+        <Chip>What's really happening</Chip>
+      </div>
+      <Ground y={210} />
+      {/* the one reaching */}
+      <div style={{position: 'absolute', bottom: 217, left: 175, textAlign: 'center'}}>
+        <Walker color={PU} reach={0.6} lean={4} />
+        <div style={{color: PU_DK, fontWeight: 800, fontSize: 28, marginTop: 8}}>the one reaching</div>
+      </div>
+      <div style={{position: 'absolute', bottom: 600, left: 95, transform: `scale(${b1})`, transformOrigin: 'bottom left'}}>
+        <div style={{position: 'relative', background: '#e9faf6', border: `4px solid ${PU}`, color: PU_DK, borderRadius: 26, padding: '16px 26px', fontSize: 29, fontWeight: 700, fontStyle: 'italic', maxWidth: 380, lineHeight: 1.35}}>
+          I'm losing you. I need to fix this.
+          <span style={{position: 'absolute', bottom: -20, left: 50, width: 16, height: 16, borderRadius: '50%', background: '#e9faf6', border: `4px solid ${PU}`}} />
+        </div>
+      </div>
+      {/* the one pulling away */}
+      <div style={{position: 'absolute', bottom: 217, right: 175, textAlign: 'center'}}>
+        <Walker color={AV} flip headDrop={6} lean={-3} />
+        <div style={{color: AV, fontWeight: 800, fontSize: 28, marginTop: 8}}>the one pulling away</div>
+      </div>
+      <div style={{position: 'absolute', bottom: 600, right: 95, transform: `scale(${b2})`, transformOrigin: 'bottom right'}}>
+        <div style={{position: 'relative', background: '#e7efee', border: `4px solid ${AV}`, color: AV, borderRadius: 26, padding: '16px 26px', fontSize: 29, fontWeight: 700, fontStyle: 'italic', maxWidth: 380, lineHeight: 1.35}}>
+          I'm overwhelmed. I need to steady myself.
+          <span style={{position: 'absolute', bottom: -20, right: 50, width: 16, height: 16, borderRadius: '50%', background: '#e7efee', border: `4px solid ${AV}`}} />
+        </div>
+      </div>
+      <Caption delay={50}>Both are trying, in their own way, to get back to connection.</Caption>
+    </AbsoluteFill>
+  );
+};
+
+// EMOTIONAL SHIFT, part one — what's underneath (the pivot, the heart, slow)
+export const UnderneathScene: React.FC = () => {
+  const surface = useEnter(2);
+  const reveal = useEnter(44); // the need reveals slowly — the pivot lands here
+  const Card: React.FC<{behaviour: string; need: string; color: string; bg: string}> = ({behaviour, need, color, bg}) => (
+    <div style={{flex: 1, textAlign: 'center'}}>
+      <div style={{...surface, background: '#fff', border: `2px solid #e2e8f0`, borderRadius: 18, padding: '22px 18px', color: MUTE, fontSize: 32, fontWeight: 700}}>
+        <div style={{fontSize: 22, fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#94a3b8', marginBottom: 8}}>What we see</div>
+        {behaviour}
+      </div>
+      <div style={{...surface, color: '#cbd5e1', fontSize: 40, margin: '10px 0'}}>&#8595;</div>
+      <div style={{...reveal, background: bg, border: `3px solid ${color}`, borderRadius: 18, padding: '24px 18px', color, fontSize: 34, fontWeight: 800, boxShadow: `0 10px 30px ${color}22`}}>
+        <div style={{fontSize: 22, fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', opacity: 0.7, marginBottom: 8}}>What's underneath</div>
+        {need}
+      </div>
+    </div>
+  );
+  return (
+    <AbsoluteFill style={{background: BG, fontFamily, alignItems: 'center', justifyContent: 'center', padding: '0 70px'}}>
+      <div style={{...useEnter(0), marginBottom: 14}}><Chip>What's underneath</Chip></div>
+      <div style={{...useEnter(0), color: NAVY, fontSize: 50, fontWeight: 800, letterSpacing: '-1px', textAlign: 'center', marginBottom: 26}}>We only see the behaviour.</div>
+      <div style={{display: 'flex', gap: 30, width: '100%', maxWidth: 900, alignItems: 'flex-start'}}>
+        <Card behaviour="The storm" need="A need for closeness" color={PU_DK} bg="#e9faf6" />
+        <Card behaviour="The silence" need="A need to feel safe" color={AV} bg="#e7efee" />
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// EMOTIONAL SHIFT, part two — the shift
+export const ShiftScene: React.FC = () => {
+  const frame = useCurrentFrame();
+  const lean = interpolate(frame, [10, 70], [0, 8], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
+  const line = useEnter(20);
+  return (
+    <AbsoluteFill style={{background: BG, fontFamily}}>
+      <div style={{position: 'absolute', top: 120, left: 0, right: 0, textAlign: 'center'}}>
+        <div style={{...useEnter(0), color: MUTE, fontSize: 40, fontWeight: 700, lineHeight: 1.4, maxWidth: '24ch', margin: '0 auto'}}>When you see what's underneath, something softens.</div>
+      </div>
+      <div style={{position: 'absolute', top: 410, left: 0, right: 0, textAlign: 'center'}}>
+        <div style={{...line, color: NAVY, fontSize: 60, fontWeight: 800, letterSpacing: '-1px'}}>Someone <span style={{color: TEAL}}>struggling</span>,<br />not attacking.</div>
+      </div>
+      <Ground y={70} />
+      {/* the two figures turn gently towards each other, down at the base */}
+      <div style={{position: 'absolute', bottom: 77, left: 380}}>
+        <Walker color={PU} reach={0.2} lean={lean} size={200} />
+      </div>
+      <div style={{position: 'absolute', bottom: 77, right: 380}}>
+        <Walker color={AV} flip reach={0.2} lean={lean} size={200} />
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// HOPE & AGENCY — change is possible, you're not the problem
 export const ReframeScene: React.FC = () => (
   <AbsoluteFill style={{background: BG, fontFamily, alignItems: 'center', justifyContent: 'center', padding: '0 90px', textAlign: 'center'}}>
     <div style={{...useEnter(0), marginBottom: 26}}><Chip>The part to hold onto</Chip></div>
-    <div style={{...useEnter(8), color: NAVY, fontSize: 92, fontWeight: 800, letterSpacing: '-2px', lineHeight: 1.15}}>
-      It's not your characters.<br />It's a <span style={{color: TEAL}}>cycle</span>.
+    <div style={{...useEnter(8), color: NAVY, fontSize: 96, fontWeight: 800, letterSpacing: '-2px', lineHeight: 1.12}}>
+      You're not the problem.<br />The <span style={{color: TEAL}}>pattern</span> is.
     </div>
-    <div style={{...useEnter(22), color: MUTE, fontSize: 38, fontWeight: 700, marginTop: 26}}>The dance is the problem, not the dancers.</div>
+    <div style={{...useEnter(24), color: MUTE, fontSize: 38, fontWeight: 700, marginTop: 28, maxWidth: '24ch'}}>If it was made by two people, it can be changed by one different step.</div>
   </AbsoluteFill>
 );
 
