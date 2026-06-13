@@ -44,6 +44,38 @@ def probe_dur(path):
         return int(h) * 3600 + int(mn) * 60 + float(s)
 
 
+def tts(text, settings, path):
+    r = requests.post(
+        f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE}",
+        headers={"xi-api-key": KEY, "Content-Type": "application/json", "Accept": "audio/mpeg"},
+        json={"text": text, "model_id": "eleven_multilingual_v2", "voice_settings": settings},
+        timeout=120,
+    )
+    if r.status_code != 200:
+        print("TTS error", path, r.status_code, r.text[:200]); raise SystemExit(1)
+    open(path, "wb").write(r.content)
+
+
+# ── Scene 0: the standing Coach4U intro stamp (NO atempo — keep crisp) ──
+# Brand "4U" spelled "for you" so it lands soft; tagline flows as one phrase.
+tts("A Coach for you video.",
+    {"stability": 0.55, "similarity_boost": 0.8, "style": 0.18, "use_speaker_boost": True},
+    "build_audio_final/intro_brand.mp3")
+tts("Helping those in relationships be truly connected, and fully present with each other.",
+    {"stability": 0.6, "similarity_boost": 0.78, "style": 0.1, "use_speaker_boost": True},
+    "build_audio_final/intro_body.mp3")
+# 0.9s lead -> brand -> 0.7s full-stop pause -> body -> 1.0s tail
+ir = subprocess.run([BIN, "ffmpeg", "-y", "-i", "build_audio_final/intro_brand.mp3",
+                     "-i", "build_audio_final/intro_body.mp3", "-filter_complex",
+                     "[0]adelay=900|900,apad=pad_dur=0.7[a];[1]apad=pad_dur=1.0[b];[a][b]concat=n=2:v=0:a=1[out]",
+                     "-map", "[out]", "-c:a", "libmp3lame", "-q:a", "3",
+                     "build_audio_final/intro.mp3"], capture_output=True, text=True)
+if ir.returncode != 0:
+    print("intro concat failed:\n", ir.stderr[-1200:]); raise SystemExit(1)
+intro_dur = probe_dur("build_audio_final/intro.mp3")
+intro_frames = round(intro_dur * FPS)
+print(f"intro: {intro_dur:.2f}s ({intro_frames} frames)")
+
 spoken = []
 for i, seg in enumerate(SEGMENTS):
     r = requests.post(
@@ -83,10 +115,20 @@ for i in range(len(SEGMENTS)):
 concat_in = "".join(f"[a{i}]" for i in range(len(SEGMENTS)))
 filt.append(f"{concat_in}concat=n={len(SEGMENTS)}:v=0:a=1[out]")
 cmd = [BIN, "ffmpeg", "-y"] + inputs + ["-filter_complex", ";".join(filt),
-       "-map", "[out]", "-c:a", "libmp3lame", "-q:a", "3", "public/voiceover-final.mp3"]
+       "-map", "[out]", "-c:a", "libmp3lame", "-q:a", "3", "build_audio_final/segbody.mp3"]
 res = subprocess.run(cmd, capture_output=True, text=True)
 if res.returncode != 0:
     print("ffmpeg concat failed:\n", res.stderr[-1500:]); raise SystemExit(1)
 
-json.dump({"frames": frames, "total": sum(frames)}, open("src/timing-final.json", "w"))
-print("total:", round(sum(frames) / FPS, 1), "s  frames:", frames)
+# Final track = intro stamp + the narration body
+fr = subprocess.run([BIN, "ffmpeg", "-y", "-i", "build_audio_final/intro.mp3",
+                     "-i", "build_audio_final/segbody.mp3", "-filter_complex",
+                     "[0][1]concat=n=2:v=0:a=1[out]", "-map", "[out]",
+                     "-c:a", "libmp3lame", "-q:a", "3", "public/voiceover-final.mp3"],
+                    capture_output=True, text=True)
+if fr.returncode != 0:
+    print("final concat failed:\n", fr.stderr[-1200:]); raise SystemExit(1)
+
+all_frames = [intro_frames] + frames
+json.dump({"frames": all_frames, "total": sum(all_frames)}, open("src/timing-final.json", "w"))
+print("total:", round(sum(all_frames) / FPS, 1), "s  frames:", all_frames)

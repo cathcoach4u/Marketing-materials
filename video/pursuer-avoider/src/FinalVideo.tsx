@@ -1,6 +1,7 @@
 import {AbsoluteFill, Audio, Series, staticFile} from 'remotion';
 import timing from './timing-final.json';
 import {
+  IntroScene,
   TitleScene,
   StoryScene,
   ResearchScene,
@@ -20,6 +21,7 @@ import {
 // timestamp-synced to the narration (gen_voice_final.py).
 export const TheDanceVideo: React.FC<{withAudio?: boolean}> = ({withAudio = false}) => {
   const scenes: React.ReactNode[] = [
+    <IntroScene />,
     <TitleScene />,
     <StoryScene />,
     <ResearchScene />,

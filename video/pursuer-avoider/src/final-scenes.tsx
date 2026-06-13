@@ -82,6 +82,35 @@ const SoundBadge: React.FC = () => {
   );
 };
 
+// 0 · INTRO — the standing Coach4U stamp every video opens with
+export const IntroScene: React.FC = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const mark = spring({frame: frame - 8, fps, config: {damping: 14, mass: 0.8}});
+  const eyebrow = spring({frame: frame - 4, fps, config: {damping: 16}});
+  const line = spring({frame: frame - 64, fps, config: {damping: 16, mass: 0.8}});
+  const breathe = 1 + 0.01 * Math.sin(frame / 16);
+  return (
+    <AbsoluteFill style={{background: BG, fontFamily, alignItems: 'center', justifyContent: 'center'}}>
+      <div style={{position: 'absolute', top: 0, left: 0, right: 0, height: 10, background: `linear-gradient(90deg,${NAVY},${TEAL})`}} />
+      <div style={{textAlign: 'center', transform: `scale(${breathe})`}}>
+        <div style={{opacity: eyebrow, color: TEAL, fontSize: 30, fontWeight: 800, letterSpacing: '5px', textTransform: 'uppercase', marginBottom: 26}}>
+          A Coach4U video
+        </div>
+        <div style={{opacity: mark, transform: `scale(${0.7 + 0.3 * mark})`, color: NAVY, fontSize: 128, fontWeight: 800, letterSpacing: '-3px', lineHeight: 1}}>
+          Coach<span style={{color: TEAL}}>4U</span>
+        </div>
+        <div style={{opacity: line, transform: `translateY(${(1 - line) * 18}px)`, marginTop: 34}}>
+          <div style={{color: MUTE, fontSize: 30, fontWeight: 700, letterSpacing: '1px', marginBottom: 8}}>for relationships</div>
+          <div style={{color: NAVY, fontSize: 52, fontWeight: 800, letterSpacing: '-1px'}}>
+            Truly connected, <span style={{color: TEAL}}>fully present</span>.
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 // 1 · TITLE — the two figures at the edges, the name, the tagline
 export const TitleScene: React.FC = () => {
   const frame = useCurrentFrame();
@@ -95,7 +124,7 @@ export const TitleScene: React.FC = () => {
       <div style={{position: 'absolute', top: 150, left: 0, right: 0, textAlign: 'center'}}>
         <div style={{color: TEAL, fontSize: 30, fontWeight: 800, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: 18}}>Your Relationship Coach</div>
         <div style={{color: NAVY, fontSize: 130, fontWeight: 800, letterSpacing: '-3px', lineHeight: 1}}>The <span style={{color: TEAL}}>Dance</span></div>
-        <div style={{color: MUTE, fontSize: 38, fontWeight: 700, marginTop: 22, lineHeight: 1.35}}>Why you are stuck in the same argument,<br />and the way back to each other.</div>
+        <div style={{color: MUTE, fontSize: 38, fontWeight: 700, marginTop: 22, lineHeight: 1.35}}>Why you're stuck in the same argument,<br />and the way back to each other.</div>
         <div style={{marginTop: 30}}><SoundBadge /></div>
       </div>
     </AbsoluteFill>
