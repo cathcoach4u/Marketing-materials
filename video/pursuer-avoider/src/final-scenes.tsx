@@ -438,7 +438,7 @@ export const CloseScene: React.FC = () => {
   const {fps} = useVideoConfig();
   const t = (frame % 26) / 26;
   const stride = Math.sin(t * Math.PI * 2);
-  const come = interpolate(frame, [6, 86], [0, 330], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
+  const come = interpolate(frame, [6, 86], [0, 255], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad)});
   const walking = frame > 6 && frame < 86;
   const sub = spring({frame: frame - 150, fps, config: {damping: 16}});
   const words = ['Back', 'to', 'each', 'other.'];
