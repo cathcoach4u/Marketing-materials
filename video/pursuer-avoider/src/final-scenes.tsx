@@ -337,7 +337,64 @@ export const ImagoScene: React.FC = () => {
   );
 };
 
-// 8 · THE TRAP — real 3D: two teal spheres orbiting on a dark floor
+// 8 · THE TRAP — a clearly repeating pattern: a labelled loop with a marker going round and round
+export const TrapCycle: React.FC = () => {
+  const frame = useCurrentFrame();
+  const CX = 540, CY = 560, R = 290;
+  const start = useEnter(0);
+  const ringDraw = interpolate(frame, [6, 40], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const CIRC = 2 * Math.PI * R;
+  // the travelling marker — laps the loop several times so it reads as an ongoing pattern
+  const spin = frame * 2.6; // degrees
+  const pos = (deg: number) => {
+    const a = (deg - 90) * Math.PI / 180;
+    return {x: CX + R * Math.cos(a), y: CY + R * Math.sin(a)};
+  };
+  const nodes = [
+    {deg: 0, label: 'reaches even harder', bg: '#e9faf6', bd: PU, fg: PU_DK},
+    {deg: 90, label: 'feels like a storm', bg: '#fff', bd: '#cbd5e1', fg: MUTE},
+    {deg: 180, label: 'pulls even further away', bg: '#e7efee', bd: AV, fg: AV},
+    {deg: 270, label: 'feels like abandonment', bg: '#fff', bd: '#cbd5e1', fg: MUTE},
+  ];
+  const trail = [0, 10, 20, 30, 42].map((lag, i) => {
+    const p = pos(spin - lag);
+    return {...p, o: (1 - i * 0.2) * Math.min(1, frame / 40), r: 16 - i * 2.4};
+  });
+  return (
+    <AbsoluteFill style={{background: BG, fontFamily}}>
+      <div style={{position: 'absolute', top: 80, left: 0, right: 0, textAlign: 'center'}}>
+        <Chip>The trap, a pattern on repeat</Chip>
+      </div>
+      <svg viewBox="0 0 1080 1080" width="1080" height="1080" style={{position: 'absolute', inset: 0}}>
+        {/* the loop draws on, then the marker laps it */}
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#9fb4ca" strokeWidth="6" strokeDasharray={`${CIRC}`} strokeDashoffset={CIRC * (1 - ringDraw)} transform={`rotate(-90 ${CX} ${CY})`} />
+        {/* clockwise arrowheads on the ring */}
+        {ringDraw > 0.95 && [45, 135, 225, 315].map((d) => (
+          <path key={d} d={`M${CX + R} ${CY} l -10 -26 26 9 z`} transform={`rotate(${d + 8} ${CX} ${CY})`} fill="#0D9488" />
+        ))}
+        {/* travelling marker with a comet trail */}
+        {trail.map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r={p.r} fill={PU} opacity={p.o} />
+        ))}
+        {trail[0] && <circle cx={trail[0].x} cy={trail[0].y} r={22} fill="none" stroke={MINT} strokeWidth="4" opacity={0.5 * Math.min(1, frame / 40)} />}
+      </svg>
+      {/* labelled stages */}
+      {nodes.map((n, i) => {
+        const p = pos(n.deg);
+        return (
+          <div key={i} style={{...start, position: 'absolute', left: p.x, top: p.y, transform: 'translate(-50%, -50%)', background: n.bg, border: `3px solid ${n.bd}`, color: n.fg, fontWeight: 800, fontSize: 30, padding: '14px 26px', borderRadius: 99, whiteSpace: 'nowrap', boxShadow: '0 8px 22px rgba(2,32,71,.1)'}}>
+            {n.label}
+          </div>
+        );
+      })}
+      <div style={{position: 'absolute', left: CX, top: CY, transform: 'translate(-50%,-50%)', textAlign: 'center', color: NAVY, fontSize: 34, fontWeight: 800, lineHeight: 1.25, width: 200}}>
+        round and<br />round it goes
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// THE TRAP (alternate) — real 3D: two teal spheres orbiting on a dark floor
 export const Trap3D: React.FC = () => {
   const frame = useCurrentFrame();
   const {width, height} = useVideoConfig();
