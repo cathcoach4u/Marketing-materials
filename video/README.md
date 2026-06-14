@@ -39,12 +39,72 @@ Remotion is the one that runs where Claude Code runs.
 - **What gets committed:** source only. `node_modules/`, `out/` (the MP4s) and `public/`
   binaries are not committed. They are regenerable, and the finished MP4 lives on Vimeo.
 
+## The Coach4U video framework (mandatory, locked 2026-06-13)
+
+**A video's job is to move the viewer through emotional states that lead to behaviour change,
+not to explain concepts.** Depth and research live in the science page and the in-session deck,
+never in the video. Every Coach4U video follows this seven-beat arc:
+
+1. **Recognition** — open on lived experience, the repeated dynamic. No labels, no theory. The
+   viewer thinks "this is us."
+2. **Validation** — normalise it, reduce blame, make both partners make sense.
+3. **Simple understanding** — ONE model only. No stacking frameworks, no repetition.
+4. **Emotional shift (the pivot)** — the heart of the video, slower and more developed than any
+   other beat. Show what we see (behaviour), what we don't see, and what's underneath.
+5. **Hope and agency** — change is possible. Do not jump straight to steps.
+6. **Action** — maximum three steps, each with the exact words a client can say. Reduce
+   intensity, not effort.
+7. **Closure** — end on meaning and reconnection, not instruction. Close on the tagline.
+
+**Clinical framing:** people are reacting to perceived disconnection and trying, in different
+ways, to get back to connection. Avoid "just protecting themselves", cold "needs" language, and
+diagnostic terms.
+
+**Rules:** one idea only; no early teaching; research is one or two lines maximum and only after
+recognition; if a section feels repetitive, cut it rather than explain again. Australian
+English, warm and direct, short speakable sentences.
+
+This framework is the structure. The visual system (the two cartoon figures, the two-teal
+palette, the labelled-loop trap, the Coach4U stamp, the tagline close) is compatible and carries
+across every video.
+
 ## The worked template
 
 `internal-coach4u-hub/video/thrivehq-onboarding/` is the complete reference project (the
 ThriveHQ onboarding video, live at Vimeo `1200318724`). Its `README.md` has the exact
 re-render commands and a file-by-file map. Copy that project's structure as the starting
 point for any new video here, then swap the scenes, palette and narration.
+
+## Voice & narration learnings (locked 2026-06-13, from The Dance)
+
+These apply to every Coach4U video. They were paid for in re-records, so follow them first time.
+
+1. **Write narration the way Cath speaks — use contractions.** "doesn't" not "does not",
+   "you're" not "you are", "it's" not "it is", "I'll" not "I will", "we're" not "we are",
+   "can't" not "cannot". Spoken word needs contractions or it sounds stiff and read-aloud.
+   On-screen quotes that are also spoken should match the contracted narration (and in
+   single-quoted JS/TSX strings, use a curly apostrophe `’` so the string doesn't break).
+2. **Never time-stretch the voice to slow it down.** ffmpeg `atempo` below about `0.92`
+   slurs and warbles Cath's voice. To slow a moment, add real silence (pauses) between
+   phrases, not a stretch. Generate at natural pace and control rhythm with the gaps.
+3. **Spell acronyms/shorthand the way they sound.** "Coach4U" reads as a hard, sharp "four";
+   write it **"A Coach for you video."** so the brand stamp lands softly. Same for any `4U`,
+   `&`, or initialism — phonetic spelling for the voice track only.
+4. **The brand stamp needs space and warmth.** A short opener line should be read a touch
+   slower and warmer than the body, with a clear full-stop pause after it, or it rushes past
+   and doesn't register.
+5. **Decide delivery by ear, not by guessing.** For any voice choice, render two short
+   variants and let Cath pick rather than committing one and iterating slowly.
+
+### Standard video intro (every Coach4U video opens with this)
+
+- **Brand stamp:** "A Coach for you video." (pause)
+- **Per-series mission line** (swap per series), then the **locked series tagline**.
+  Couples/relationships: "Helping those in relationships be truly connected, and fully
+  present with each other." The comma after "connected," keeps the voice flowing through to
+  "and fully present" — do not break it into two sentences.
+- Visual: navy-to-teal brand bar, the Coach4U mark on the stamp, the line fading in as it is
+  spoken. Built as a reusable scene 0 in front of each video's own title.
 
 ## Hosting: Vimeo (video) vs Supabase Storage (files)
 
