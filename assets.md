@@ -1,55 +1,53 @@
-# Asset catalogue — source of truth
+# Asset catalogue — where it lives
 
-This repo is the source of truth for Coach4U brand assets and the inventory of everything
-hosted elsewhere. The repo holds the masters and this list; the bytes for everyday uploads live
-in Supabase Storage and on Vimeo. Updated 2026-06-12.
+There is no list of assets in this file anymore, and there should not be one. A hand-typed
+list here always falls behind the real one, so it has been retired to a pointer.
 
-## The rules
+## The one source of truth
 
-1. **Masters live in `Assets/`** (logos, headshots). Working copies deployed elsewhere (the
-   Internal Hub's `C4U.png`, PWA icons, Journey Card images) stay where they are; they are bound
-   to fixed paths and live pages depend on them.
-2. **New uploads (images, screenshots, PDFs) go to Supabase Storage**, not the repo, via the CRM
-   at Hubs, Media Library (https://cathcoach4u.github.io/internal-coach4u-hub/). Pick the
-   category when uploading (Marketing for marketing assets). Supabase project
-   `uoixetfvboevjxlkfyqy`, bucket `coach4u-public`.
-3. **Video goes to Vimeo**, catalogued in the Media Library External tab. See `video/README.md`.
-4. **Add a row here** when an asset matters enough that losing track of it would hurt. This file
-   is the inventory; it never holds the bytes.
-5. Claude Code sessions cannot push binary files correctly, so adding new masters to `Assets/`
-   is a manual upload via the GitHub website.
+The single catalogue of every Coach4U asset is the **Media Library in the Internal Hub**:
 
-## Brand masters — `Assets/` (this repo)
+https://cathcoach4u.github.io/internal-coach4u-hub/ → Hubs ▸ Media Library
+
+It is backed by the `media_assets` table (Supabase project `uoixetfvboevjxlkfyqy`). Uploading a
+file in the Media Library lists it automatically, so the catalogue is always current. To find,
+add, edit, or remove any asset, work there. Andrew manages the library in the hub.
+
+## How to add or change an asset
+
+1. Open the Media Library in the hub.
+2. Pick the category (Marketing for marketing assets) and the bucket.
+3. Upload, rename, or delete there. Do not commit files to any repo.
+
+Where the bytes actually live (the catalogue points at all of these, you never manage them by hand):
+
+- **Images, screenshots, PDFs** → Supabase Storage. `coach4u-public` for anything that can be on
+  an open URL (marketing, public pages). `coach4u-internal` for client documents, signed-in only.
+- **Video** → Vimeo, catalogued in the Media Library External tab. See `video/README.md`.
+- **Brand masters** → the only files kept in this repo, in `Assets/` (see below). They are also
+  given a catalogue row so the hub still lists them.
+
+## Using an asset anywhere
+
+Public Storage files and Vimeo videos work from any project by URL, so the same file is referenced
+across every repo, the WordPress site, emails, and PDFs without copying it. Public Storage URL shape:
+
+`https://uoixetfvboevjxlkfyqy.supabase.co/storage/v1/object/public/coach4u-public/{path}`
+
+## Brand masters — `Assets/` (this repo, the one exception)
+
+These four stay in git because live pages load them by fixed path. Adding a new master is a manual
+upload via the GitHub website (Claude Code sessions cannot push binary files correctly).
 
 | File | What it is |
 |---|---|
-| `Assets/C4U.png` | Coach4U logo, transparent PNG (the master of the deployed copies) |
+| `Assets/C4U.png` | Coach4U logo, transparent PNG (master of the deployed copies) |
 | `Assets/COACH4U (Final).jpg` | Coach4U logo, full colour JPG |
-| `Assets/Cath-Baker-Headshot.jpg` | Cath's headshot (used on the hub Team section) |
+| `Assets/Cath-Baker-Headshot.jpg` | Cath's headshot (hub Team section) |
 | `Assets/Andrew-Headshot.jpeg` | Andrew's headshot (Marketing Manager, Team section) |
-
-Note: the Internal Hub keeps its own `Assets/Cath Baker Image.jpg` working copy because the live ThriveHQ intro page loads it. That copy stays; the duplicate here was removed 2026-06-12.
-
-## Supabase Storage — `coach4u-public`
-
-URL shape: `https://uoixetfvboevjxlkfyqy.supabase.co/storage/v1/object/public/coach4u-public/{path}`
-
-| File | Category | What it is |
-|---|---|---|
-| `cfc5baec-a4dc-4dfe-b3df-bb6155b3c039.jpeg` | General | WhatsApp call-link screenshot used on the ThriveHQ body-doubling page (kept under its original filename because the live page links to it) |
-
-`coach4u-internal` (signed-in only) is currently empty.
-
-## Hosted video — Vimeo (catalogued in Media Library, External tab)
-
-| Title | URL | Category | Used in |
-|---|---|---|---|
-| Welcome to ThriveHQ - Onboarding | https://vimeo.com/1200318724 | ThriveHQ | `thrivehq-onboarding/index.html` (Internal Hub) |
-| WhatsApp call link walkthrough — body doubling hosts | https://vimeo.com/1198930362 | ThriveHQ | `thrivehq/body-doubling.html` (Internal Hub) |
 
 ## Brand commentary
 
 - Public-facing marketing standard (locked): `CLAUDE.md` in this repo.
-- Coach4U master and sub-brand voice, palettes and the cloned audio voice: `brand-and-voice.md`
-  in this repo.
+- Coach4U master and sub-brand voice, palettes, cloned audio voice: `brand-and-voice.md`.
 - Machine-readable brand values: `shared/branding/brand.json`.
